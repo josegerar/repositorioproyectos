@@ -1,0 +1,501 @@
+EDAD,SALARIO,ESTADO
+48.87,57,Uni¢n Libre
+42.57,40.2,Casado
+71.41,21.45,Uni¢n Libre
+53.68,21.9,Casado
+45.85,45,Soltero
+42.32,32.1,Viudo
+44.64,36,Viudo
+34.61,21.9,Casado
+54.9,27.9,Casado
+54.85,24,Uni¢n Libre
+50.86,30.3,Separado
+34.92,28.35,Viudo
+40.41,27.75,Viudo
+51.81,35.1,Casado
+38.3,27.3,Soltero
+36.07,40.8,Soltero
+38.41,46,Separado
+44.74,103.75,Soltero
+38.32,42.3,Separado
+60.91,26.25,Casado
+37.82,38.85,Soltero
+60.24,21.75,Separado
+35.75,24,Separado
+67.74,16.95,Viudo
+58.47,21.15,Separado
+34.1,31.05,Separado
+46.75,60.38,Viudo
+37.68,32.55,Casado
+56.89,135,Soltero
+39.24,31.2,Casado
+36.81,36.15,Uni¢n Libre
+46.88,110.62,Separado
+39.75,42,Uni¢n Libre
+51.87,92,Viudo
+39.32,81.25,Uni¢n Libre
+37.36,31.35,Viudo
+46.19,29.1,Separado
+38.64,31.35,Soltero
+40.48,36,Uni¢n Libre
+67.32,19.2,Viudo
+39.75,23.55,Soltero
+40.23,35.1,Soltero
+36.91,23.25,Soltero
+37.5,29.25,Viudo
+62.39,30.75,Soltero
+60.09,22.35,Separado
+62.65,30,Soltero
+53.53,30.75,Uni¢n Libre
+42.25,34.8,Uni¢n Libre
+40.85,60,Soltero
+38.44,35.55,Soltero
+37.09,45.15,Separado
+46.66,73.75,Casado
+69.55,25.05,Viudo
+40.47,27,Uni¢n Libre
+38.67,26.85,Soltero
+37.67,33.9,Casado
+36.08,26.4,Casado
+39.61,28.05,Separado
+41.83,30.9,Viudo
+36.63,22.5,Separado
+38.41,48,Uni¢n Libre
+39.32,55,Separado
+37.21,53.12,Viudo
+36.72,21.9,Separado
+38.83,78.12,Separado
+36.55,46,Viudo
+37.61,45.25,Casado
+40.48,56.55,Separado
+38.85,41.1,Viudo
+52.31,82.5,Casado
+36.94,54,Uni¢n Libre
+32.84,26.4,Casado
+67.65,33.9,Uni¢n Libre
+35.34,24.15,Soltero
+33.28,29.25,Casado
+32.26,27.6,Soltero
+32.32,22.95,Soltero
+38.89,34.8,Casado
+39.56,51,Casado
+32.76,24.3,Uni¢n Libre
+53.31,24.75,Soltero
+33.17,22.95,Viudo
+33.76,25.05,Viudo
+38.68,25.95,Casado
+39.31,31.65,Uni¢n Libre
+41.16,24.15,Viudo
+38.84,72.5,Viudo
+39.48,68.75,Soltero
+62.81,16.2,Soltero
+33.11,20.1,Soltero
+32.47,24,Casado
+32.78,25.95,Soltero
+50.37,24.6,Separado
+32.35,28.5,Soltero
+67.22,30.75,Separado
+47.91,40.2,Viudo
+44.58,30,Separado
+32.44,22.05,Soltero
+37.14,78.25,Soltero
+40.76,60.62,Separado
+37.72,39.9,Casado
+41.75,97,Soltero
+38.11,27.45,Soltero
+34.77,31.65,Separado
+38.36,91.25,Separado
+40.33,25.2,Viudo
+70.44,21,Soltero
+37.1,30.45,Casado
+48.13,28.35,Uni¢n Libre
+60.06,30.75,Soltero
+52.49,30.75,Separado
+41.19,54.88,Uni¢n Libre
+39.31,37.8,Viudo
+39.59,33.45,Uni¢n Libre
+38.52,30.3,Viudo
+68.94,31.5,Casado
+36.78,31.65,Uni¢n Libre
+37.4,25.2,Soltero
+36.09,37.8,Viudo
+64.38,18.75,Soltero
+35.22,32.55,Casado
+51.65,33.3,Casado
+37.55,38.55,Viudo
+44.36,27.45,Uni¢n Libre
+49.91,24.3,Separado
+50.3,30.75,Uni¢n Libre
+54.4,19.65,Casado
+41.41,68.75,Separado
+42.28,59.38,Uni¢n Libre
+38.85,31.5,Casado
+47.59,27.3,Uni¢n Libre
+41.26,27,Viudo
+59.11,41.55,Uni¢n Libre
+32.56,26.25,Casado
+61.32,22.2,Soltero
+63.44,65,Soltero
+53.94,30.9,Casado
+69.52,20.1,Casado
+35.69,22.35,Soltero
+34.5,35.55,Viudo
+34.08,28.5,Uni¢n Libre
+61.33,24.45,Viudo
+69.32,16.65,Soltero
+36.92,26.7,Soltero
+49.96,43.95,Casado
+64.28,23.7,Separado
+41.2,26.55,Soltero
+38.47,27.6,Viudo
+46.79,25.8,Casado
+46.34,42.3,Soltero
+71.64,30.75,Uni¢n Libre
+33.59,26.7,Uni¢n Libre
+60.54,20.85,Casado
+37.78,35.25,Uni¢n Libre
+37.92,26.7,Separado
+33.45,26.55,Casado
+36.23,27.75,Separado
+49.93,25.05,Separado
+49.31,66,Separado
+37.84,52.65,Viudo
+39.56,45.62,Casado
+35.09,30.9,Casado
+35.34,29.4,Viudo
+34.63,33.3,Uni¢n Libre
+58.44,21.9,Separado
+68.32,18.15,Uni¢n Libre
+38.65,46.88,Uni¢n Libre
+35.56,25.5,Uni¢n Libre
+36.5,26.55,Viudo
+70.92,26.7,Soltero
+47.51,29.85,Soltero
+50.92,69.25,Separado
+65.96,31.95,Separado
+62.95,26.25,Separado
+38.19,35.7,Uni¢n Libre
+38.35,28.5,Uni¢n Libre
+62.93,17.1,Separado
+35.9,25.2,Viudo
+40.9,24,Uni¢n Libre
+61.96,27.45,Uni¢n Libre
+57.79,18.45,Casado
+40.79,39.3,Viudo
+36.11,38.85,Soltero
+70.32,30.75,Soltero
+36.44,37.5,Soltero
+37.38,58.75,Viudo
+66.88,34.5,Uni¢n Libre
+50.73,36,Casado
+68.1,29.1,Separado
+69.17,16.5,Soltero
+51.19,19.65,Viudo
+34.4,24.75,Casado
+62.7,27.15,Viudo
+45.11,26.4,Soltero
+54.8,23.1,Separado
+38.21,54.9,Separado
+48.75,70.88,Casado
+42.87,51.25,Uni¢n Libre
+37.84,67.5,Viudo
+45.61,29.34,Uni¢n Libre
+37.75,39.6,Viudo
+36.75,29.1,Separado
+40.15,33.15,Casado
+56.49,66.75,Soltero
+57.58,33.75,Casado
+41.83,27.3,Uni¢n Libre
+32.04,24,Soltero
+66.94,19.8,Casado
+51.62,30.6,Separado
+50.11,28.95,Separado
+35.59,38.4,Uni¢n Libre
+55.16,30.75,Casado
+32.25,20.4,Soltero
+32.24,19.2,Viudo
+36.58,30.15,Casado
+51.76,34.62,Separado
+36.73,80,Uni¢n Libre
+37.87,25.35,Viudo
+37.33,29.85,Separado
+53.58,24,Viudo
+65.27,27.75,Soltero
+58.77,22.35,Soltero
+66.09,16.2,Separado
+33.17,21.9,Casado
+36.48,23.25,Casado
+35.41,33.9,Casado
+37.23,25.65,Viudo
+60.33,17.25,Soltero
+66.88,22.5,Separado
+35.93,40.2,Uni¢n Libre
+37.25,55.5,Casado
+37.4,26.55,Separado
+40.09,50.55,Soltero
+38.26,75,Separado
+31.62,27.45,Viudo
+31.53,22.65,Casado
+31.5,27.3,Casado
+31.25,27.75,Uni¢n Libre
+39.5,54.38,Separado
+64.32,17.4,Separado
+33.11,40.8,Casado
+31.84,23.1,Casado
+31.24,22.5,Soltero
+31.75,26.7,Casado
+32.92,24.9,Separado
+32.59,19.65,Viudo
+31.68,22.05,Separado
+31.6,25.5,Viudo
+34.18,28.2,Viudo
+31.9,23.1,Soltero
+31.24,25.5,Uni¢n Libre
+58.83,17.1,Viudo
+36.85,68.12,Casado
+68.35,30.6,Casado
+52.96,52.12,Soltero
+49.23,61.88,Separado
+31.76,21.3,Soltero
+31.75,19.65,Viudo
+31.81,22.35,Casado
+31.72,23.4,Viudo
+32.48,24.3,Casado
+32.17,28.5,Separado
+31.91,19.95,Casado
+31.22,23.4,Separado
+37.19,34.5,Casado
+31.3,18.15,Uni¢n Libre
+64.6,22.35,Uni¢n Libre
+34.75,40.2,Casado
+53.14,28.65,Uni¢n Libre
+37.31,27.75,Uni¢n Libre
+36.49,66.88,Viudo
+61.11,30,Separado
+36.36,83.75,Uni¢n Libre
+37.92,33.9,Casado
+35.59,56.5,Casado
+35.57,43,Separado
+57.52,20.85,Viudo
+31.66,24.45,Soltero
+31.15,24.75,Viudo
+55.83,34.5,Soltero
+37.25,27.9,Separado
+37.8,68.12,Soltero
+39.18,73.5,Viudo
+70.57,30.75,Viudo
+42.78,40.05,Uni¢n Libre
+35.9,40.35,Uni¢n Libre
+45.9,38.7,Separado
+36.13,65,Uni¢n Libre
+46.7,51.45,Viudo
+66.25,35.25,Separado
+37.61,25.95,Viudo
+35.24,25.05,Separado
+32.18,26.7,Casado
+68.34,24,Viudo
+36.84,26.85,Uni¢n Libre
+58.68,23.4,Separado
+34.31,24.6,Casado
+35.59,32.55,Soltero
+40.56,26.55,Casado
+32.36,31.5,Soltero
+61.23,22.35,Separado
+62.86,35.25,Soltero
+55.22,25.8,Casado
+59.15,30.75,Casado
+34.69,30.75,Separado
+55.41,50,Viudo
+37.87,34.5,Separado
+36.41,26.25,Separado
+36.73,44.88,Casado
+49.84,22.5,Uni¢n Libre
+37.76,25.65,Viudo
+31.13,21.3,Casado
+34.05,29.85,Uni¢n Libre
+31.23,34.5,Separado
+40.92,27.75,Uni¢n Libre
+31.79,27.75,Soltero
+39.82,48.75,Uni¢n Libre
+34.79,43.41,Uni¢n Libre
+64.11,22.05,Separado
+47.14,22.05,Casado
+62.81,22.5,Casado
+33.59,25.5,Viudo
+34.17,29.16,Viudo
+66.13,16.8,Casado
+42.4,29.55,Soltero
+35.79,26.7,Soltero
+48.15,55,Uni¢n Libre
+42.31,62.5,Separado
+41.61,27.3,Soltero
+58.87,24.45,Soltero
+36.6,33,Separado
+35.88,37.05,Soltero
+34.6,24.45,Soltero
+70.82,31.95,Casado
+36.93,47.25,Soltero
+30.88,26.1,Soltero
+62.36,15.9,Soltero
+58.12,23.7,Separado
+66.63,21.75,Viudo
+55.91,59.4,Separado
+52.55,24.45,Viudo
+47.52,103.5,Separado
+37.17,35.7,Uni¢n Libre
+31.61,22.2,Casado
+32.33,22.95,Viudo
+56.36,23.1,Uni¢n Libre
+38.51,56.75,Uni¢n Libre
+62.75,29.1,Uni¢n Libre
+61.67,37.65,Viudo
+34.88,27.9,Soltero
+67.07,21.15,Separado
+45.77,31.2,Casado
+54.62,20.55,Uni¢n Libre
+39.58,25.95,Soltero
+35.09,28.35,Uni¢n Libre
+68.93,17.7,Uni¢n Libre
+56.69,23.55,Separado
+59.52,19.95,Viudo
+32.34,29.4,Viudo
+34.52,28.8,Separado
+63.7,16.95,Soltero
+46.54,35.7,Separado
+53.73,17.4,Separado
+52.17,21.45,Viudo
+39.74,24.75,Separado
+58.58,16.95,Casado
+57.42,26.1,Viudo
+33.08,28.05,Casado
+37.9,36.6,Separado
+34.69,58.12,Uni¢n Libre
+65.33,21.3,Viudo
+51.14,22.5,Separado
+33.39,29.4,Viudo
+34.18,27.45,Uni¢n Libre
+36.18,29.85,Soltero
+35.04,25.35,Casado
+70.25,15.75,Soltero
+62.61,19.65,Uni¢n Libre
+59.82,21,Separado
+54.43,27,Uni¢n Libre
+41.16,24,Uni¢n Libre
+39.53,78.5,Separado
+45.1,20.85,Soltero
+70.23,30,Viudo
+66.35,28.5,Uni¢n Libre
+35.86,65,Soltero
+41.95,30.15,Casado
+41.67,66.88,Viudo
+32.09,24.15,Viudo
+31.92,24.45,Casado
+30.59,21.6,Soltero
+31.47,27.9,Soltero
+30.85,29.1,Casado
+30.76,22.65,Separado
+30.32,20.85,Soltero
+30.9,22.95,Soltero
+30.06,30.6,Soltero
+30.85,20.4,Separado
+31.35,23.85,Casado
+30.75,22.8,Viudo
+30.85,20.7,Casado
+30.63,21.3,Casado
+47.63,24.3,Uni¢n Libre
+56.44,19.65,Viudo
+35.19,60,Uni¢n Libre
+35.27,30.3,Separado
+36.84,61.25,Viudo
+38.07,36,Casado
+58.95,25.2,Soltero
+69.34,16.2,Soltero
+30.49,22.8,Viudo
+34.76,43.5,Viudo
+39.93,30.3,Soltero
+37.62,31.95,Viudo
+35.91,35.25,Uni¢n Libre
+33.4,37.8,Uni¢n Libre
+35.53,31.2,Uni¢n Libre
+36.15,29.4,Casado
+43.42,70,Soltero
+39.12,33.9,Separado
+37.41,27.15,Soltero
+64.65,22.2,Separado
+34.44,31.35,Soltero
+58.9,20.85,Separado
+48.14,33.3,Soltero
+58.67,26.25,Casado
+36.79,31.95,Soltero
+54.35,30,Casado
+44.63,66.25,Uni¢n Libre
+41.92,86.25,Separado
+36.76,30.75,Viudo
+34.08,33.54,Soltero
+39,34.95,Casado
+36.56,40.35,Viudo
+35.55,30.27,Separado
+67.3,26.25,Viudo
+36.18,32.4,Uni¢n Libre
+30.47,20.4,Uni¢n Libre
+53.11,24.15,Viudo
+51.38,23.85,Viudo
+32.24,29.7,Viudo
+71.87,21.6,Viudo
+39.25,24.45,Uni¢n Libre
+37.36,28.05,Separado
+42.37,100,Soltero
+39.45,49,Viudo
+67.55,16.35,Casado
+34.95,70,Separado
+46.41,55,Soltero
+31.4,28.5,Uni¢n Libre
+47.35,28.8,Soltero
+70.38,24.45,Separado
+35.38,90.62,Viudo
+36.91,43.65,Soltero
+41.16,75,Soltero
+32.55,31.65,Viudo
+35.44,61.88,Uni¢n Libre
+29.84,21.75,Viudo
+31.34,22.5,Viudo
+57.12,21.6,Separado
+37.16,34.41,Casado
+66.19,20.7,Viudo
+38.74,47.55,Separado
+38.41,33.9,Viudo
+52.51,23.4,Uni¢n Libre
+33.32,32.85,Uni¢n Libre
+35.04,55.75,Uni¢n Libre
+36.54,25.2,Separado
+36.9,26.25,Viudo
+34.36,26.4,Casado
+34.81,39.15,Soltero
+63.07,21.45,Separado
+32.1,29.4,Uni¢n Libre
+40.41,27.75,Casado
+51.81,35.1,Viudo
+38.3,27.3,Separado
+36.07,40.8,Separado
+38.41,46,Soltero
+44.74,103.75,Separado
+38.32,42.3,Uni¢n Libre
+60.91,26.25,Viudo
+37.82,38.85,Separado
+29.84,21.75,Casado
+31.34,22.5,Uni¢n Libre
+57.12,21.6,Soltero
+37.16,34.41,Viudo
+66.19,20.7,Soltero
+38.74,47.55,Viudo
+36.9,26.25,Separado
+34.36,26.4,Soltero
+34.81,39.15,Viudo
+63.07,21.45,Viudo
+32.1,29.4,Uni¢n Libre
+40.41,27.75,Viudo
+51.81,35.1,Uni¢n Libre
+38.3,27.3,Uni¢n Libre
+36.07,40.8,Soltero
+38.41,46,Casado
+44.74,103.75,Separado
