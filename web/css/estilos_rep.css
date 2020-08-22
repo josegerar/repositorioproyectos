@@ -1,0 +1,367 @@
+
+.btn {
+  line-height: 31px;
+  position: relative;
+  padding: 5px 22px;
+  border: 0;
+  margin: 10px;
+  cursor: pointer;
+  border-radius: 2px;
+  text-transform: uppercase;
+  text-decoration: none;
+  outline: none !important;
+  -webkit-transition: 0.2s ease-out;
+  -moz-transition: 0.2s ease-out;
+  -o-transition: 0.2s ease-out;
+  -ms-transition: 0.2s ease-out;
+  transition: 0.2s ease-out;
+}
+
+.btn i,
+.btn-flat i {
+  font-size: 1.3rem;
+  line-height: inherit;
+}
+
+.btn .badge {
+  margin-left: 7px;
+}
+
+.z-depth-1, .btn, .btn-floating {
+  box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.16), 0 2px 10px 0 rgba(0, 0, 0, 0.12);
+}
+
+.z-depth-1-half, .btn:hover, .btn-floating:hover {
+  box-shadow: 0 5px 11px 0 rgba(0, 0, 0, 0.18), 0 4px 15px 0 rgba(0, 0, 0, 0.15);
+}
+
+.btn-default {
+  color: #fff;
+  background-color: #185B8A;
+}
+
+.btn-default:hover,
+.btn-default:focus {
+  background-color: #185B8A !important;
+  color: #fff !important;
+}
+
+.waves-effect {
+  position: relative;
+  cursor: pointer;
+  display: inline-block;
+  overflow: hidden;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+  -webkit-tap-highlight-color: transparent;
+  vertical-align: middle;
+  z-index: 1;
+  will-change: opacity, transform;
+  -webkit-transition: all 0.3s ease-out;
+  -moz-transition: all 0.3s ease-out;
+  -o-transition: all 0.3s ease-out;
+  -ms-transition: all 0.3s ease-out;
+  transition: all 0.3s ease-out;
+}
+
+.waves-effect .waves-ripple {
+  position: absolute;
+  border-radius: 50%;
+  width: 20px;
+  height: 20px;
+  margin-top: -10px;
+  margin-left: -10px;
+  opacity: 0;
+  background: rgba(0, 0, 0, 0.2);
+  -webkit-transition: all 0.7s ease-out;
+  -moz-transition: all 0.7s ease-out;
+  -o-transition: all 0.7s ease-out;
+  -ms-transition: all 0.7s ease-out;
+  transition: all 0.7s ease-out;
+  -webkit-transition-property: -webkit-transform, opacity;
+  -moz-transition-property: -moz-transform, opacity;
+  -o-transition-property: -o-transform, opacity;
+  transition-property: transform, opacity;
+  -webkit-transform: scale(0);
+  -moz-transform: scale(0);
+  -ms-transform: scale(0);
+  -o-transform: scale(0);
+  transform: scale(0);
+  pointer-events: none;
+}
+
+.waves-effect.waves-light .waves-ripple {
+  background-color: rgba(255, 255, 255, 0.45);
+}
+
+.waves-effect.waves-red .waves-ripple {
+  background-color: rgba(244, 67, 54, 0.7);
+}
+
+.waves-effect.waves-yellow .waves-ripple {
+  background-color: rgba(255, 235, 59, 0.7);
+}
+
+.waves-effect.waves-orange .waves-ripple {
+  background-color: rgba(255, 152, 0, 0.7);
+}
+
+.waves-effect.waves-purple .waves-ripple {
+  background-color: rgba(156, 39, 176, 0.7);
+}
+
+.waves-effect.waves-green .waves-ripple {
+  background-color: rgba(76, 175, 80, 0.7);
+}
+
+.waves-effect.waves-teal .waves-ripple {
+  background-color: rgba(0, 150, 136, 0.7);
+}
+
+/* Firefox Bug: link not triggered */
+a.waves-effect .waves-ripple {
+  z-index: -1;
+}
+.navstyle{
+    background: #185B8A; 
+    height: 60px;
+
+}
+.navenlaces{
+    margin-top: 10px;
+    color: #fff;
+}
+.navenlaces:hover{
+    color: #fff;
+    font-weight: 600;
+}
+.navImg{
+    height: 30px;
+     position: fixed;
+    left: 20px;
+    top: 10px;
+   
+}
+.iconEnlace{
+    height: 20px;
+    margin-right: 3px;
+    margin-top: -3px;
+}
+.bcrumbSt{
+    margin-top: 20px;
+    margin-bottom: 10px;
+}
+.contenedor{
+    margin-left: 10%;
+    margin-right: 10%;
+    
+}
+.IniContPrim{
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.IniContSecIz{
+    width: 25%;
+    background: #D7D7D7;
+}
+.IniContSecDe{
+    width: 100%;
+    padding-left: 10px;
+}
+
+/*<Buscador>*/
+.iniContBusc{
+     display: flex;
+    flex-wrap: wrap;
+}
+
+.iniContBuscInImg{
+    height: 25px;
+    margin: auto;
+    padding-left: 10px;
+    margin-top: 6px;
+}
+.iniContBuscInText{
+    width: 100%;
+    border-style: none;
+    height: 36px;
+    margin-top: 1px;
+}
+.iniContBuscInBtn{
+    background: #2079C5;
+    height: 40px;
+    margin-left: 0px;
+    color: #fff;
+    width: 100%;
+}
+.iniContBuscIn{
+  
+    margin-bottom: 15px;
+    width: 100%;
+    height: 40px;
+    border-radius: 5px;
+    border-width: 1px;
+    border-style: solid;
+    border-color: #D7D7D7;
+    display: flex;
+}
+
+/*</Buscador>*/
+
+/*<CabInicio>*/
+.iniCabTitulo{
+    font-size: 20px;
+    font-weight: 500;
+}
+.iniContCab{
+   
+}
+.iniContCabRes{
+    display: flex;
+    width: 50%;
+    flex-wrap: wrap;
+}
+.InicioPaginacion{
+ margin-top: 10px;
+    justify-content: center;
+}
+.InicListOrden{
+    margin-left: 0px;
+    
+}
+.hrInic{
+    margin-top: 70px;
+}
+.InicLabResulBus{
+    margin-top: 5px;
+    background: #fff;
+}
+/*</CabInicio>*/
+
+/*<InicioCards>*/
+.IniContCardsBusq{
+    display: flex;
+    flex-wrap: wrap;
+}
+.IniCards{
+    border-width: 1px;
+    border-style: solid;
+    border-color: #D7D7D7;
+    border-radius: 5px;
+    display: flex;
+    margin-top: 10px;
+    width: 100%;
+}
+.iniConCardsSec{
+    display: flex;
+    flex-wrap: wrap;
+    padding: 10px;
+}
+.IniCardsImg{
+    height: 80px;
+    margin-left: 10px;
+    margin-right: 10px;
+    margin-top: 20px;
+}
+.IniCardsTitulo{
+    color: #2079C5;
+    font-size: 24px;
+    margin-top: 10px;
+}
+.IniCardInfoRel{
+   margin-left: 4px;
+    margin-right: 4px;
+    font-size: 15px;
+    margin-bottom: 0;
+}
+.IniCardsInformacion{
+    text-align: justify;
+    max-width: 95%;
+    maxlength:40;
+}
+
+/*Registro*/
+.regisContenedor{
+    margin-left: 30%;
+    margin-right: 30%;
+}
+.regisTitulo{
+    margin: auto;
+    font-size: 30px;
+    text-align: center;
+    margin-top: 20px;
+    margin-bottom: 20px;
+
+}
+/*Registro*/
+
+/*</InicioCards>*/
+
+@media(min-width:830px)  {
+  /* For desktop: */
+.IniContPrim{
+    display: flex;
+    flex-wrap: nowrap;
+}
+.iniContCabRes{
+    display: flex;
+    width: 50%;
+    flex-wrap: nowrap;
+}
+.InicioPaginacion{
+ margin-top: -38px;
+}
+.InicListOrden{
+    margin-left: 20px;
+    
+}
+.InicLabResulBus{
+    margin-top: 5px;
+    background: #fff;
+}
+    .hrInic{
+    margin-top: 20px;
+}
+    .iniContBusc{
+     display: flex;
+    flex-wrap: nowrap;
+}
+    .iniContBuscInBtn{
+
+    width: 10%;
+    margin-left: 15px;
+}
+    .IniContSecIz{
+    width: 30%;
+    background: #D7D7D7;
+}
+.IniContSecDe{
+    width: 100%;
+    padding-left: 10px;
+}
+.iniContBuscIn{
+  
+
+    width: 90%;
+
+}
+    
+
+}
+.divN{
+    background: #fff;
+    border-color: black;
+    border-radius: 5px;
+}
+
+input:focus, input.form-control:focus {
+
+    outline:none !important;
+    outline-width: 0 !important;
+    box-shadow: none;
+    -moz-box-shadow: none;
+    -webkit-box-shadow: none;
+}

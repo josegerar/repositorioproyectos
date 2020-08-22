@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app version="3.1" xmlns="http://xmlns.jcp.org/xml/ns/javaee" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-app_3_1.xsd">
+    <servlet>
+        <servlet-name>conex</servlet-name>
+        <servlet-class>org.servlet.conex</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>InsertInstitucion</servlet-name>
+        <servlet-class>org.Controladores.InsertInstitucion</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>InsertProfesion</servlet-name>
+        <servlet-class>org.Controladores.InsertProfesion</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>conex</servlet-name>
+        <url-pattern>/conex</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>InsertInstitucion</servlet-name>
+        <url-pattern>/InsertInstitucion</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>InsertProfesion</servlet-name>
+        <url-pattern>/InsertProfesion</url-pattern>
+    </servlet-mapping>
+    <session-config>
+        <session-timeout>
+            30
+        </session-timeout>
+    </session-config>
+</web-app>
