@@ -21,9 +21,9 @@ public class Data {
     public Data() throws SQLException, ClassNotFoundException {
         con = new Conexion(
                 "localhost",
-                "test_jquery",
+                "pivii",
                 "root",
-                "1234"
+                "qwerty"
         );
     }
 

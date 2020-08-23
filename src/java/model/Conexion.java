@@ -21,7 +21,7 @@ public class Conexion {
        
         String url = protocolo +
                 server + "/" +
-                bd + "?" +
+                bd + "?autoReconnect=true&useSSL=false&" +
                 lineaUser + "&" +
                 lineaPass;
        

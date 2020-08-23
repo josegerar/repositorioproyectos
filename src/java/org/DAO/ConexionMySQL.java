@@ -28,7 +28,7 @@ public class ConexionMySQL {
     String user = "root";
     String password = "qwerty";
     //jdbc:mysql://localhost:3306/pivii?zeroDateTimeBehavior=convertToNull
-    String url = "jdbc:mysql://localhost:3306/pivii?zeroDateTimeBehavior=convertToNull";
+    String url = "jdbc:mysql://localhost:3306/pivii?autoReconnect=true&useSSL=false";
 
     Connection connection;
     Statement statement;
@@ -53,7 +53,7 @@ public static Connection getConnectionE() {
         Connection cn = null;
         try {
             Class.forName("com.mysql.jdbc.Driver");
-            cn = DriverManager.getConnection("jdbc:mysql://localhost:3306/pivii", "root", "qwerty");
+            cn = DriverManager.getConnection("jdbc:mysql://localhost:3306/pivii?autoReconnect=true&useSSL=false", "root", "qwerty");
         } catch (Exception e) {
 
         }
@@ -132,7 +132,7 @@ public static LinkedList<Provincia> getProvincias() {
         LinkedList<Provincia> listaProvincia = new LinkedList<Provincia>();
         try {
            Class.forName("com.mysql.jdbc.Driver");
-            Connection conexion =  DriverManager.getConnection("jdbc:mysql://localhost:3306/pivii", "root", "qwerty");
+            Connection conexion =  DriverManager.getConnection("jdbc:mysql://localhost:3306/pivii?autoReconnect=true&useSSL=false", "root", "qwerty");
             Statement st = conexion.createStatement();
             ResultSet rs = st.executeQuery("select * from provincia;");
             while (rs.next()) {
@@ -154,7 +154,7 @@ public static LinkedList<Ciudad> getCiudad(String idProvincia) {
         LinkedList<Ciudad> listaCiudad = new LinkedList<Ciudad>();
         try {
            Class.forName("com.mysql.jdbc.Driver");
-            Connection conexion =  DriverManager.getConnection("jdbc:mysql://localhost:3306/pivii", "root", "qwerty");
+            Connection conexion =  DriverManager.getConnection("jdbc:mysql://localhost:3306/pivii?autoReconnect=true&useSSL=false", "root", "qwerty");
             Statement st = conexion.createStatement();
             ResultSet rs = st.executeQuery("select * from ciudad where Provincia_idProvincia="+idProvincia+";");
             while (rs.next()) {
@@ -176,7 +176,7 @@ public static LinkedList<Profesion> getProfesion()
         LinkedList<Profesion> listaProfesion = new LinkedList<Profesion>();
         try {
            Class.forName("com.mysql.jdbc.Driver");
-            Connection conexion =  DriverManager.getConnection("jdbc:mysql://localhost:3306/pivii", "root", "qwerty");
+            Connection conexion =  DriverManager.getConnection("jdbc:mysql://localhost:3306/pivii?autoReconnect=true&useSSL=false", "root", "qwerty");
             Statement st = conexion.createStatement();
             ResultSet rs = st.executeQuery("select * from profesion;");
             while (rs.next()) {
@@ -198,7 +198,7 @@ public static LinkedList<Institucion> getInstitucion()
      LinkedList<Institucion> listaInstitucion = new LinkedList<Institucion>();
         try {
            Class.forName("com.mysql.jdbc.Driver");
-            Connection conexion =  DriverManager.getConnection("jdbc:mysql://localhost:3306/pivii", "root", "qwerty");
+            Connection conexion =  DriverManager.getConnection("jdbc:mysql://localhost:3306/pivii?autoReconnect=true&useSSL=false", "root", "qwerty");
             Statement st = conexion.createStatement();
             ResultSet rs = st.executeQuery("select * from institucion;");
             while (rs.next()) {
@@ -221,7 +221,7 @@ public static LinkedList<Institucion> getInstitucion()
 
         try {
            Class.forName("com.mysql.jdbc.Driver");
-            Connection conexion =  DriverManager.getConnection("jdbc:mysql://localhost:3306/pivii", "root", "qwerty");
+            Connection conexion =  DriverManager.getConnection("jdbc:mysql://localhost:3306/pivii?autoReconnect=true&useSSL=false", "root", "qwerty");
           Statement st = conexion.createStatement();
             ResultSet rs = st.executeQuery(sentence);
             while (rs.next()) {

@@ -23,7 +23,7 @@ public class DataR {
                 "localhost",
                 "pivii",
                 "root",
-                "1234"
+                "qwerty"
         );
     }
 
