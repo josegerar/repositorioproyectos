@@ -42,7 +42,21 @@
             String usuario = String.valueOf(sesion.getAttribute("usuario"));
             String rol = String.valueOf(sesion.getAttribute("rol"));
             
-        %>>
+        %>
+        
+        <%-- Carga la informacion del proyecto seleccionado para mostrar mas detalle--%>
+        <%
+            //Connection con = ConexionMySQL.getConnectionE();
+            PreparedStatement ps;
+            ResultSet rs;
+            //int id = Integer.parseInt(request.getParameter("id"));
+            int insta = 0, numAtr = 0, NumVis = 0, FechaD = 0,IdDon=0;
+            String nom = "", abstra = "", caract = "", zona = "", docRel = "", solicCita = "", carAtr = "", Tarea = "", Na = "", Fuente = "", InfAtr = "", InfCD = "", NombArc = "";
+            //ps = con.prepareStatement("Select * from proyecto_integrador where id_proyecto=" + id);
+            // rs = ps.executeQuery();
+            
+        %>
+        
         
         <nav class="navbar navbar-icon-top navbar-expand-lg navbar-dark " style="background:#225499; margin-top: 0px; position: fixed; top: 0; width: 100%; z-index: 10000000000;">
                 <a class="navbar-brand" href="#">REPOSITORIO</a>
@@ -57,18 +71,28 @@
                             <a class="nav-link" href="Repo.jsp">
                                 <i class="fa fa-home"></i>
                                 Inicio
-
                             </a>
                         </li>
                         
+                        <li class="nav-item">
+                            <a class="nav-link" href="Proyectos.jsp">
+                                <i class="fa fa-address-book"></i>
+                                Proyectos
+                            </a>
+                        </li>
                        
-                        <%-- Si es usuario es administrador se muestra esto --%>
-                           <% if (usuario.equals("suanny") || usuario.equals("SUANNY")) { %>
-                            <li class="nav-item">
+                        <%-- Si ha iniciado sesion --%>
+                        <% if (sesion.getAttribute("usuario") != null) { %>
+                        <li class="nav-item">
+                            <a class="nav-link" href="AnadirProyectos.jsp">
+                                <i class="fa fa-newspaper-o" aria-hidden="true"></i>
+                                Añadir proyecto
+                            </a>
+                        </li>
+                        <li class="nav-item">
                             <a class="nav-link" href="RegistroUsuario.jsp">
                                 <i class="fa fa-user-o" id="userli"></i>
                                  Mi Perfil
-
                             </a>
                         </li>
                         <li class="nav-item">
@@ -79,7 +103,7 @@
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="GenerarDatos.jsp">
+                            <a class="nav-link" href="MisDanaciones.jsp">
                                 <i class="fa fa-database">
 
                                 </i>
@@ -87,7 +111,7 @@
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="MisDanaciones.jsp">
+                            <a class="nav-link" href="GenerarDatos.jsp">
                                 <i class="fa fa-table">
 
                                 </i>
@@ -96,7 +120,8 @@
                         </li>
                         <%}%>
                         
-                        <% if (usuario.equals("suanny") || usuario.equals("SUANNY")) { %>
+                        <%-- Si es usuario administrador --%>
+                        <% if (rol.equals("1")) { %>
                         <li class="nav-item">
                             <a class="nav-link " href="Aprobacion.jsp"><i class="fa fa-envelope-o"></i>Solicitudes</a>
                         </li>
@@ -131,6 +156,7 @@
             <nav aria-label="breadcrumb">
             <ol class="breadcrumb">
                 <li class="breadcrumb-item active" aria-current="page"><a href="Repo.jsp">Inicio</a></li>
+                <li class="breadcrumb-item active" aria-current="page"><a href="Proyectos.jsp">Proyectos</a></li>
                 <li class="breadcrumb-item active" aria-current="page">Detalle</li>
             </ol>
         </nav>
