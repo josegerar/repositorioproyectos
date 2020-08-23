@@ -3,12 +3,13 @@
     Created on : 23-ago-2020, 10:40:41
     Author     : F
 --%>
+<%@page import="org.DAO.ConexionMySQL"%>
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <html>
     <head>
         <meta name="viewport" content="width=device-width" />
-        <title>Repositorio</title>
+        <title>Proyectos</title>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <link href="css/bootstrap.min.css" rel="stylesheet" type="text/css"/>
         <link href="css/bootstrap.css" rel="stylesheet" type="text/css"/>
