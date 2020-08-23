@@ -126,6 +126,24 @@
                         <%}%>
 
                     </ul>
+                    <div style="position: fixed; top: 8px; right:  10px;"  class=" justify-content-end " >
+                        <ul class="navbar-nav  justify-content-end " >
+                            <li class="nav-item">
+                                <% if (sesion.getAttribute("usuario") != null) {%>
+                                <a class="nav-link"  id="user" > <i class="fa fa-user"></i><%=sesion.getAttribute("usuario")%></a>
+                                    <%} else {%>
+                                <a class="nav-link" href="RegistroUsuario.jsp"> <i class="fa fa-user"></i>Registrarse</a>
+                                <%}%>
+                            </li>
+                            <li class="nav-item">
+                                <% if (sesion.getAttribute("usuario") != null) { %>
+                                <a class="nav-link" id="btncerrarsesion" > <i class="fa fa-sign-in"> </i>Cerrar Sesión</a>
+                                <%} else {%>                        
+                                <a class="nav-link"  id="btn-abrir-popup"  > <i class="fa fa-sign-in"> </i>Iniciar Sesión</a>
+                                <%}%>   
+                            </li>
+                        </ul>
+                    </div>
                 </div>
             </nav>
 
