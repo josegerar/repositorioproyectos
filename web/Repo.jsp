@@ -72,7 +72,7 @@
                         </li>
                         
                         <li class="nav-item">
-                            <a class="nav-link" href="Repo.jsp">
+                            <a class="nav-link" href="Proyectos.jsp">
                                 <i class="fa fa-address-book" aria-hidden="true"></i>
                                 Proyectos
 
@@ -83,7 +83,7 @@
                         <!--Validaciones de cada una de las paginas--> 
                         <% if (sesion.getAttribute("usuario") != null) { %>
                         <li class="nav-item">
-                            <a class="nav-link" href="Proyectos.jsp">
+                            <a class="nav-link" href="AnadirProyectos.jsp">
                                 <i class="fa fa-newspaper-o" aria-hidden="true"></i>
                                 Añadir proyecto
 
