@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<div  style="position: fixed;top: 0; margin-top: 82px; width: 90%;margin-left: 5%; z-index: 10000000; background: #fff; ">
+    <nav aria-label="breadcrumb" style="margin-top: 10px; width: 90%; margin-left: 5%;">
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item active" aria-current="page">Inicio</li>
+        </ol>
+    </nav>
+
+
+    <div class="iniContBusc"style="width: 90%; margin-left: 5%; box-shadow: 0 2px 2px -2px gray;">
+        <div class="iniContBuscIn">
+            <div style="width: 40px;">
+                <img src="iconos/icons8_Search_50px.png" class="iniContBuscInImg" alt="">
+            </div>
+            <div style="width: 95%;">
+                <input type="text" class="iniContBuscInText" id="txtBuscar" onkeyup="buscar()" placeholder="Escribe para buscar..">
+            </div>
+        </div>
+        <button type="button" class="btn  iniContBuscInBtn"  onclick="buscar()">
+            Buscar
+        </button>
+
+    </div>
+</div>            
+<div class="contenedor bcrumbSt" style="margin-top: 220px; margin-bottom: 100px;">
+    <form onload="sinFiltro()" >
+        <div class="IniContPrim">
+            <div class="IniContSecIz" style="background:  #fff;">
+                <p class="iniCabTitulo" style="text-transform: uppercase;">Filtrar por:</p>
+                <input type="button" class="page-link"  name="sinF" id="sFiltro" value="Mostrar todo" onclick="Aprobados()" style="width: 100%; text-align: left;">
+                <p class="iniCabTitulo2" style="font-size: 12px;margin-top: 5px; margin-bottom: 5px; font-weight: 600;">TAREA PREDETERMINADA</p>
+                <input type="button" class="page-link"  name="tarea" id="Clasification" value="Año" onclick="buscarC()" style="width: 100%; text-align: left;">
+                <input type="button" class="page-link"  name="tarea" id="Regresion" value="Facultad" onclick="buscarReg()" style="width: 100%; text-align: left;">
+                <input type="button" class="page-link"  name="tarea" id="Agrupacion" value="Carrera" onclick="buscarCla()" style="width: 100%; text-align: left;">
+
+            </div>
+            <div class="IniContSecDe">
+                <div class="iniContCab">
+                    <p class="iniCabTitulo">REPOSITORIO</p>
+                    <hr style="margin-top: -10px;">
+                </div>
+
+
+
+
+                <div class="IniContCardsBusq" id="contenedores">
+                    <div class="container">
+
+
+
+                        <table id="myTable" class="table table-striped">
+                            <thead class="thead-dark">
+                                <tr>
+                                    <th scope="col">Titulo</th>
+                                    <th scope="col">Modulo</th>
+                                    <th scope="col">Fecha registro</th>
+                                    <th scope="col">Objetivo</th>
+                                    <th scope="col">Carrera</th>
+                                    <th scope="col">Periodo lectivo</th>
+                                </tr>
+                            </thead>
+                            <tbody id="resultado">
+
+
+
+                            </tbody>
+                        </table>
+                        <div style="float: right;">    
+                            <!--Paginacion de la tabla--> 
+                            <input type="button"  value="<"name="btnatras" onclick="dec()" style="background: #2079C5; border: none; color: #fff; width: 40px; height: 35px; border-radius: 5px;" class="btn-default waves-effect waves-light">
+                            <input type="button" id="btnAV" name="paginaN" value="1" style="background: #F5F5F5; border: none; color: #666666; width: 40px; height: 35px; border-radius: 5px;" class=" waves-effect waves-light">
+                            <input type="button"  value=">" name="btnsig" onclick="ad()" style="background: #2079C5; border: none; color: #fff; width: 40px; height: 35px; border-radius: 5px;" class="btn-default waves-effect waves-light">
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+
+    </form>            
+
+</div>

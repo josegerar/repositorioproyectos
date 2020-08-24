@@ -1,0 +1,673 @@
+<!DOCTYPE html>
+<div  style="position: fixed;top: 0; margin-top: 82px; width: 90%;margin-left: 5%; z-index: 10000000; background: #fff; ">
+    <nav aria-label="breadcrumb" style="margin-top: 10px; width: 90%; margin-left: 5%;">
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item active" aria-current="page">Inicio</li>
+        </ol>
+    </nav>
+
+
+    <div class="iniContBusc"style="width: 90%; margin-left: 5%; box-shadow: 0 2px 2px -2px gray;">
+        <div class="iniContBuscIn">
+            <div style="width: 40px;">
+                <img src="iconos/icons8_Search_50px.png" class="iniContBuscInImg" alt="">
+            </div>
+            <div style="width: 95%;">
+                <input type="text" class="iniContBuscInText" id="txtBuscar" onkeyup="buscar()" placeholder="Escribe para buscar..">
+            </div>
+        </div>
+        <button type="button" class="btn  iniContBuscInBtn"  onclick="buscar()">
+            Buscar
+        </button>
+
+    </div>
+</div>
+<div class="contenedor bcrumbSt" style="margin-top: 220px; margin-bottom: 100px;">
+
+    <!--Tabla carga sin filtro muestra todos los dataset aprobados--> 
+    <form onload="javascript:sinFiltro()" >
+        <div class="IniContPrim">
+            <div class="IniContSecIz" style="background:  #fff;">
+                <p class="iniCabTitulo" style="text-transform: uppercase;">Filtrar por:</p>
+                <input type="button" class="page-link"  name="sinF" id="sFiltro" value="Mostrar todo" onclick="Aprobados()" style="width: 100%; text-align: left;">
+                <p class="iniCabTitulo2" style="font-size: 12px;margin-top: 5px; margin-bottom: 5px; font-weight: 600;">TAREA PREDETERMINADA</p>
+                <input type="button" class="page-link"  name="tarea" id="Clasification" value="Clasificación" onclick="buscarC()" style="width: 100%; text-align: left;">
+                <input type="button" class="page-link"  name="tarea" id="Regresion" value="Regresión" onclick="buscarReg()" style="width: 100%; text-align: left;">
+                <input type="button" class="page-link"  name="tarea" id="Agrupacion" value="Agrupación" onclick="buscarCla()" style="width: 100%; text-align: left;">
+                <input type="button" class="page-link"  name="tarea" id="Otros" value="Otros" onclick="tareaOtros()" style="width: 100%; text-align: left;">
+
+
+
+
+                <p class="iniCabTitulo2" style="font-size: 12px; margin-top: 5px; margin-bottom: 5px; font-weight: 600;">TIPO DE ATRIBUTO</p>
+                <input type="button" class="page-link"  name="tipoAtributo" id="Categorico" value="Categórico" onclick="tAtrCat()" style="width: 100%; text-align: left;">
+                <input type="button" class="page-link"  name="tipoAtributo" id="Numerico" value="Numérico" onclick="tAtrNum()" style="width: 100%; text-align: left;">
+                <input type="button" class="page-link"  name="tipoAtributo" id="Mixto" value="Mixto" onclick="tAtrMix()" style="width: 100%; text-align: left;">
+
+
+                <p class="iniCabTitulo2" style="font-size: 12px;margin-top: 5px; margin-bottom: 5px; font-weight: 600;">TIPO DE DATO</p>
+                <input type="button" class="page-link"  name="tipoDato" id="Multivariante" value="Multivariante" onclick="tDatMulti()" style="width: 100%; text-align: left;">
+                <input type="button" class="page-link"  name="tipoDato" id="Univariante" value="Univariante" onclick="tDatUni()" style="width: 100%; text-align: left;">
+                <input type="button" class="page-link"  name="tipoDato" id="Secuencial" value="Secuencial" onclick="tDatSec()" style="width: 100%; text-align: left;">
+                <input type="button" class="page-link"  name="tipoDato" id="Seriestemporales" value="Series temporales" onclick="tDatSer()" style="width: 100%; text-align: left;">
+                <input type="button" class="page-link"  name="tipoDato" id="Texto" value="Texto" onclick="tDatTex()" style="width: 100%; text-align: left;">
+                <input type="button" class="page-link"  name="tipoDato" id="Teoríadeldominio" value="Teoría del dominio" onclick="tDatTeo()" style="width: 100%; text-align: left;">
+                <input type="button" class="page-link"  name="tipoDato" id="Otros" value="Otros" onclick="tDatOtro()" style="width: 100%; text-align: left;">         
+
+                <p class="iniCabTitulo2" style="font-size: 12px;margin-top: 5px; margin-bottom: 5px; font-weight: 600;">ZONA</p>
+                <input type="button" class="page-link"  name="zona" id="Cienciasdelavida" value="Ciencias de la vida" onclick="zonaCvid()" style="width: 100%; text-align: left;">
+                <input type="button" class="page-link"  name="zona" id="Cienciasfísicas" value="Ciencias físicas" onclick="zonaCfis()" style="width: 100%; text-align: left;">
+                <input type="button" class="page-link"  name="zona" id="CSIngeniería" value="CS / Ingeniería" onclick="zonaIng()" style="width: 100%; text-align: left;">
+                <input type="button" class="page-link"  name="zona" id="Cienciassociales" value="Ciencias sociales" onclick="zonaCS()" style="width: 100%; text-align: left;">
+                <input type="button" class="page-link"  name="zona" id="Negocios" value="Negocios" onclick="zonaNeg()" style="width: 100%; text-align: left;">
+
+                <p class="iniCabTitulo2" style="font-size: 12px;margin-top: 5px; margin-bottom: 5px; font-weight: 600;">ATRIBUTOS</p>
+                <input type="button" class="page-link"  name="ATRIBUTOS" id="M10" value="Menos de 10" onclick="MMe10()" style="width: 100%; text-align: left;">
+                <input type="button" class="page-link"  name="ATRIBUTOS" id="10100" value="10 a 100" onclick="Men10100()" style="width: 100%; text-align: left;">
+                <input type="button" class="page-link"  name="ATRIBUTOS" id="M100" value="Más de 100" onclick="MMa100()" style="width: 100%; text-align: left;">
+
+
+                <p class="iniCabTitulo2" style="font-size: 12px;margin-top: 5px; margin-bottom: 5px; font-weight: 600;">INSTANCIAS</p>
+                <input type="button" class="page-link"  name="INSTANCIAS" id="IM10" value="Menos de 10" onclick="IMe10()" style="width: 100%; text-align: left;">
+                <input type="button" class="page-link"  name="INSTANCIAS" id="I10100" value="10 a 100" onclick="Ien10100()" style="width: 100%; text-align: left;">
+                <input type="button" class="page-link"  name="INSTANCIAS" id="IM100" value="Más de 100" onclick="IMa100()" style="width: 100%; text-align: left;">
+
+
+
+            </div>
+            <div class="IniContSecDe">
+                <div class="iniContCab">
+                    <p class="iniCabTitulo">REPOSITORIO</p>
+                    <hr style="margin-top: -10px;">
+                </div>
+
+
+
+
+                <div class="IniContCardsBusq" id="contenedores">
+                    <div class="container">
+
+
+
+                        <table id="myTable" class="table table-striped">
+                            <thead class="thead-dark">
+                                <tr>
+                                    <th scope="col">Name</th>
+                                    <th scope="col">Tipo de Dato</th>
+                                    <th scope="col">Tarea Predeterminada</th>
+                                    <th scope="col">Tipo Atributo</th>
+                                    <th scope="col"># de Instan cias</th>
+                                    <th scope="col"># de atributos</th>
+                                    <th scope="col">Año</th>
+                                </tr>
+                            </thead>
+                            <tbody id="resultado">
+
+
+
+                            </tbody>
+                        </table>
+                        <div style="float: right;">    
+                            <!--Paginacion de la tabla--> 
+                            <input type="button"  value="<"name="btnatras" onclick="dec()" style="background: #2079C5; border: none; color: #fff; width: 40px; height: 35px; border-radius: 5px;" class="btn-default waves-effect waves-light">
+                            <input type="button" id="btnAV" name="paginaN" value="1" style="background: #F5F5F5; border: none; color: #666666; width: 40px; height: 35px; border-radius: 5px;" class=" waves-effect waves-light">
+                            <input type="button"  value=">" name="btnsig" onclick="ad()" style="background: #2079C5; border: none; color: #fff; width: 40px; height: 35px; border-radius: 5px;" class="btn-default waves-effect waves-light">
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+
+    </form>
+
+</div>            
+          
+<script>
+    var Gcond;
+    var Gfiltro;
+    var Gpag;
+    var nPag;
+    var contarFilas;
+    function dec() {
+        var condicion = "";
+        if (Gcond == "SinF")
+        {
+            condicion = "SinF";
+        } else {
+            condicion = Gcond;
+        }
+        if (parseInt(document.getElementById("btnAV").value) > 1) {
+            document.getElementById("btnAV").value = parseInt(document.getElementById("btnAV").value) - 1;
+
+            var filtro = Gfiltro;
+            var pag = document.getElementById("btnAV").value;
+            $.ajax({
+                type: "POST",
+                url: "BuscarServlet",
+                data: {condicion: condicion, filtro: filtro, pagi: pag},
+                success: function (responseText) {
+                    $("#resultado").html(responseText);
+                }
+            });
+        }
+    }
+    function doSearch()
+    {
+
+
+
+    }
+    function ad() {
+        var yea = myTable.rows.length;
+        var condicion = "";
+        if (Gcond == "SinF")
+        {
+            condicion = "SinF";
+        } else {
+            condicion = Gcond;
+        }
+        if (yea > 17) {
+
+
+            document.getElementById("btnAV").value = parseInt(document.getElementById("btnAV").value) + 1;
+
+            var filtro = Gfiltro;
+            var pag = document.getElementById("btnAV").value;
+            $.ajax({
+                type: "POST",
+                url: "BuscarServlet",
+                data: {condicion: condicion, filtro: filtro, pagi: pag},
+                success: function (responseText) {
+                    console.log("ss");
+                    $("#resultado").html(responseText);
+                }
+            });
+        }
+
+
+    }
+    function buscarReg() {
+        document.getElementById("btnAV").value = 1;
+        var condicion = "tarea";
+        var filtro = "Regresion";
+        var pag = document.getElementById("btnAV").value;
+        Gcond = condicion;
+        Gfiltro = filtro;
+        Gpag = pag;
+        $.ajax({
+            type: "POST",
+            url: "BuscarServlet",
+            data: {condicion: condicion, filtro: filtro, pagi: pag},
+            success: function (responseText) {
+                $("#resultado").html(responseText);
+            }
+        });
+    }
+    function buscarCla() {
+        document.getElementById("btnAV").value = 1;
+        var condicion = $('#Agrupacion').attr('name');
+        var filtro = document.getElementById("Agrupacion").value;
+        var pag = document.getElementById("btnAV").value;
+        Gcond = condicion;
+        Gfiltro = filtro;
+        Gpag = pag;
+        $.ajax({
+            type: "POST",
+            url: "BuscarServlet",
+            data: {condicion: condicion, filtro: filtro, pagi: pag},
+            success: function (responseText) {
+                $("#resultado").html(responseText);
+            }
+        });
+    }
+    function buscarC() {
+        document.getElementById("btnAV").value = 1;
+        var condicion = "tarea";
+        var filtro = "Clasificación";
+        var pag = document.getElementById("btnAV").value;
+        Gcond = condicion;
+        Gfiltro = filtro;
+        Gpag = pag;
+        $.ajax({
+            type: "POST",
+            url: "BuscarServlet",
+            data: {condicion: condicion, filtro: filtro, pagi: pag},
+            success: function (responseText) {
+                $("#resultado").html(responseText);
+            }
+        });
+    }
+    function tAtrCat() {
+        document.getElementById("btnAV").value = 1;
+        var condicion = "tipoAtributo";
+        var filtro = "Categorico";
+        var pag = document.getElementById("btnAV").value;
+        Gcond = condicion;
+        Gfiltro = filtro;
+        Gpag = pag;
+        $.ajax({
+            type: "POST",
+            url: "BuscarServlet",
+            data: {condicion: condicion, filtro: filtro, pagi: pag},
+            success: function (responseText) {
+                $("#resultado").html(responseText);
+            }
+        });
+    }
+    function tAtrNum() {
+        document.getElementById("btnAV").value = 1;
+        var condicion = "tipoAtributo";
+        var filtro = "Numerico";
+        var pag = document.getElementById("btnAV").value;
+        Gcond = condicion;
+        Gfiltro = filtro;
+        Gpag = pag;
+        $.ajax({
+            type: "POST",
+            url: "BuscarServlet",
+            data: {condicion: condicion, filtro: filtro, pagi: pag},
+            success: function (responseText) {
+                $("#resultado").html(responseText);
+            }
+        });
+    }
+    function tAtrMix() {
+        document.getElementById("btnAV").value = 1;
+        var condicion = "tipoAtributo";
+        var filtro = "Mixto";
+        var pag = document.getElementById("btnAV").value;
+        Gcond = condicion;
+        Gfiltro = filtro;
+        Gpag = pag;
+        $.ajax({
+            type: "POST",
+            url: "BuscarServlet",
+            data: {condicion: condicion, filtro: filtro, pagi: pag},
+            success: function (responseText) {
+                $("#resultado").html(responseText);
+            }
+        });
+    }
+
+
+    function tDatMulti() {
+        document.getElementById("btnAV").value = 1;
+        var condicion = "tipoDatos";
+        var filtro = "Multivariante";
+        var pag = document.getElementById("btnAV").value;
+        Gcond = condicion;
+        Gfiltro = filtro;
+        Gpag = pag;
+        $.ajax({
+            type: "POST",
+            url: "BuscarServlet",
+            data: {condicion: condicion, filtro: filtro, pagi: pag},
+            success: function (responseText) {
+                $("#resultado").html(responseText);
+            }
+        });
+    }
+    function tDatUni() {
+        document.getElementById("btnAV").value = 1;
+        var condicion = "tipoDatos";
+        var filtro = "Univariante";
+        var pag = document.getElementById("btnAV").value;
+        Gcond = condicion;
+        Gfiltro = filtro;
+        Gpag = pag;
+        $.ajax({
+            type: "POST",
+            url: "BuscarServlet",
+            data: {condicion: condicion, filtro: filtro, pagi: pag},
+            success: function (responseText) {
+                $("#resultado").html(responseText);
+            }
+        });
+    }
+    function tDatSec() {
+        document.getElementById("btnAV").value = 1;
+        var condicion = "tipoDatos";
+        var filtro = "Secuencial";
+        var pag = document.getElementById("btnAV").value;
+        Gcond = condicion;
+        Gfiltro = filtro;
+        Gpag = pag;
+        $.ajax({
+            type: "POST",
+            url: "BuscarServlet",
+            data: {condicion: condicion, filtro: filtro, pagi: pag},
+            success: function (responseText) {
+                $("#resultado").html(responseText);
+            }
+        });
+    }
+    function tDatSer() {
+        document.getElementById("btnAV").value = 1;
+        var condicion = "tipoDatos";
+        var filtro = "Serie Temporal";
+        var pag = document.getElementById("btnAV").value;
+        Gcond = condicion;
+        Gfiltro = filtro;
+        Gpag = pag;
+        $.ajax({
+            type: "POST",
+            url: "BuscarServlet",
+            data: {condicion: condicion, filtro: filtro, pagi: pag},
+            success: function (responseText) {
+                $("#resultado").html(responseText);
+            }
+        });
+    }
+    function tDatTex() {
+        document.getElementById("btnAV").value = 1;
+        var condicion = "tipoDatos";
+        var filtro = "Texto";
+        var pag = document.getElementById("btnAV").value;
+        Gcond = condicion;
+        Gfiltro = filtro;
+        Gpag = pag;
+        $.ajax({
+            type: "POST",
+            url: "BuscarServlet",
+            data: {condicion: condicion, filtro: filtro, pagi: pag},
+            success: function (responseText) {
+                $("#resultado").html(responseText);
+            }
+        });
+    }
+    function tDatTeo() {
+        document.getElementById("btnAV").value = 1;
+        var condicion = "tipoDatos";
+        var filtro = "Teoria del Dominio";
+        var pag = document.getElementById("btnAV").value;
+        Gcond = condicion;
+        Gfiltro = filtro;
+        Gpag = pag;
+        $.ajax({
+            type: "POST",
+            url: "BuscarServlet",
+            data: {condicion: condicion, filtro: filtro, pagi: pag},
+            success: function (responseText) {
+                $("#resultado").html(responseText);
+            }
+        });
+    }
+    function tDatOtro() {
+        document.getElementById("btnAV").value = 1;
+        Gcond = "OtrosD";
+        var condicion = "OtrosD";
+        var filtro = "";
+        var pag = document.getElementById("btnAV").value;
+        $.ajax({
+            type: "POST",
+            url: "BuscarServlet",
+            data: {condicion: condicion, filtro: filtro, pagi: pag},
+            success: function (responseText) {
+                $("#resultado").html(responseText);
+            }
+        });
+    }
+
+
+    function tDatTeo() {
+        document.getElementById("btnAV").value = 1;
+        var condicion = "tipoDatos";
+        var filtro = "Teoria del Dominio";
+        var pag = document.getElementById("btnAV").value;
+        Gcond = condicion;
+        Gfiltro = filtro;
+        Gpag = pag;
+        $.ajax({
+            type: "POST",
+            url: "BuscarServlet",
+            data: {condicion: condicion, filtro: filtro, pagi: pag},
+            success: function (responseText) {
+                $("#resultado").html(responseText);
+            }
+        });
+    }
+
+    function zonaCvid() {
+        document.getElementById("btnAV").value = 1;
+        var condicion = "zona";
+        var filtro = "Ciencias de la vida";
+        var pag = document.getElementById("btnAV").value;
+        Gcond = condicion;
+        Gfiltro = filtro;
+        Gpag = pag;
+        $.ajax({
+            type: "POST",
+            url: "BuscarServlet",
+            data: {condicion: condicion, filtro: filtro, pagi: pag},
+            success: function (responseText) {
+                $("#resultado").html(responseText);
+            }
+        });
+    }
+    function zonaCfis() {
+        document.getElementById("btnAV").value = 1;
+        var condicion = "zona";
+        var filtro = "Ciencias fisicas";
+        var pag = document.getElementById("btnAV").value;
+        Gcond = condicion;
+        Gfiltro = filtro;
+        Gpag = pag;
+        $.ajax({
+            type: "POST",
+            url: "BuscarServlet",
+            data: {condicion: condicion, filtro: filtro, pagi: pag},
+            success: function (responseText) {
+                $("#resultado").html(responseText);
+            }
+        });
+    }
+    function zonaIng() {
+        document.getElementById("btnAV").value = 1;
+        var condicion = "zona";
+        var filtro = "CS / Ingenieria";
+        var pag = document.getElementById("btnAV").value;
+        Gcond = condicion;
+        Gfiltro = filtro;
+        Gpag = pag;
+        $.ajax({
+            type: "POST",
+            url: "BuscarServlet",
+            data: {condicion: condicion, filtro: filtro, pagi: pag},
+            success: function (responseText) {
+                $("#resultado").html(responseText);
+            }
+        });
+    }
+    function zonaCS() {
+        document.getElementById("btnAV").value = 1;
+        var condicion = "zona";
+        var filtro = "Ciencias sociales";
+        var pag = document.getElementById("btnAV").value;
+        Gcond = condicion;
+        Gfiltro = filtro;
+        Gpag = pag;
+        $.ajax({
+            type: "POST",
+            url: "BuscarServlet",
+            data: {condicion: condicion, filtro: filtro, pagi: pag},
+            success: function (responseText) {
+                $("#resultado").html(responseText);
+            }
+        });
+    }
+    function zonaNeg() {
+        document.getElementById("btnAV").value = 1;
+        var condicion = "zona";
+        var filtro = "Negocios";
+        var pag = document.getElementById("btnAV").value;
+        Gcond = condicion;
+        Gfiltro = filtro;
+        Gpag = pag;
+        $.ajax({
+            type: "POST",
+            url: "BuscarServlet",
+            data: {condicion: condicion, filtro: filtro, pagi: pag},
+            success: function (responseText) {
+                $("#resultado").html(responseText);
+            }
+        });
+    }
+    function tareaOtros() {
+        document.getElementById("btnAV").value = 1;
+        Gcond = "Otros";
+        var condicion = "Otros";
+        var filtro = "";
+        var pag = document.getElementById("btnAV").value;
+        $.ajax({
+            type: "POST",
+            url: "BuscarServlet",
+            data: {condicion: condicion, filtro: filtro, pagi: pag},
+            success: function (responseText) {
+                $("#resultado").html(responseText);
+            }
+        });
+    }
+    function IMe10() {
+        document.getElementById("btnAV").value = 1;
+        Gcond = "IMe10";
+        var condicion = "IMe10";
+        var filtro = "";
+        var pag = document.getElementById("btnAV").value;
+        $.ajax({
+            type: "POST",
+            url: "BuscarServlet",
+            data: {condicion: condicion, filtro: filtro, pagi: pag},
+            success: function (responseText) {
+                $("#resultado").html(responseText);
+            }
+        });
+    }
+    function IMa100() {
+        document.getElementById("btnAV").value = 1;
+        Gcond = "IMa100";
+        var condicion = "IMa100";
+        var filtro = "";
+        var pag = document.getElementById("btnAV").value;
+        $.ajax({
+            type: "POST",
+            url: "BuscarServlet",
+            data: {condicion: condicion, filtro: filtro, pagi: pag},
+            success: function (responseText) {
+                $("#resultado").html(responseText);
+            }
+        });
+    }
+    function Ien10100() {
+        document.getElementById("btnAV").value = 1;
+        Gcond = "Ien10100";
+        var condicion = "Ien10100";
+        var filtro = "";
+        var pag = document.getElementById("btnAV").value;
+        $.ajax({
+            type: "POST",
+            url: "BuscarServlet",
+            data: {condicion: condicion, filtro: filtro, pagi: pag},
+            success: function (responseText) {
+                $("#resultado").html(responseText);
+            }
+        });
+    }
+
+
+    function MMe10() {
+        document.getElementById("btnAV").value = 1;
+        Gcond = "MMe10";
+        var condicion = "MMe10";
+        var filtro = "";
+        var pag = document.getElementById("btnAV").value;
+        $.ajax({
+            type: "POST",
+            url: "BuscarServlet",
+            data: {condicion: condicion, filtro: filtro, pagi: pag},
+            success: function (responseText) {
+                $("#resultado").html(responseText);
+            }
+        });
+    }
+    function MMa100() {
+        document.getElementById("btnAV").value = 1;
+        Gcond = "MMa100";
+        var condicion = "MMa100";
+        var filtro = "";
+        var pag = document.getElementById("btnAV").value;
+        $.ajax({
+            type: "POST",
+            url: "BuscarServlet",
+            data: {condicion: condicion, filtro: filtro, pagi: pag},
+            success: function (responseText) {
+                $("#resultado").html(responseText);
+            }
+        });
+    }
+
+    function Men10100() {
+        document.getElementById("btnAV").value = 1;
+        Gcond = "Men10100";
+        var condicion = "Men10100";
+        var filtro = "";
+        var pag = document.getElementById("btnAV").value;
+        $.ajax({
+            type: "POST",
+            url: "BuscarServlet",
+            data: {condicion: condicion, filtro: filtro, pagi: pag},
+            success: function (responseText) {
+                $("#resultado").html(responseText);
+            }
+        });
+    }
+    function sinFiltro() {
+        document.getElementById("btnAV").value = 1;
+        Gcond = "SinF";
+        var condicion = "SinF";
+        var filtro = "";
+        var pag = document.getElementById("btnAV").value;
+        $.ajax({
+            type: "POST",
+            url: "BuscarServlet",
+            data: {condicion: condicion, filtro: filtro, pagi: pag},
+            success: function (responseText) {
+                $("#resultado").html(responseText);
+            }
+        });
+    }
+    function buscar() {
+        document.getElementById("btnAV").value = 1;
+        Gcond = "Buscar";
+        var condicion = "Buscar";
+        var filtro = document.getElementById("txtBuscar").value;
+        var pag = document.getElementById("btnAV").value;
+        var ban = "nel";
+        $.ajax({
+            type: "POST",
+            url: "BuscarServlet",
+            data: {condicion: condicion, filtro: filtro, pagi: pag, ban: ban},
+            success: function (responseText) {
+                $("#resultado").html(responseText);
+            }
+        });
+    }
+    function Aprobados() {
+        document.getElementById("btnAV").value = 1;
+        Gcond = "Aprovados";
+        var condicion = "Aprovados";
+        var filtro = "4";
+        var pag = document.getElementById("btnAV").value;
+        var ban = "ban";
+        $.ajax({
+            type: "POST",
+            url: "BuscarServlet",
+            data: {condicion: condicion, filtro: filtro, pagi: pag, ban: ban},
+            success: function (responseText) {
+                $("#resultado").html(responseText);
+            }
+        });
+    }
+    
+    sinFiltro();
+</script>

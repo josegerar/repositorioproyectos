@@ -1,0 +1,121 @@
+<%-- any content can be specified here e.g.: --%>
+<%@ page pageEncoding="UTF-8" %>
+<nav class="navbar navbar-icon-top navbar-expand-lg navbar-dark " style="background:#225499; margin-top: 0px; position: fixed; top: 0; width: 100%; z-index: 10000000000;">
+    <a class="navbar-brand" href="#">REPOSITORIO</a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-targ
+            et="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav mr-auto">
+            <li class="nav-item">
+                <a class="nav-link" href="javascript:paginacion('pages/repositorioDocentes.html')">
+                    <i class="fa fa-home"></i>
+                    Inicio
+
+                </a>
+            </li>
+
+            <li class="nav-item">
+                <a class="nav-link" href="javascript:paginacion('pages/repositorioProyectos.html')">
+                    <i class="fa fa-address-book" aria-hidden="true"></i>
+                    Proyectos
+
+                </a>
+            </li>
+
+
+            <!--Validaciones de cada una de las paginas--> 
+            <% if (sesion.getAttribute("usuario") != null) { %>
+            <li class="nav-item">
+                <a class="nav-link" href="AnadirProyectos.jsp">
+                    <i class="fa fa-newspaper-o" aria-hidden="true"></i>
+                    Añadir proyecto
+
+                </a>
+            </li>
+
+
+            <li class="nav-item">
+                <a class="nav-link" href="RegistroUsuario.jsp">
+                    <i class="fa fa-user-o" id="userli"></i>
+                    Mi Perfil
+
+                </a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="AcuerdoDonacion.jsp">
+                    <i class="fa fa-gift">
+                    </i>
+                    Donar
+                </a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="MisDanaciones.jsp">
+                    <i class="fa fa-database">
+
+                    </i>
+                    Mis Donaciones
+                </a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="GenerarDatos.jsp">
+                    <i class="fa fa-table">
+
+                    </i>
+                    Generar Datos
+                </a>
+            </li>
+            <%}%>
+
+            <% if (rol.equals("1")) { %>
+            <li class="nav-item">
+                <a class="nav-link " href="Aprobacion.jsp"><i class="fa fa-envelope-o"></i>Solicitudes</a>
+            </li>
+            <%}%>
+
+        </ul>
+        <div style="position: fixed; top: 8px; right:  10px;"  class=" justify-content-end " >
+            <ul class="navbar-nav  justify-content-end " >
+                <li class="nav-item">
+                    <% if (sesion.getAttribute("usuario") != null) {%>
+                    <a class="nav-link"  id="user" > <i class="fa fa-user"></i><%=sesion.getAttribute("usuario")%></a>
+                        <%} else {%>
+                    <a class="nav-link" href="RegistroUsuario.jsp"> <i class="fa fa-user"></i>Registrarse</a>
+                    <%}%>
+                </li>
+                <li class="nav-item">
+                    <% if (sesion.getAttribute("usuario") != null) { %>
+                    <a class="nav-link" id="btncerrarsesion" > <i class="fa fa-sign-in"> </i>Cerrar Sesión</a>
+                    <%} else {%>                        
+                    <a class="nav-link"  id="btn-abrir-popup"  > <i class="fa fa-sign-in"> </i>Iniciar Sesión</a>
+                    <%}%>   
+                </li>
+            </ul>
+        </div>
+
+
+    </div>
+</nav>
+<script>
+    var btnAbrirPopup = document.getElementById("btn-abrir-popup"),
+            overlay = document.getElementById('overlay'),
+            popup = document.getElementById('popup');
+    btnAbrirPopup.addEventListener('click', function () {
+        overlay.classList.add('active');
+        popup.classList.add('active');
+    });</script>
+<script>
+
+    async function fetchHtmlAsText(url) {
+        return await (await fetch(url)).text();
+    }
+
+    async function paginacion(pagina) {
+        const contentDiv = document.getElementById("contenidoPrincipal");
+        $("#contenidoPrincipal").load(pagina);
+        //contentDiv.innerHTML = await fetchHtmlAsText(pagina);
+    }
+    
+</script>

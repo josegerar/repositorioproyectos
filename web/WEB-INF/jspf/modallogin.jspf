@@ -1,0 +1,83 @@
+<%-- any content can be specified here e.g.: --%>
+<%@ page pageEncoding="UTF-8" %>
+<div class="overlay" id="overlay" style="z-index: 100000000000">
+    <div class="popup" id="popup">
+        <a id="btn-cerrar-popup" class="btn-cerrar-popup">X</a>
+        <h3>INICIO DE SESIÓN</h3>
+        <form id="form1">
+            <div class="contenedor-inputs">
+                <input id="usuario" name="usuario" type="text" placeholder="Nombre de Usuario"  required minlength="3" maxlength="20" />
+                <input id="clave" name="clave" type="password" placeholder="Contraseña"  required minlength="3" maxlength="25" />
+            </div>
+            <input  type="button" id="envia" class="btn-submit" value="Ingresar">
+        </form>
+        <br/>
+        <div id="result1" style="color: red" ></div>
+        <br/>
+        <a href="RegistroUsuario.jsp" class="txt3">Registrate Ahora</a>
+    </div>
+</div>
+
+<script>
+    var overlay = document.getElementById('overlay'),
+            popup = document.getElementById('popup'),
+            btnCerrarPopup = document.getElementById('btn-cerrar-popup');
+
+    btnCerrarPopup.addEventListener('click', function () {
+        overlay.classList.remove('active');
+        popup.classList.remove('active');
+        location.reload(true);
+    });
+
+</script>
+
+<!-- ajax -->
+<script>
+    $(document).ready(function () {
+        $('#envia').click(function (event) {
+            var usuarioVar = $('#usuario').val();
+            var claveVar = $('#clave').val();
+            // Si en vez de por post lo queremos hacer por get, cambiamos el $.post por $.get
+            $.ajax({
+                type: "POST",
+                url: "LogUsuario",
+                data: {
+                    usuario: usuarioVar,
+                    clave: claveVar
+                },
+                success: function (result) {
+                    var resultado = result;
+                    if (resultado == 1) {
+                        overlay.classList.remove('active');
+                        popup.classList.remove('active');
+                        location.reload(true);
+
+                    }
+                    ;
+                    $("#result1").html(result);
+                }
+            });
+            document.getElementById("clave").value = "";
+        });
+
+    });
+</script>
+<!--Cerrar Sesion-->
+<script>
+    $(document).ready(function () {
+        $('#btncerrarsesion').click(function (event) {
+            var usuarioVar = $('#usuario').val();
+            $.ajax({
+                type: "POST",
+                url: "CerrarSesion",
+                data: {
+                    usuario: usuarioVar
+                },
+                success: function (result) {
+                    location.reload(true);
+                }
+            });
+        });
+
+    });
+</script>
