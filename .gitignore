@@ -1,2 +1,11 @@
-/build/
-/dist/
+# Created by https://www.toptal.com/developers/gitignore/api/java,netbeans,java-web
+
+### NetBeans ###
+nbproject/private/
+build/
+nbbuild/
+dist/
+nbdist/
+nbactions.xml
+.nb-gradle/
+/nbproject/
