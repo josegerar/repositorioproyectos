@@ -18,6 +18,7 @@ import org.Object.Ciudad;
 import org.Object.Provincia;
 import org.Object.Profesion;
 import org.Object.Institucion;
+import org.Object.Usuario;
 /**
  *
  * @author Suanny
@@ -255,5 +256,28 @@ public static LinkedList<Institucion> getInstitucion()
             }
         }
         return b;
+    }
+     
+    public static LinkedList<Usuario> getUsuario() {
+
+        LinkedList<Usuario> listausuario = new LinkedList<Usuario>();
+        try {
+           Class.forName("com.mysql.jdbc.Driver");
+            Connection conexion =  DriverManager.getConnection("jdbc:mysql://localhost:3306/pivii?autoReconnect=true&useSSL=false", "root", "qwerty");
+            Statement st = conexion.createStatement();
+            ResultSet rs = st.executeQuery("select idUsuario, concat(nombre, ' ' ,apellido) as nombre from usuario");
+            while (rs.next()) {
+                Usuario usuario = new Usuario();
+                usuario.setIdUsuario(rs.getInt("idUsuario"));
+                usuario.setNombre(rs.getString("nombre"));
+                listausuario.add(usuario);
+            }
+            rs.close();
+            st.close();
+            conexion.close();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return listausuario;
     }
 }

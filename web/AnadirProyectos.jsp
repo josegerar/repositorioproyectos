@@ -8,6 +8,7 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@page import="org.DAO.ConexionMySQL"%>
 <%@page import="model.Conexion"%>
+<%@page import="org.Object.Usuario"%>
 
 <!DOCTYPE html>
 <html>
@@ -21,12 +22,14 @@
         <link href="css/bootstrap-grid.min.css" rel="stylesheet" type="text/css"/>
         <link href="css/bootstrap-grid.css" rel="stylesheet" type="text/css"/>
         <link rel="stylesheet" type="text/css" href="fonts/font-awesome-4.7.0/css/font-awesome.min.css">
+        <link href="css/CssAnadirPI.css" rel="stylesheet" type="text/css"/>
         <link href="css/util.css" rel="stylesheet" type="text/css"/>
         <link href="css/main.css" rel="stylesheet" type="text/css"/>
         <link href="css/estilos_rep.css" rel="stylesheet" type="text/css" />
         <link href="css/estilos.css" rel="stylesheet" type="text/css"/>
         <script src="js/dinamico.js" type="text/javascript"></script>
         <script src="js/jquery-3.4.1.min.js" type="text/javascript"></script>
+        <script src="js/jquery.min.js" type="text/javascript"></script>
         <script src="js/popup.js" type="text/javascript"></script>
         <link href="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
         <script src="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>
@@ -35,6 +38,7 @@
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
 
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+        
     </head>
     <body>
         <%
@@ -118,7 +122,6 @@
                       <a class="nav-link " href="Aprobacion.jsp"><i class="fa fa-envelope-o"></i>Solicitudes</a>
                  </li>
                  <%}%>
-
              </ul>
                  
             <div style="position: fixed; top: 8px; right:  10px;"  class=" justify-content-end " >
@@ -145,27 +148,82 @@
                        
         <div class="regisContenedor" style="max-width: 800px; margin: auto;">
             <p class="regisTitulo"> Registro de Proyectos </p>
+            <p class="regisTitulo"> Registro de Proyectos </p>
             <form action="InsertProject" method="post">
                 <div>
                     <div class="input-group mb-3">
-                        <select name="coordinadorid" id="coordinadorid" class="custom-select" required="true">
-                            <option value="" selected>Elija un coordinador...</option>
-                        </select>
-                        <div class="input-group-append">
-                            <label class="input-group-text" for="inputGroupSelect02">Coordinador</label>
+                        <div class="input-group-prepend">
+                            <span class="input-group-text" id="inputGroup-sizing-default2"  style="width: 200px; ">Coordinador</span>
                         </div>
+                        <!--<input type="text" name="coordinadorid" id="coordinadorid" class="custom-select" required="true" style="height: 40px; width: 500px;" />-->
+                        <input type="text" placeholder="Escriba el coordinador..." onpaste="return false" onkeypress="return SoloLetras(event)" id="coordinador" name="coordinador" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default">    
+                        <button id="anadirCoordinador" class="btn btn-primary btn-lg" style="margin-bottom: 0px; margin-top: 0px; margin-right: 0px; width: 70px; height: 40px; padding: 0; font-size: 15px;">Añadir</button>
                     </div>
+                    
+                   <table id="general" style="width: 15px; height: 15px; margin-bottom: 10px;">
+                        <tbody>
+
+                            <tr>
+                                <td class="input-group-text" style="height: 40px; width: 200px;" >Autores</td>
+                                <td> <div style="overflow-y: scroll; max-height: 100px;">
+                                        <table style="position: relative; left:0;" id="autorTb" >           
+                                            <tbody id="cuerpoAutores">
+
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </td>
+                                <td><button id="anadirAutor" class="btn btn-primary btn-lg" type="submit" style="margin-bottom: 0px; margin-top: 0px; width: 70px; height: 40px; padding: 0; font-size: 15px;">Añadir</button></td>
+                        <script>
+                            //Script para generar Autores
+                            var cont1 = 0;
+                            $(function () {
+                                agregarAutor();
+                            });
+                            // Aqui se crean los actores
+                            function agregarAutor() {
+                                var tb = $('#autorTb tbody');
+                                var textClone = $('<input>', {
+                                    id: 'autor' + cont1,
+                                    class: 'form-control autocomplete-sql ob-blur-actor-sql',
+                                    name: 'autor' + cont1,
+                                    value: '',
+                                    type: 'text',
+                                    style: 'width: 413px; height: 40px;',
+                                    placeholder: 'Busqueda del autor...'
+                                });
+                                var colText = $('<td>').append(textClone);
+                                var div = $('<div class="estilobutton" style="width: 40px; higth: 40px; text-align: center; cursor: pointer;" ><a onclick="agregarAutor()"><i class="fa fa-plus" aria-hidden="true"></i></a></div>');
+                                var div2 = $('<div class="estilobutton" style="width: 40px; higth: 40px; text-align: center; cursor: pointer;" ><a onclick="borrarFila(' + "'fAutor" + cont1 + "'" + ',' + "'autorTb'" + ')"><i class="fa fa-trash" aria-hidden="true"></i></a></div>');
+                                var colButtondel = $('<td>').append(div2);
+                                var colButtoadd = $('<td>').append(div);
+                                $('<tr>', {id: 'fAutor' + cont1}).append(colText).append(colButtoadd).append(colButtondel).appendTo(tb);
+                                cont1++;
+                            }
+                            //Se borra la fila creada de autores
+                            function borrarFila(id_fila, tableName) {
+                                var table = document.getElementById(tableName);
+                                var cant = table.rows.length;
+                                if (cant > 1) {
+                                    $('#' + id_fila).remove();
+                                }
+                            }
+                        </script>
+                        </tr>
+                    </table>
+                    
                     
                     <div class="input-group mb-3">
                         <div class="input-group-prepend">
                             <span class="input-group-text" id="inputGroup-sizing-default" style="width: 200px; ">Titulo</span>
                         </div>
-                        <input type="text" onpaste="return false" onkeypress="return SoloLetras(event)" id="nombre" name="nombre" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default" required="true">
+                        <input type="text" placeholder="Escriba el titulo..." onpaste="return false" onkeypress="return SoloLetras(event)" id="titulo" name="titulo" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default">
 
                     </div>
-                            
+                    
+                     
                     <div class="input-group mb-3">
-                        <select id="modulo" name="modulo" class="custom-select" required="true">
+                        <select id="modulo" name="modulo" class="custom-select">
                             <option value="" selected>Elija el Modulo...</option>
                             <option value="1">1er Semestre</option>
                             <option value="2">2do Semestre</option>
@@ -179,19 +237,19 @@
                         </select>
 
                         <div class="input-group-append">
-                            <label class="input-group-text" for="inputGroupSelect02">Modulo</label>
+                            <label class="input-group-text" for="inputGroupSelect02" style="width: 170px;">Modulo</label>
                         </div>             
                     </div>        
                             
                     <div class="input-group mb-3">
-                        <select id="periodo" name="periodo" class="custom-select" required="true">
+                        <select id="periodo" name="periodo" class="custom-select">
                             <option value="" selected>Elija el periodo...</option>
                             <option value="PPA">Primer Periodo Academico</option>
                             <option value="SPA">Segundo Periodo Academico</option>  
                         </select>
-                        <input type="number" onpaste="return false" min="1970" max="2050" maxlength="4" minlength="4" onkeypress="return SoloNumeros(event)" id="anio" name="anio" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default" required="true">
+                        <input type="number" placeholder="Elija el año..." onpaste="return false" min="1970" max="2050" maxlength="2050" minlength="1970" onkeypress="return SoloNumeros(event)" id="anio" name="anio" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default">
                         <div class="input-group-append">
-                            <label class="input-group-text" for="inputGroupSelect02">Periodo Academico</label>
+                            <label class="input-group-text" for="inputGroupSelect02" style="width: 170px;">Periodo Academico</label>
                         </div>             
                     </div>         
                             
@@ -199,29 +257,112 @@
                         <div class="input-group-prepend">
                             <span class="input-group-text" id="inputGroup-sizing-default2"  style="width: 200px; ">Objetivo General</span>
                         </div>
-                        <input type="text"onpaste="return false" onkeypress="return SoloLetras(event)" id="objetivo" name="objetivo" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default2" required="true">
+                        <input type="text"onpaste="return false" onkeypress="return SoloLetras(event)" id="objetivo" name="objetivo" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default2">
                     </div>    
                             
                     <div class="input-group mb-3">
                         <div class="input-group-prepend">
                             <span class="input-group-text" id="inputGroup-sizing-default2"  style="width: 200px; ">Resumen</span>
                         </div>
-                        <textarea rows="6" id="resumen" name="resumen" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default2" required="true"></textarea>
+                        <textarea rows="6" id="resumen" name="resumen" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default2"></textarea>
                     </div> 
                    
+                    <table id="generalVariable" style="width: 15px; height: 15px; margin-bottom: 10px;">
+                        <tbody>
+
+                            <tr>
+                                <td class="input-group-text" style="height: 40px; width: 200px;" >Variables</td>
+                                <td> <div style="overflow-y: scroll; max-height: 100px;">
+                                        <table style="position: relative; left:0;" id="variableTb" >           
+                                            <tbody id="cuerpoVariables">
+
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </td>
+                        <script>
+                            //Script para generar Autores
+                            var cont2 = 0;
+                            $(function () {
+                                agregarVariable();
+                            });
+                            // Aqui se crean los actores
+                            function agregarVariable() {
+                                var tb = $('#variableTb tbody');
+                                var textCloneVar = $('<input>', {
+                                    id: 'variable' + cont2,
+                                    class: 'form-control autocomplete-sql ob-blur-actor-sql',
+                                    name: 'variable' + cont2,
+                                    value: '',
+                                    type: 'text',
+                                    style: 'width: 350px; height: 40px;',
+                                    placeholder: 'Escriba la variable...'
+                                });
+                                var textCloneTipo = $('<select class="custom-select" style="width: 145px; height: 40px;" required="true"><option value="I">Independiente</option><option value="D">Dependiente</option></select>');
+                                var colTextVar = $('<td>').append(textCloneVar);
+                                var colTextTipo = $('<td>').append(textCloneTipo);
+                                var div = $('<div class="estilobutton" style="width: 40px; higth: 40px; text-align: center; cursor: pointer;" ><a onclick="agregarVariable()"><i class="fa fa-plus" aria-hidden="true"></i></a></div>');
+                                var div2 = $('<div class="estilobutton" style="width: 40px; higth: 40px; text-align: center; cursor: pointer;" ><a onclick="borrarFilaVariable(' + "'fVariable" + cont2 + "'" + ',' + "'variableTb'" + ')"><i class="fa fa-trash" aria-hidden="true"></i></a></div>');
+                                var colButtondel = $('<td>').append(div2);
+                                var colButtoadd = $('<td>').append(div);
+                                $('<tr>', {id: 'fVariable' + cont2}).append(colTextVar).append(colTextTipo).append(colButtoadd).append(colButtondel).appendTo(tb);
+                                cont2++;
+                            }
+                            //Se borra la fila creada de autores
+                            function borrarFilaVariable(id_fila, tableName) {
+                                var table = document.getElementById(tableName);
+                                var cant = table.rows.length;
+                                if (cant > 1) {
+                                    $('#' + id_fila).remove();
+                                }
+                            }
+                        </script>
+                        </tr>
+                    </table>
+                    
+                    
                     <div class="input-group mb-3">
+                        
+                        <input type="file" onpaste="return false" id="url" name="url" class="form-control upload-photo" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default2">
+                        
                         <div class="input-group-prepend">
-                            <span class="input-group-text" id="inputGroup-sizing-default2"  style="width: 200px; ">Archivo de Proyecto</span>
+                            <span class="input-group-text" id="inputGroup-sizing-default2"  style="width: 170px;">Archivo de Proyecto</span>
                         </div>
-                        <input type="file"onpaste="return false" onkeypress="return SoloLetras(event)" id="url" name="url" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default2" required="true">
                     </div>   
                   </div> 
                 
+                  <!--</div>
+                    <div class="input__row uploader">
+                      <div id="inputval" class="input-value"></div>
+                      <label for="file_1"></label>
+                      <input id="file_1" class="upload" type="file">
+                    </div>-->
+                
                   <div style="display: flex; justify-content: space-between;">
                         <button id="guardar" type="submit" class="btn btn-primary btn-lg" style="width: 48%">Guardar</button>
-                        <button type="button" onclick="recargar()" class="btn btn-secondary btn-lg" style="width: 48%">Cancelar</button>
+                        <button type="button" onclick="" class="btn btn-secondary btn-lg" style="width: 48%">Cancelar</button>
                     </div>
             </form>
         </div> 
+          
+         <!--    Modal  -->    
+         <div id="dialog" title="Dialogo básico">
+             <p>Diálogo básico modal. Puede ser movido, redimensionado y cerrado haciendo clic sobre el botón 'X'.</p>
+         </div>
+         
+         <!--  End  Modal  --> 
+        <script>
+             $(function () {
+                  $("#dialog").dialog({
+                  autoOpen: false,
+                  modal: true
+             });
+             $("#anadirCoordinador")
+                  .button()
+                  .click(function () {
+                  $("#dialog").dialog("open");
+                  });
+             });
+        </script>          
     </body>
 </html>
