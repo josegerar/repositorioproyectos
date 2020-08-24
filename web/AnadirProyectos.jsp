@@ -30,7 +30,6 @@
         <script src="js/dinamico.js" type="text/javascript"></script>
         <script src="js/jquery-3.4.1.min.js" type="text/javascript"></script>
         <script src="js/jquery.min.js" type="text/javascript"></script>
-        <script src="js/popup.js" type="text/javascript"></script>
         <link href="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
         <script src="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>
         <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
@@ -149,7 +148,7 @@
         <div class="regisContenedor" style="max-width: 800px; margin: auto;">
             <p class="regisTitulo"> Registro de Proyectos </p>
             <p class="regisTitulo"> Registro de Proyectos </p>
-            <form action="InsertProject" method="post">
+            <form>
                 <div>
                     <div class="input-group mb-3">
                         <div class="input-group-prepend">
@@ -157,7 +156,7 @@
                         </div>
                         <!--<input type="text" name="coordinadorid" id="coordinadorid" class="custom-select" required="true" style="height: 40px; width: 500px;" />-->
                         <input type="text" placeholder="Escriba el coordinador..." onpaste="return false" onkeypress="return SoloLetras(event)" id="coordinador" name="coordinador" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default">    
-                        <button id="anadirCoordinador" class="btn btn-primary btn-lg" style="margin-bottom: 0px; margin-top: 0px; margin-right: 0px; width: 70px; height: 40px; padding: 0; font-size: 15px;">Añadir</button>
+                        <button id="btn-abrir-popup" class="btn btn-primary btn-lg" style="margin-bottom: 0px; margin-top: 0px; margin-right: 0px; width: 70px; height: 40px; padding: 0; font-size: 15px;">Añadir</button>
                     </div>
                     
                    <table id="general" style="width: 15px; height: 15px; margin-bottom: 10px;">
@@ -173,7 +172,7 @@
                                         </table>
                                     </div>
                                 </td>
-                                <td><button id="anadirAutor" class="btn btn-primary btn-lg" type="submit" style="margin-bottom: 0px; margin-top: 0px; width: 70px; height: 40px; padding: 0; font-size: 15px;">Añadir</button></td>
+                                <td><button id="btn-abrir-popup2" class="btn btn-primary btn-lg" style="margin-bottom: 0px; margin-top: 0px; width: 70px; height: 40px; padding: 0; font-size: 15px;">Añadir</button></td>
                         <script>
                             //Script para generar Autores
                             var cont1 = 0;
@@ -345,24 +344,124 @@
             </form>
         </div> 
           
-         <!--    Modal  -->    
-         <div id="dialog" title="Dialogo básico">
-             <p>Diálogo básico modal. Puede ser movido, redimensionado y cerrado haciendo clic sobre el botón 'X'.</p>
-         </div>
+         <!--    Modal Coordinadores -->    
+         <div class="overlay" id="overlay" style="z-index: 100000000000">
+             <div class="popup" id="popup" style="width: 700px; padding: 10px;">
+                <a id="btn-cerrar-popup" class="btn-cerrar-popup">X</a>
+                <h3>REGISTRAR COORDINADOR</h3>
+                <form id="form1">
+                    <div class="contenedor-inputs">
+                        <table id="tableCoord1" style="padding: 0px; margin: auto;">
+                            <tr>
+                                <td><input id="cordnombre" name="cordnombre" type="text" placeholder="Nombres..." style="width: 300px; height: 40px;" required minlength="1" maxlength="50" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default" /></td>
+                                <td><input id="cordapellido" name="cordapellido" type="text" placeholder="Apellidos..." style="width: 300px; height: 40px;" required minlength="1" maxlength="50" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default" required minlength="1" maxlength="50" /></td>
+                            </tr>   
+                            <tr>
+                                <td><input id="cordidentificacion" name="cordidentificacion" type="text" placeholder="CI, Pasaporte, etc..." style="width: 300px; height: 40px;" required minlength="1" maxlength="15" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default" required minlength="1" maxlength="15" /></td>
+                                <td><input type="date" id="cordfechaNacimiento" min="1930-01-01" max="2010-12-31"name="cordfechaNacimiento" style="width: 300px; height: 40px;"  class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default2"></td>
+                            </tr>
+                            <tr>
+                                <td><input id="cordemail" name="cordemail" type="text" style="width: 300px; height: 40px;" required minlength="8" maxlength="100" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default" placeholder="Correo electrónico..."/></td>
+                                <td><input id="corddireccion" name="corddireccion" type="text" style="width: 300px; height: 40px;" required minlength="10" maxlength="100" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default" placeholder="Dirección..."/></td>
+                            </tr>
+                            <tr>
+                                <td><input id="cordprovincia" name="cordprovincia" type="text" style="width: 300px; height: 40px;" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default" placeholder="Provincia..."/></td>
+                                <td><input id="cordciudad" name="cordciudad" type="text" style="width: 300px; height: 40px;" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default" placeholder="Ciudad..."/></td>
+                            </tr>
+                            <tr>
+                                <td><input id="cordprofesion" name="cordprofesion" type="text" style="width: 300px; height: 40px;"  class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default" placeholder="Escriba la profesión..."/></td>
+                                <td><input id="cordinstitucion" name="cordinstitucion" type="text" style="width: 300px; height: 40px;" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default" placeholder="Institución a que pertenece..."/></td>
+                            </tr>
+                        </table>
+                        
+                        <select id="cordlevelacademico" name="cordlevelacademico" class="custom-select" style="font-size: 14px;; width: 250px; margin-bottom: 20px;">
+                            <option value="" selected>Elija el Nivel académico...</option>
+                            <option value="3">Tercer nivel</option>
+                            <option value="4">Cuarto nivel</option>
+                        </select>
+                        
+                        <table id="tableCoord2" style="padding: 0px; margin: auto;"">
+                            <tr>
+                                <td><input id="corduser" name="corduser" type="text" placeholder="Usuario..." style="width: 300px; height: 40px;" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default" /></td>
+                                <td><input id="cordpassword" name="cordpassword" type="password" placeholder="Clave..." style="width: 300px; height: 40px;" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default" /></td>
+                            </tr>
+                        </table>
+                    </div>
+                    <input type="button" id="envia" class="btn-submit" value="Guardar" style="margin-bottom: 20px;">
+                </form>
+                <br/>
+                <div id="result1" style="color: red" ></div>
+                <br/>
+            </div>
+        </div>
+         <!--  End  Modal  -->       
          
-         <!--  End  Modal  --> 
-        <script>
-             $(function () {
-                  $("#dialog").dialog({
-                  autoOpen: false,
-                  modal: true
-             });
-             $("#anadirCoordinador")
-                  .button()
-                  .click(function () {
-                  $("#dialog").dialog("open");
-                  });
-             });
-        </script>          
+         <!--    Modal Autores --> 
+         <div class="overlay" id="overlay2" style="z-index: 100000000000">
+             <div class="popup" id="popup2" style="width: 700px; padding: 10px;">
+                <a id="btn-cerrar-popup2" class="btn-cerrar-popup">X</a>
+                <h3>REGISTRAR AUTOR</h3>
+                <form id="form2">
+                    <div class="contenedor-inputs">
+                        <table id="tableAutor" style="padding: 0px; margin: auto;">
+                            <tr>
+                                <td><input id="autornombre" name="autornombre" type="text" placeholder="Nombres..." style="width: 300px; height: 40px;" required minlength="1" maxlength="50" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default" required minlength="1" maxlength="50" /></td>
+                                <td><input id="autorapellido" name="autorapellido" type="text" placeholder="Apellidos..." style="width: 300px; height: 40px;" required minlength="1" maxlength="50" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default" required minlength="1" maxlength="50" /></td>
+                            </tr>   
+                            <tr>
+                                <td><input id="autoridentificacion" name="autoridentificacion" type="text" placeholder="CI, Pasaporte, etc..." style="width: 300px; height: 40px;" required minlength="1" maxlength="15" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default" required minlength="1" maxlength="15" /></td>
+                                <td><input type="date" id="autorfechaNacimiento" min="1930-01-01" max="2010-12-31"name="autorfechaNacimiento" style="width: 300px; height: 40px;"  class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default2"></td>
+                            </tr>
+                            <tr>
+                                <td><input id="autoremail" name="autoremail" type="text" style="width: 300px; height: 40px;" required minlength="8" maxlength="100" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default" placeholder="Correo electrónico..."/></td>
+                                <td><input id="autorcarrera" name="autorcarrera" type="text" style="width: 300px; height: 40px;" required minlength="10" maxlength="100" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default" placeholder="Dirección..."/></td>
+                            </tr>
+                        </table>
+                    </div>
+                    <input type="button" id="envia" class="btn-submit" value="Guardar" style="margin-bottom: 20px;">
+                </form>
+                <br/>
+                <div id="result1" style="color: red" ></div>
+                <br/>
+            </div>
+        </div>
+         <!-- End modal-->
+         
+         <script>
+             var btnAbrirPopup = document.getElementById("btn-abrir-popup"),
+             overlay = document.getElementById('overlay'),
+             popup = document.getElementById('popup'),
+             btnCerrarPopup = document.getElementById('btn-cerrar-popup');
+    
+             var btnAbrirPopup2 = document.getElementById("btn-abrir-popup2"),
+             overlay2 = document.getElementById('overlay2'),
+             popup2 = document.getElementById('popup2'),
+             btnCerrarPopup2 = document.getElementById('btn-cerrar-popup2');
+
+            btnAbrirPopup.addEventListener('click', function(e) {
+                e.preventDefault();
+                overlay.classList.add('active');
+                popup.classList.add('active');
+            });
+            
+            btnAbrirPopup2.addEventListener('click', function(e) {
+                e.preventDefault();
+                console.log(overlay2);
+                overlay2.classList.add('active');
+                popup2.classList.add('active');
+            });
+
+            btnCerrarPopup.addEventListener('click', function (e){
+                e.preventDefault();
+                overlay.classList.remove('active');
+                popup.classList.remove('active');
+            });
+            
+            btnCerrarPopup2.addEventListener('click', function (e){
+                e.preventDefault();
+                overlay2.classList.remove('active');
+                popup2.classList.remove('active');
+            });
+         </script>
     </body>
 </html>
