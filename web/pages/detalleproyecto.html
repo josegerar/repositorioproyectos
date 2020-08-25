@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<div class="contenedor bcrumbSt" style="margin-top: 100px;">
+
+    <nav aria-label="breadcrumb">
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item active" aria-current="page"><a href="javascript:paginacion('pages/repositorioDocentes.html')">Inicio</a></li>
+            <li class="breadcrumb-item active" aria-current="page"><a href="javascript:paginacion('pages/repositorioProyectos.html')">Proyectos</a></li>
+            <li class="breadcrumb-item active" aria-current="page">Detalle</li>
+        </ol>
+    </nav>
+
+    <form action="" method="post" style=" margin-bottom: 100px;" >
+        <div style="display: flex; flex-wrap: wrap; font-size: 30px; font-weight: 700; text-transform: uppercase;">
+            <p style="margin-right: 7px;">Descargar proyecto</p>
+        </div>
+        <div >
+            <%
+            if (sesion.getAttribute("usuario") != null) {%>
+            <a class="page-link" style="margin-bottom: 5px;" href="#">Descargar</a>
+            <% } else {%>
+            <a class="page-link" style="margin-bottom: 5px;" href="">Descargar</a>
+            <% }
+            %>
+        </div>
+        <div>
+            <p class="iniCabTitulo" style="text-align: justify;">Título:</p>
+            <label id="txtTitulo" style="text-align: justify; margin-bottom: 20px;" ></label>
+        </div>
+        <%-- Tabla de Autores --%>
+        <div>
+            <p class="iniCabTitulo" style="text-align: justify;">Autores:</p>
+            <table id="myTable" class="table" style="width: 100%;">
+                <tbody>
+                    <tr>
+                        <td style="border-style: solid; border-width: 2px; border-color: #E9ECEF ;background:#E9ECEF; font-weight: 600; ">Nombres</td>
+                        <td style="border-style: solid; border-width: 2px; border-color: #E9ECEF ;"></td>
+                        <td style="border-style: solid; border-width: 2px; border-color: #E9ECEF ;background:#E9ECEF; font-weight: 600; ">Apellidos</td>
+                        <td style="border-style: solid; border-width: 2px; border-color: #E9ECEF ;"></td>
+                        <td style="border-style: solid; border-width: 2px; border-color: #E9ECEF ;background:#E9ECEF; font-weight: 600; ">Email</td>
+                        <td style="border-style: solid; border-width: 2px; border-color: #E9ECEF ;"></td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        <div>
+            <p class="iniCabTitulo">Coordinador:</p>
+            <label style="text-align: justify;margin-bottom: 20px;" ></label>
+        </div>
+        <%-- Tabla de Modulo - Periodo --%>
+        <div>
+            <table id="myTable" class="table" style="width: 100%;">
+                <tbody>
+                    <tr>
+                        <td style="border-style: solid; border-width: 2px; border-color: #E9ECEF ;background:#E9ECEF; font-weight: 600; ">Módulo:</td>
+                        <td style="border-style: solid; border-width: 2px; border-color: #E9ECEF ;"></td>
+                        <td style="border-style: solid; border-width: 2px; border-color: #E9ECEF ;background:#E9ECEF; font-weight: 600; ">Periodo Lectivo:</td>
+                        <td style="border-style: solid; border-width: 2px; border-color: #E9ECEF ;"> </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        <div>
+            <p class="iniCabTitulo" style="text-align: justify;">Resumen:</p>
+            <label id="txtResumen" style="text-align: justify; margin-bottom: 20px;" ></label>
+        </div>
+        <div>
+            <p class="iniCabTitulo" style="text-align: justify;">Objetivo:</p>
+            <label id="txtObjetivo" style="text-align: justify; margin-bottom: 20px;" ></label>
+        </div>
+        <%-- Tabla de Variables --%>
+        <div>
+            <p class="iniCabTitulo" style="text-align: justify;">Variables:</p>
+            <table id="myTable" class="table" style="width: 100%;">
+                <tbody>
+                    <tr>
+                        <td style="border-style: solid; border-width: 2px; border-color: #E9ECEF ;background:#E9ECEF; font-weight: 600; ">Variable:</td>
+                        <td style="border-style: solid; border-width: 2px; border-color: #E9ECEF ;"></td>
+                        <td style="border-style: solid; border-width: 2px; border-color: #E9ECEF ;background:#E9ECEF; font-weight: 600; ">Tipo:</td>
+                        <td style="border-style: solid; border-width: 2px; border-color: #E9ECEF ;"> </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </form>
+
+</div>

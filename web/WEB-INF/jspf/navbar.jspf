@@ -13,7 +13,6 @@
                 <a class="nav-link" href="javascript:paginacion('pages/repositorioDocentes.html')">
                     <i class="fa fa-home"></i>
                     Inicio
-
                 </a>
             </li>
 
@@ -21,7 +20,6 @@
                 <a class="nav-link" href="javascript:paginacion('pages/repositorioProyectos.html')">
                     <i class="fa fa-address-book" aria-hidden="true"></i>
                     Proyectos
-
                 </a>
             </li>
 
@@ -29,7 +27,7 @@
             <!--Validaciones de cada una de las paginas--> 
             <% if (sesion.getAttribute("usuario") != null) { %>
             <li class="nav-item">
-                <a class="nav-link" href="AnadirProyectos.jsp">
+                <a class="nav-link" href="javascript:paginacion('pages/anadirproyectos.html')">
                     <i class="fa fa-newspaper-o" aria-hidden="true"></i>
                     Añadir proyecto
 
@@ -114,7 +112,7 @@
 
     async function paginacion(pagina) {
         const contentDiv = document.getElementById("contenidoPrincipal");
-        $("#contenidoPrincipal").load(pagina);
+        await $("#contenidoPrincipal").load(pagina);
         //contentDiv.innerHTML = await fetchHtmlAsText(pagina);
     }
     
