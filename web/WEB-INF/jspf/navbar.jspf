@@ -23,6 +23,12 @@
                 </a>
             </li>
 
+            <li class="nav-item">
+                <a class="nav-link" href="javascript:paginacion('pages/detalleproyecto.html')">
+                    <i class="fa fa-address-book" aria-hidden="true"></i>
+                    Ver Proyectos
+                </a>
+            </li>
 
             <!--Validaciones de cada una de las paginas--> 
             <% if (sesion.getAttribute("usuario") != null) { %>

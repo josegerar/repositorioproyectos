@@ -25,10 +25,10 @@ public class CoordinadorController extends ConexionMySQL {
         ResultSet rs = null;
         String sql;
         try {
-            sql = "SELECT * FROM(SELECT idUsuario, nombre, apellido FROM usuario WHERE Rol_idRol=2) AS p WHERE  p.nombre LIKE '%?%' OR p.apellido LIKE '%?%';";
+            sql = "SELECT * FROM(SELECT idUsuario, nombre, apellido FROM usuario WHERE Rol_idRol=2) AS p WHERE  p.nombre LIKE ? OR p.apellido LIKE ?;";
             pst = getConnection().prepareStatement(sql);
-            pst.setString(1, nombre);
-            pst.setString(2, nombre);
+            pst.setString(1, "%"+nombre+"%");
+            pst.setString(2, "%"+nombre+"%");
             rs = pst.executeQuery();
             while (rs.next()) {
                 Usuario user = new Usuario();
