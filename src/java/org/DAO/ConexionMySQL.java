@@ -19,6 +19,7 @@ import org.Object.Provincia;
 import org.Object.Profesion;
 import org.Object.Institucion;
 import org.Object.Usuario;
+
 /**
  *
  * @author Suanny
@@ -28,9 +29,7 @@ public class ConexionMySQL {
     String bd = "pivii";
     String user = "root";
     String password = "qwerty";
-    //jdbc:mysql://localhost:3306/pivii?zeroDateTimeBehavior=convertToNull
     String url = "jdbc:mysql://localhost:3306/pivii?autoReconnect=true&useSSL=false";
-
     Connection connection;
     Statement statement;
     String message;
@@ -38,19 +37,15 @@ public class ConexionMySQL {
 
     //Constructor de clase que se conecta a la base de datoS
     public ConexionMySQL() {
-
-        //String urlDatabase = "jdbc:postgresql://localhost:5432/AutismoDB";
         try {
             Class.forName("com.mysql.jdbc.Driver");
-            connection = DriverManager.getConnection(url, user, password);
-            message = "ok";
-        } catch (Exception e) {
+            getConnection();
+        } catch (ClassNotFoundException e) {
             System.out.println("Ocurrio un error : " + e.getMessage());
-            message = e.getMessage();
         }
-        //System.out.println("La conexión se realizo sin problemas! =) ");
     }
-public static Connection getConnectionE() {
+
+    public static Connection getConnectionE() {
         Connection cn = null;
         try {
             Class.forName("com.mysql.jdbc.Driver");
@@ -60,6 +55,30 @@ public static Connection getConnectionE() {
         }
         return cn;
     }
+    
+    public synchronized Connection getConnection() {
+        try {
+            if (connection == null || connection.isClosed()) {
+                connection = DriverManager.getConnection(url, user, password);
+                message = "ok";
+            }
+        } catch (SQLException e) {
+            System.err.println(e.getMessage());
+        }
+        return connection;
+    }
+
+    public boolean isConected() {
+        try {
+            if (connection == null) {
+                return false;
+            } else return !connection.isClosed();
+        } catch (SQLException ex) {
+            Logger.getLogger(ConexionMySQL.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return false;
+    }
+
     public ConexionMySQL(Connection connection, Statement statement, String message, ResultSet resultSet) {
         this.connection = connection;
         this.statement = statement;
@@ -88,14 +107,6 @@ public static Connection getConnectionE() {
     public Connection ConexionPostgreSQLABD() {
 
         return connection;
-    }
-
-    public Connection getConnection() {
-        return connection;
-    }
-
-    public void setConnection(Connection connection) {
-        this.connection = connection;
     }
 
     public ResultSet select(String sentence) {
@@ -128,12 +139,12 @@ public static Connection getConnectionE() {
         return b;
     }
 
-public static LinkedList<Provincia> getProvincias() {
+    public static LinkedList<Provincia> getProvincias() {
 
         LinkedList<Provincia> listaProvincia = new LinkedList<Provincia>();
         try {
-           Class.forName("com.mysql.jdbc.Driver");
-            Connection conexion =  DriverManager.getConnection("jdbc:mysql://localhost:3306/pivii?autoReconnect=true&useSSL=false", "root", "qwerty");
+            Class.forName("com.mysql.jdbc.Driver");
+            Connection conexion = DriverManager.getConnection("jdbc:mysql://localhost:3306/pivii?autoReconnect=true&useSSL=false", "root", "qwerty");
             Statement st = conexion.createStatement();
             ResultSet rs = st.executeQuery("select * from provincia;");
             while (rs.next()) {
@@ -150,14 +161,15 @@ public static LinkedList<Provincia> getProvincias() {
         }
         return listaProvincia;
     }
-public static LinkedList<Ciudad> getCiudad(String idProvincia) {
+
+    public static LinkedList<Ciudad> getCiudad(String idProvincia) {
 
         LinkedList<Ciudad> listaCiudad = new LinkedList<Ciudad>();
         try {
-           Class.forName("com.mysql.jdbc.Driver");
-            Connection conexion =  DriverManager.getConnection("jdbc:mysql://localhost:3306/pivii?autoReconnect=true&useSSL=false", "root", "qwerty");
+            Class.forName("com.mysql.jdbc.Driver");
+            Connection conexion = DriverManager.getConnection("jdbc:mysql://localhost:3306/pivii?autoReconnect=true&useSSL=false", "root", "qwerty");
             Statement st = conexion.createStatement();
-            ResultSet rs = st.executeQuery("select * from ciudad where Provincia_idProvincia="+idProvincia+";");
+            ResultSet rs = st.executeQuery("select * from ciudad where Provincia_idProvincia=" + idProvincia + ";");
             while (rs.next()) {
                 Ciudad ciudad = new Ciudad();
                 ciudad.setIdCiudad(rs.getInt("idCiudad"));
@@ -172,16 +184,16 @@ public static LinkedList<Ciudad> getCiudad(String idProvincia) {
         }
         return listaCiudad;
     }
-public static LinkedList<Profesion> getProfesion()
-{    
+
+    public static LinkedList<Profesion> getProfesion() {
         LinkedList<Profesion> listaProfesion = new LinkedList<Profesion>();
         try {
-           Class.forName("com.mysql.jdbc.Driver");
-            Connection conexion =  DriverManager.getConnection("jdbc:mysql://localhost:3306/pivii?autoReconnect=true&useSSL=false", "root", "qwerty");
+            Class.forName("com.mysql.jdbc.Driver");
+            Connection conexion = DriverManager.getConnection("jdbc:mysql://localhost:3306/pivii?autoReconnect=true&useSSL=false", "root", "qwerty");
             Statement st = conexion.createStatement();
             ResultSet rs = st.executeQuery("select * from profesion;");
             while (rs.next()) {
-                Profesion profesion=new Profesion();
+                Profesion profesion = new Profesion();
                 profesion.setProfesionID(rs.getInt("idProfesion"));
                 profesion.setNombre(rs.getString("nombre"));
                 listaProfesion.add(profesion);
@@ -192,18 +204,18 @@ public static LinkedList<Profesion> getProfesion()
         } catch (Exception e) {
             e.printStackTrace();
         }
-        return listaProfesion;    
-}
-public static LinkedList<Institucion> getInstitucion()
-{    
-     LinkedList<Institucion> listaInstitucion = new LinkedList<Institucion>();
+        return listaProfesion;
+    }
+
+    public static LinkedList<Institucion> getInstitucion() {
+        LinkedList<Institucion> listaInstitucion = new LinkedList<Institucion>();
         try {
-           Class.forName("com.mysql.jdbc.Driver");
-            Connection conexion =  DriverManager.getConnection("jdbc:mysql://localhost:3306/pivii?autoReconnect=true&useSSL=false", "root", "qwerty");
+            Class.forName("com.mysql.jdbc.Driver");
+            Connection conexion = DriverManager.getConnection("jdbc:mysql://localhost:3306/pivii?autoReconnect=true&useSSL=false", "root", "qwerty");
             Statement st = conexion.createStatement();
             ResultSet rs = st.executeQuery("select * from institucion;");
             while (rs.next()) {
-                Institucion institucion=new Institucion();
+                Institucion institucion = new Institucion();
                 institucion.setInstitucionID(rs.getInt("idInstitucion"));
                 institucion.setNombre(rs.getString("nombre"));
                 listaInstitucion.add(institucion);
@@ -214,16 +226,17 @@ public static LinkedList<Institucion> getInstitucion()
         } catch (Exception e) {
             e.printStackTrace();
         }
-        return listaInstitucion;    
-}
- public static String seleccion(String sentence) {
+        return listaInstitucion;
+    }
+
+    public static String seleccion(String sentence) {
         //ResultSet resultSet = null;
         String cadena = "";
 
         try {
-           Class.forName("com.mysql.jdbc.Driver");
-            Connection conexion =  DriverManager.getConnection("jdbc:mysql://localhost:3306/pivii?autoReconnect=true&useSSL=false", "root", "qwerty");
-          Statement st = conexion.createStatement();
+            Class.forName("com.mysql.jdbc.Driver");
+            Connection conexion = DriverManager.getConnection("jdbc:mysql://localhost:3306/pivii?autoReconnect=true&useSSL=false", "root", "qwerty");
+            Statement st = conexion.createStatement();
             ResultSet rs = st.executeQuery(sentence);
             while (rs.next()) {
                 cadena = rs.getString("resultado");
@@ -236,34 +249,33 @@ public static LinkedList<Institucion> getInstitucion()
 
         return cadena;
     }
-     public int validacion(String sentence) {
+
+    public int validacion(String sentence) {
         ResultSet resultSet = null;
         int b = 0;
         if (message.equals("ok")) {
             try {
                 statement = getConnection().createStatement();
                 resultSet = statement.executeQuery(sentence);
-                if(resultSet.next())
-                {
-                  b=resultSet.getInt(1);
+                if (resultSet.next()) {
+                    b = resultSet.getInt(1);
+                } else {
+                    b = 0;
                 }
-                else{
-                    b=0;
-                }
-                
+
             } catch (SQLException exSQL) {
                 message = exSQL.getMessage();
             }
         }
         return b;
     }
-     
+
     public static LinkedList<Usuario> getUsuario() {
 
         LinkedList<Usuario> listausuario = new LinkedList<Usuario>();
         try {
-           Class.forName("com.mysql.jdbc.Driver");
-            Connection conexion =  DriverManager.getConnection("jdbc:mysql://localhost:3306/pivii?autoReconnect=true&useSSL=false", "root", "qwerty");
+            Class.forName("com.mysql.jdbc.Driver");
+            Connection conexion = DriverManager.getConnection("jdbc:mysql://localhost:3306/pivii?autoReconnect=true&useSSL=false", "root", "qwerty");
             Statement st = conexion.createStatement();
             ResultSet rs = st.executeQuery("select idUsuario, concat(nombre, ' ' ,apellido) as nombre from usuario");
             while (rs.next()) {

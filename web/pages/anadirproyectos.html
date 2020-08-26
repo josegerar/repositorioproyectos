@@ -9,7 +9,7 @@
                     <span class="input-group-text" id="inputGroup-sizing-default2"  style="width: 200px; ">Coordinador</span>
                 </div>
                 <!--<input type="text" name="coordinadorid" id="coordinadorid" class="custom-select" required="true" style="height: 40px; width: 500px;" />-->
-                <input type="text" placeholder="Escriba el coordinador..." onpaste="return false" onkeypress="return SoloLetras(event)" id="coordinador" name="coordinador" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default">    
+                <input type="text" placeholder="Escriba el coordinador..." id="coordinador" name="coordinador" class="form-control autocomplete-sql ob-blur-sql" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default">    
                 <button id="btn-abrir-popup" class="btn btn-primary btn-lg" style="margin-bottom: 0px; margin-top: 0px; margin-right: 0px; width: 70px; height: 40px; padding: 0; font-size: 15px;">Añadir</button>
             </div>
 
@@ -38,7 +38,7 @@
                         var tb = $('#autorTb tbody');
                         var textClone = $('<input>', {
                             id: 'autor' + cont1,
-                            class: 'form-control autocomplete-sql ob-blur-actor-sql',
+                            class: 'form-control autocomplete-sql ob-blur-sql',
                             name: 'autor' + cont1,
                             value: '',
                             type: 'text',
@@ -176,20 +176,13 @@
 
             <div class="input-group mb-3">
 
-                <input type="file" onpaste="return false" id="url" name="url" class="form-control upload-photo" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default2">
+                <input type="file" id="url" name="url" class="form-control upload-photo" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default2">
 
                 <div class="input-group-prepend">
                     <span class="input-group-text" id="inputGroup-sizing-default2"  style="width: 170px;">Archivo de Proyecto</span>
                 </div>
             </div>   
         </div> 
-
-        <!--</div>
-          <div class="input__row uploader">
-            <div id="inputval" class="input-value"></div>
-            <label for="file_1"></label>
-            <input id="file_1" class="upload" type="file">
-          </div>-->
 
         <div style="display: flex; justify-content: space-between;">
             <button id="guardar" type="submit" class="btn btn-primary btn-lg" style="width: 48%">Guardar</button>
@@ -241,10 +234,10 @@
                     </tr>
                 </table>
             </div>
-            <input type="button" id="envia" class="btn-submit" value="Guardar" style="margin-bottom: 20px;">
+            <input type="button" id="saveCoord" class="btn-submit" value="Guardar" style="margin-bottom: 20px;">
         </form>
         <br/>
-        <div id="result1" style="color: red" ></div>
+        <div id="resultC" style="color: red" ></div>
         <br/>
     </div>
 </div>
@@ -272,10 +265,10 @@
                     </tr>
                 </table>
             </div>
-            <input type="button" id="envia" class="btn-submit" value="Guardar" style="margin-bottom: 20px;">
+            <input type="button" id="saveAutor" class="btn-submit" value="Guardar" style="margin-bottom: 20px;">
         </form>
         <br/>
-        <div id="result1" style="color: red" ></div>
+        <div id="resultA" style="color: red" ></div>
         <br/>
     </div>
 </div>

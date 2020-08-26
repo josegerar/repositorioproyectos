@@ -36,10 +36,10 @@ public class BuscarServlet extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException, SQLException, ClassNotFoundException {
-        response.setContentType("text/html;charset=UTF-8");
-        try (PrintWriter out = response.getWriter()) {
-            /* TODO output your page here. You may use following sample code. */
 
+        response.setContentType("text/html;charset=UTF-8");
+
+        try (PrintWriter out = response.getWriter()) {
             String condicion = request.getParameter("condicion");
             String filtro = request.getParameter("filtro");
             String pag = request.getParameter("pagi");
@@ -50,24 +50,21 @@ public class BuscarServlet extends HttpServlet {
             npagina = npagina * 17;
             int cont = 0, aux = npagina - 17;
             DataR d = new DataR();
-      
-                 for (RepositorioD R : d.getRepositorio(condicion, filtro, "")) {
-                    cont++;
-                    if (cont <= npagina && cont > aux) {
-                        out.println("<tr>");
-                        out.println("<td><a href=DetalleCD.jsp?id=" + R.getIdDonaciones() + ">" + R.getNombreConjuntoDatos() + "</a></td>");
-                        out.println("<td>" + R.getTipoDatos() + "</td>");
-                        out.println("<td>" + R.getTarea() + "</td>");
-                        out.println("<td>" + R.getTipoAtributo() + "</td>");
-                        out.println("<td>" + R.getNumeroInstancia() + "</td>");
-                        out.println("<td>" + R.getNumeroAtributos() + "</td>");
-                        out.println("<td>" + R.getAnio()+ "</td>");
-                        out.println("</tr>");
-                    }
+
+            for (RepositorioD R : d.getRepositorio(condicion, filtro, "")) {
+                cont++;
+                if (cont <= npagina && cont > aux) {
+                    out.println("<tr>");
+                    out.println("<td><a href=DetalleCD.jsp?id=" + R.getIdDonaciones() + ">" + R.getNombreConjuntoDatos() + "</a></td>");
+                    out.println("<td>" + R.getTipoDatos() + "</td>");
+                    out.println("<td>" + R.getTarea() + "</td>");
+                    out.println("<td>" + R.getTipoAtributo() + "</td>");
+                    out.println("<td>" + R.getNumeroInstancia() + "</td>");
+                    out.println("<td>" + R.getNumeroAtributos() + "</td>");
+                    out.println("<td>" + R.getAnio() + "</td>");
+                    out.println("</tr>");
                 }
-            
-               
-            
+            }
 
         }
 

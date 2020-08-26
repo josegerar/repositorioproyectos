@@ -12,6 +12,14 @@
         <servlet-name>InsertProfesion</servlet-name>
         <servlet-class>org.Controladores.InsertProfesion</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>Autocomplete</servlet-name>
+        <servlet-class>org.servlet.Autocomplete</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>Validate</servlet-name>
+        <servlet-class>org.servlet.Validate</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>conex</servlet-name>
         <url-pattern>/conex</url-pattern>
@@ -23,6 +31,14 @@
     <servlet-mapping>
         <servlet-name>InsertProfesion</servlet-name>
         <url-pattern>/InsertProfesion</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>Autocomplete</servlet-name>
+        <url-pattern>/autocomplete</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>Validate</servlet-name>
+        <url-pattern>/validate</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

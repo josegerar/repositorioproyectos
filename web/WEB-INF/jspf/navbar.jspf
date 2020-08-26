@@ -88,6 +88,15 @@
                     <a class="nav-link" id="btncerrarsesion" > <i class="fa fa-sign-in"> </i>Cerrar Sesión</a>
                     <%} else {%>                        
                     <a class="nav-link"  id="btn-abrir-popup"  > <i class="fa fa-sign-in"> </i>Iniciar Sesión</a>
+                    <script>
+                        var btnAbrirPopup = document.getElementById("btn-abrir-popup"),
+                                overlay = document.getElementById('overlay'),
+                                popup = document.getElementById('popup');
+                        btnAbrirPopup.addEventListener('click', function () {
+                            overlay.classList.add('active');
+                            popup.classList.add('active');
+                        });
+                    </script>
                     <%}%>   
                 </li>
             </ul>
@@ -96,14 +105,7 @@
 
     </div>
 </nav>
-<script>
-    var btnAbrirPopup = document.getElementById("btn-abrir-popup"),
-            overlay = document.getElementById('overlay'),
-            popup = document.getElementById('popup');
-    btnAbrirPopup.addEventListener('click', function () {
-        overlay.classList.add('active');
-        popup.classList.add('active');
-    });</script>
+
 <script>
 
     async function fetchHtmlAsText(url) {
@@ -113,7 +115,6 @@
     async function paginacion(pagina) {
         const contentDiv = document.getElementById("contenidoPrincipal");
         await $("#contenidoPrincipal").load(pagina);
-        //contentDiv.innerHTML = await fetchHtmlAsText(pagina);
     }
-    
+
 </script>

@@ -25,7 +25,7 @@
 <div class="contenedor bcrumbSt" style="margin-top: 220px; margin-bottom: 100px;">
 
     <!--Tabla carga sin filtro muestra todos los dataset aprobados--> 
-    <form onload="javascript:sinFiltro()" >
+    <form >
         <div class="IniContPrim">
             <div class="IniContSecIz" style="background:  #fff;">
                 <p class="iniCabTitulo" style="text-transform: uppercase;">Filtrar por:</p>
@@ -34,16 +34,12 @@
                 <input type="button" class="page-link"  name="tarea" id="Clasification" value="Clasificación" onclick="buscarC()" style="width: 100%; text-align: left;">
                 <input type="button" class="page-link"  name="tarea" id="Regresion" value="Regresión" onclick="buscarReg()" style="width: 100%; text-align: left;">
                 <input type="button" class="page-link"  name="tarea" id="Agrupacion" value="Agrupación" onclick="buscarCla()" style="width: 100%; text-align: left;">
-                <input type="button" class="page-link"  name="tarea" id="Otros" value="Otros" onclick="tareaOtros()" style="width: 100%; text-align: left;">
-
-
-
+                <input type="button" class="page-link"  name="tarea" id="OtrosTPred" value="Otros" onclick="tareaOtros()" style="width: 100%; text-align: left;">
 
                 <p class="iniCabTitulo2" style="font-size: 12px; margin-top: 5px; margin-bottom: 5px; font-weight: 600;">TIPO DE ATRIBUTO</p>
                 <input type="button" class="page-link"  name="tipoAtributo" id="Categorico" value="Categórico" onclick="tAtrCat()" style="width: 100%; text-align: left;">
                 <input type="button" class="page-link"  name="tipoAtributo" id="Numerico" value="Numérico" onclick="tAtrNum()" style="width: 100%; text-align: left;">
                 <input type="button" class="page-link"  name="tipoAtributo" id="Mixto" value="Mixto" onclick="tAtrMix()" style="width: 100%; text-align: left;">
-
 
                 <p class="iniCabTitulo2" style="font-size: 12px;margin-top: 5px; margin-bottom: 5px; font-weight: 600;">TIPO DE DATO</p>
                 <input type="button" class="page-link"  name="tipoDato" id="Multivariante" value="Multivariante" onclick="tDatMulti()" style="width: 100%; text-align: left;">
@@ -52,7 +48,7 @@
                 <input type="button" class="page-link"  name="tipoDato" id="Seriestemporales" value="Series temporales" onclick="tDatSer()" style="width: 100%; text-align: left;">
                 <input type="button" class="page-link"  name="tipoDato" id="Texto" value="Texto" onclick="tDatTex()" style="width: 100%; text-align: left;">
                 <input type="button" class="page-link"  name="tipoDato" id="Teoríadeldominio" value="Teoría del dominio" onclick="tDatTeo()" style="width: 100%; text-align: left;">
-                <input type="button" class="page-link"  name="tipoDato" id="Otros" value="Otros" onclick="tDatOtro()" style="width: 100%; text-align: left;">         
+                <input type="button" class="page-link"  name="tipoDato" id="OtrosTDato" value="Otros" onclick="tDatOtro()" style="width: 100%; text-align: left;">         
 
                 <p class="iniCabTitulo2" style="font-size: 12px;margin-top: 5px; margin-bottom: 5px; font-weight: 600;">ZONA</p>
                 <input type="button" class="page-link"  name="zona" id="Cienciasdelavida" value="Ciencias de la vida" onclick="zonaCvid()" style="width: 100%; text-align: left;">
@@ -72,8 +68,6 @@
                 <input type="button" class="page-link"  name="INSTANCIAS" id="I10100" value="10 a 100" onclick="Ien10100()" style="width: 100%; text-align: left;">
                 <input type="button" class="page-link"  name="INSTANCIAS" id="IM100" value="Más de 100" onclick="IMa100()" style="width: 100%; text-align: left;">
 
-
-
             </div>
             <div class="IniContSecDe">
                 <div class="iniContCab">
@@ -81,14 +75,9 @@
                     <hr style="margin-top: -10px;">
                 </div>
 
-
-
-
                 <div class="IniContCardsBusq" id="contenedores">
                     <div class="container">
-
-
-
+                        
                         <table id="myTable" class="table table-striped">
                             <thead class="thead-dark">
                                 <tr>
@@ -103,13 +92,11 @@
                             </thead>
                             <tbody id="resultado">
 
-
-
                             </tbody>
                         </table>
                         <div style="float: right;">    
                             <!--Paginacion de la tabla--> 
-                            <input type="button"  value="<"name="btnatras" onclick="dec()" style="background: #2079C5; border: none; color: #fff; width: 40px; height: 35px; border-radius: 5px;" class="btn-default waves-effect waves-light">
+                            <input type="button"  value="<" name="btnatras" onclick="dec()" style="background: #2079C5; border: none; color: #fff; width: 40px; height: 35px; border-radius: 5px;" class="btn-default waves-effect waves-light">
                             <input type="button" id="btnAV" name="paginaN" value="1" style="background: #F5F5F5; border: none; color: #666666; width: 40px; height: 35px; border-radius: 5px;" class=" waves-effect waves-light">
                             <input type="button"  value=">" name="btnsig" onclick="ad()" style="background: #2079C5; border: none; color: #fff; width: 40px; height: 35px; border-radius: 5px;" class="btn-default waves-effect waves-light">
                         </div>
