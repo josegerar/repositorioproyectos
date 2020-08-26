@@ -38,7 +38,7 @@ public class Autocomplete extends HttpServlet {
         String json = "[]";
         
         if(tipo.equals("coordinador")){
-            ArrayList<Usuario> coordinadores = new CoordinadorController().getCoordinadores();
+            ArrayList<Usuario> coordinadores = new CoordinadorController().getCoordinadores(nombre);
             json = new Gson().toJson(coordinadores);
         }
         

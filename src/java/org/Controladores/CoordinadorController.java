@@ -18,14 +18,17 @@ import org.DAO.ConexionMySQL;
  */
 public class CoordinadorController extends ConexionMySQL {
 
-    public ArrayList<Usuario> getCoordinadores() {
+    public ArrayList<Usuario> getCoordinadores(String nombre) {
+        
         ArrayList<Usuario> coordinadores = new ArrayList<>();
         PreparedStatement pst = null;
         ResultSet rs = null;
         String sql;
         try {
-            sql = "SELECT idUsuario, nombre, apellido FROM usuario WHERE Rol_idRol=1;";
+            sql = "SELECT * FROM(SELECT idUsuario, nombre, apellido FROM usuario WHERE Rol_idRol=2) AS p WHERE  p.nombre LIKE '%?%' OR p.apellido LIKE '%?%';";
             pst = getConnection().prepareStatement(sql);
+            pst.setString(1, nombre);
+            pst.setString(2, nombre);
             rs = pst.executeQuery();
             while (rs.next()) {
                 Usuario user = new Usuario();
