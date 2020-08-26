@@ -106,7 +106,7 @@
                             if (data) {
                                 $.each(data, function (i, item) {
                                     availableTags[i] = {label: item.nombre + " " + item.apellido, value: item};
-                                    console.log(item);
+                                    /*console.log(item);*/
                                 });
                             }
                         }
@@ -120,8 +120,8 @@
                         select: function (event, ui) {
                             $(this).val(ui.item.label);
                             $(this).data("data", ui.item.value);
-                            var f = $(this).data("data");
-                            console.log(f);
+                            /*var f = $(this).data("data");*/
+                            /*console.log(f);*/
                             return false;
                         },
                         create: function () {
