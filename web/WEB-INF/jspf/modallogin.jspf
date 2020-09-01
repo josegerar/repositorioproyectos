@@ -7,8 +7,9 @@
         <form id="form1">
             <div class="contenedor-inputs">
                 <input id="usuario" name="usuario" type="text" placeholder="Nombre de Usuario"  required minlength="3" maxlength="20" />
-                <input id="clave" name="clave" type="password" placeholder="Contraseña"  required minlength="3" maxlength="25" />
+                <input id="clave" name="clave" type="password" placeholder="Contraseña" style="margin-top: 5px;" required minlength="3" maxlength="25" />
             </div>
+            <br/>
             <input  type="button" id="envia" class="btn-submit" value="Ingresar">
         </form>
         <br/>

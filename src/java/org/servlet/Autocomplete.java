@@ -12,8 +12,20 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import org.Controladores.AutorController;
+import org.Controladores.CarreraController;
+import org.Controladores.CiudadController;
 import org.Controladores.CoordinadorController;
+import org.Controladores.InstitucionController;
+import org.Controladores.ProfesionController;
+import org.Controladores.ProvinciaController;
 import org.Object.Usuario;
+import org.Object.Autor;
+import org.Object.Provincia;
+import org.Object.Ciudad;
+import org.Object.Profesion;
+import org.Object.Institucion;
+import org.Object.Carrera;
 
 /**
  *
@@ -35,13 +47,38 @@ public class Autocomplete extends HttpServlet {
         
         String nombre = request.getParameter("nombre");
         String tipo = request.getParameter("tipo");
+        
         String json = "[]";
         
         if(tipo.equals("coordinador")){
             ArrayList<Usuario> coordinadores = new CoordinadorController().getCoordinadores(nombre);
             json = new Gson().toJson(coordinadores);
         }
-        
+        if(tipo.equals("autor")){
+            ArrayList<Autor> autor = new AutorController().getAutores(nombre);
+            json = new Gson().toJson(autor);
+        }
+        if(tipo.equals("provincia")){
+            ArrayList<Provincia> provincia = new ProvinciaController().getProvincias(nombre);
+            json = new Gson().toJson(provincia);
+        }
+        if(tipo.equals("ciudad")){
+            Integer idp = Integer.parseInt(request.getParameter("idProvincia"));
+            ArrayList<Ciudad> ciudad = new CiudadController().getCiudades(nombre, idp);
+            json = new Gson().toJson(ciudad);
+        }
+        if(tipo.equals("profesion")){
+            ArrayList<Profesion> profesion = new ProfesionController().getProfesiones(nombre);
+            json = new Gson().toJson(profesion);
+        }
+        if(tipo.equals("institucion")){
+            ArrayList<Institucion> institucion = new InstitucionController().getInstituciones(nombre);
+            json = new Gson().toJson(institucion);
+        }
+        if(tipo.equals("carrera")){
+            ArrayList<Carrera> carrera = new CarreraController().getCarreras(nombre);
+            json = new Gson().toJson(carrera);
+        }
         response.setContentType("application/json");
         response.setCharacterEncoding("UTF-8");
         response.getWriter().write(json);

@@ -13,6 +13,7 @@ import java.util.List;
 public class Provincia {
     int idProvincia;
     String nombre;
+    
     public Provincia(int idProvincia, String nombre) {
         this.idProvincia = idProvincia;
         this.nombre = nombre;

@@ -96,17 +96,23 @@
                 var availableTags = new Array();
 
                 function autocompleteSql(input, event) {
+                    var data = {};
+                    data.nombre = $(input).val();
+                    data.tipo = $(input).attr("name");
+                    if(data.tipo === "ciudad") {
+                        var prov = $("#cordprovincia").data("data");
+                        data.idProvincia = prov.idProvincia;
+                    }
                     $.ajax({
                         url: "autocomplete",
-                        data: {nombre: $(input).val(), tipo: $(input).attr("id")},
+                        data: data,
                         dataType: "json",
                         type: "GET",
                         success: function (data) {
                             availableTags.length = 0;
                             if (data) {
                                 $.each(data, function (i, item) {
-                                    availableTags[i] = {label: item.nombre + " " + item.apellido, value: item};
-                                    /*console.log(item);*/
+                                    availableTags[i] = {label: item.nombre, value: item};
                                 });
                             }
                         }
@@ -120,8 +126,8 @@
                         select: function (event, ui) {
                             $(this).val(ui.item.label);
                             $(this).data("data", ui.item.value);
-                            /*var f = $(this).data("data");*/
-                            /*console.log(f);*/
+                            /*var f = $(this).data("data");
+                            console.log(f);*/
                             return false;
                         },
                         create: function () {
@@ -157,5 +163,28 @@
             });
         </script>
 
+        <!-- script de validacion de campos de formularios -->
+        <script>
+            function SoloNumerico(variable){
+                Numer=parseInt(variable);
+                if (isNaN(Numer)){
+                    return "";
+                }
+                return Numer;
+            }
+
+            function ValNumero(Control){
+                Control.value=SoloNumerico(Control.value);
+            }
+
+            function ValTexto(e){
+                key = e.keyCode || e.which;
+                tecla = String.fromCharCode(key).toLowerCase();
+                letras = " áéíóúabcdefghijklmnñopqrstuvwxyz";
+                if(letras.indexOf(tecla)==-1){
+                    return false;
+                }
+            }
+        </script>
     </body>
 </html>

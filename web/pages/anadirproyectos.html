@@ -39,7 +39,7 @@
                         var textClone = $('<input>', {
                             id: 'autor' + cont1,
                             class: 'form-control autocomplete-sql ob-blur-sql',
-                            name: 'autor' + cont1,
+                            name: 'autor',
                             value: '',
                             type: 'text',
                             style: 'width: 413px; height: 40px;',
@@ -70,7 +70,7 @@
                 <div class="input-group-prepend">
                     <span class="input-group-text" id="inputGroup-sizing-default" style="width: 200px; ">Titulo</span>
                 </div>
-                <input type="text" placeholder="Escriba el titulo..." onpaste="return false" onkeypress="return SoloLetras(event)" id="titulo" name="titulo" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default">
+                <input type="text" placeholder="Escriba el titulo..." onpaste="return false" id="titulo" name="titulo" class="form-control autocomplete-sql ob-blur-sql" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default">
 
             </div>
 
@@ -192,35 +192,35 @@
 </div> 
 
 <!--    Modal Coordinadores -->    
-<div class="overlay" id="overlay" style="z-index: 100000000000">
+<div class="overlay" id="overlay" style="z-index: 100">
     <div class="popup" id="popup" style="width: 700px; padding: 10px;">
         <a id="btn-cerrar-popup" class="btn-cerrar-popup">X</a>
         <h3>REGISTRAR COORDINADOR</h3>
         <form id="form1">
-            <div class="contenedor-inputs">
+            <div id="conttabla" class="contenedor-inputs">
                 <table id="tableCoord1" style="padding: 0px; margin: auto;">
                     <tr>
-                        <td><input id="cordnombre" name="cordnombre" type="text" placeholder="Nombres..." style="width: 300px; height: 40px;" required minlength="1" maxlength="50" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default" /></td>
-                        <td><input id="cordapellido" name="cordapellido" type="text" placeholder="Apellidos..." style="width: 300px; height: 40px;" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default" required minlength="1" maxlength="50" /></td>
+                        <td><input id="cordnombre" name="cordnombre" type="text" placeholder="Nombres..." onkeypress="return ValTexto(event)" style="width: 300px; height: 40px; margin-bottom: 5px;" required minlength="1" maxlength="50" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default" /></td>
+                        <td><input id="cordapellido" name="cordapellido" type="text" placeholder="Apellidos..." onkeypress="return ValTexto(event)"  style="width: 300px; height: 40px; margin-bottom: 5px;" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default" required minlength="1" maxlength="50" /></td>
                     </tr>   
                     <tr>
-                        <td><input id="cordidentificacion" name="cordidentificacion" type="text" placeholder="CI, Pasaporte, etc..." style="width: 300px; height: 40px;" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default" required minlength="1" maxlength="15" /></td>
-                        <td><input type="date" id="cordfechaNacimiento" min="1930-01-01" max="2010-12-31"name="cordfechaNacimiento" style="width: 300px; height: 40px;"  class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default2"></td>
+                        <td><input id="cordidentificacion" name="cordidentificacion" type="text" placeholder="CI, Pasaporte, etc..." onkeyUp="return ValNumero(this);" style="width: 300px; height: 40px; margin-bottom: 5px;" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default" required minlength="1" maxlength="15" /></td>
+                        <td><input type="date" id="cordfechaNacimiento" min="1930-01-01" max="2010-12-31"name="cordfechaNacimiento" style="width: 300px; height: 40px; margin-bottom: 5px;"  class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default2"></td>
                     </tr>
                     <tr>
-                        <td><input id="cordemail" name="cordemail" type="text" style="width: 300px; height: 40px;" required minlength="8" maxlength="100" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default" placeholder="Correo electrónico..."/></td>
-                        <td><input id="corddireccion" name="corddireccion" type="text" style="width: 300px; height: 40px;" required minlength="10" maxlength="100" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default" placeholder="Dirección..."/></td>
+                        <td><input id="cordemail" name="cordemail" type="text" style="width: 300px; height: 40px; margin-bottom: 5px;" required minlength="8" maxlength="100" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default" placeholder="Correo electrónico..."/></td>
+                        <td><input id="corddireccion" name="corddireccion" type="text" style="width: 300px; height: 40px; margin-bottom: 5px;" required minlength="10" maxlength="100" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default" placeholder="Dirección..."/></td>
                     </tr>
                     <tr>
-                        <td><input id="cordprovincia" name="cordprovincia" type="text" style="width: 300px; height: 40px;" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default" placeholder="Provincia..."/></td>
-                        <td><input id="cordciudad" name="cordciudad" type="text" style="width: 300px; height: 40px;" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default" placeholder="Ciudad..."/></td>
+                        <td><input id="cordprovincia" name="provincia" type="text" onkeypress="return ValTexto(event)"  style="width: 300px; height: 40px; margin-bottom: 5px;" class="form-control autocomplete-sql ob-blur-sql" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default" placeholder="Provincia..."/></td>
+                        <td><input id="cordciudad" name="ciudad" type="text" onkeypress="return ValTexto(event)"  style="width: 300px; height: 40px; margin-bottom: 5px;" class="form-control autocomplete-sql ob-blur-sql" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default" placeholder="Ciudad..."/></td>
                     </tr>
                     <tr>
-                        <td><input id="cordprofesion" name="cordprofesion" type="text" style="width: 300px; height: 40px;"  class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default" placeholder="Escriba la profesión..."/></td>
-                        <td><input id="cordinstitucion" name="cordinstitucion" type="text" style="width: 300px; height: 40px;" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default" placeholder="Institución a que pertenece..."/></td>
+                        <td><input id="cordprofesion" name="profesion" onkeypress="return ValTexto(event)"  type="text" style="width: 300px; height: 40px; margin-bottom: 5px;"  class="form-control autocomplete-sql ob-blur-sql" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default" placeholder="Escriba la profesión..."/></td>
+                        <td><input id="cordinstitucion" name="institucion" onkeypress="return ValTexto(event)"  type="text" style="width: 300px; height: 40px; margin-bottom: 5px;" class="form-control autocomplete-sql ob-blur-sql" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default" placeholder="Institución a que pertenece..."/></td>
                     </tr>
                 </table>
-
+                <br/>
                 <select id="cordlevelacademico" name="cordlevelacademico" class="custom-select" style="font-size: 14px;; width: 250px; margin-bottom: 20px;">
                     <option value="" selected>Elija el Nivel académico...</option>
                     <option value="3">Tercer nivel</option>
@@ -229,11 +229,12 @@
 
                 <table id="tableCoord2" style="padding: 0px; margin: auto;">
                     <tr>
-                        <td><input id="corduser" name="corduser" type="text" placeholder="Usuario..." style="width: 300px; height: 40px;" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default" /></td>
-                        <td><input id="cordpassword" name="cordpassword" type="password" placeholder="Clave..." style="width: 300px; height: 40px;" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default" /></td>
+                        <td><input id="corduser" name="corduser" type="text" placeholder="Usuario..." style="width: 300px; height: 40px; margin-bottom: 5px;" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default" /></td>
+                        <td><input id="cordpassword" name="cordpassword" type="password" placeholder="Clave..." style="width: 300px; height: 40px; margin-bottom: 5px;" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default" /></td>
                     </tr>
                 </table>
             </div>
+            <br/>
             <input type="button" id="saveCoord" class="btn-submit" value="Guardar" style="margin-bottom: 20px;">
         </form>
         <br/>
@@ -244,7 +245,7 @@
 <!--  End  Modal  -->       
 
 <!--    Modal Autores --> 
-<div class="overlay" id="overlay2" style="z-index: 100000000000">
+<div class="overlay" id="overlay2" style="z-index: 100">
     <div class="popup" id="popup2" style="width: 700px; padding: 10px;">
         <a id="btn-cerrar-popup2" class="btn-cerrar-popup">X</a>
         <h3>REGISTRAR AUTOR</h3>
@@ -252,19 +253,20 @@
             <div class="contenedor-inputs">
                 <table id="tableAutor" style="padding: 0px; margin: auto;">
                     <tr>
-                        <td><input id="autornombre" name="autornombre" type="text" placeholder="Nombres..." style="width: 300px; height: 40px;" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default" required minlength="1" maxlength="50" /></td>
-                        <td><input id="autorapellido" name="autorapellido" type="text" placeholder="Apellidos..." style="width: 300px; height: 40px;" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default" required minlength="1" maxlength="50" /></td>
+                        <td><input id="autornombre" name="autornombre" type="text" placeholder="Nombres..." onkeypress="return ValTexto(event)"  style="width: 300px; height: 40px; margin-bottom: 5px;" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default" required minlength="1" maxlength="50" /></td>
+                        <td><input id="autorapellido" name="autorapellido" type="text" placeholder="Apellidos..." onkeypress="return ValTexto(event)"  style="width: 300px; height: 40px; margin-bottom: 5px;" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default" required minlength="1" maxlength="50" /></td>
                     </tr>   
                     <tr>
-                        <td><input id="autoridentificacion" name="autoridentificacion" type="text" placeholder="CI, Pasaporte, etc..." style="width: 300px; height: 40px;" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default" required minlength="1" maxlength="15" /></td>
-                        <td><input type="date" id="autorfechaNacimiento" min="1930-01-01" max="2010-12-31"name="autorfechaNacimiento" style="width: 300px; height: 40px;"  class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default2"></td>
+                        <td><input id="autoridentificacion" name="autoridentificacion" type="text" placeholder="CI, Pasaporte, etc..." onkeyUp="return ValNumero(this);" style="width: 300px; height: 40px; margin-bottom: 5px;" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default" required minlength="1" maxlength="15" /></td>
+                        <td><input type="date" id="autorfechaNacimiento" min="1930-01-01" max="2010-12-31"name="autorfechaNacimiento" style="width: 300px; height: 40px; margin-bottom: 5px;"  class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default2"></td>
                     </tr>
                     <tr>
-                        <td><input id="autoremail" name="autoremail" type="text" style="width: 300px; height: 40px;" required minlength="8" maxlength="100" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default" placeholder="Correo electrónico..."/></td>
-                        <td><input id="autorcarrera" name="autorcarrera" type="text" style="width: 300px; height: 40px;" required minlength="10" maxlength="100" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default" placeholder="Dirección..."/></td>
+                        <td><input id="autoremail" name="autoremail" type="text" style="width: 300px; height: 40px; margin-bottom: 5px;" required minlength="8" maxlength="100" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default" placeholder="Correo electrónico..."/></td>
+                        <td><input id="autorcarrera" name="carrera" type="text" onkeypress="return ValTexto(event)"  style="width: 300px; height: 40px; margin-bottom: 5px;" required minlength="10" maxlength="100" class="form-control autocomplete-sql ob-blur-sql" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default" placeholder="Carrera que cursa..."/></td>
                     </tr>
                 </table>
             </div>
+            <br/>
             <input type="button" id="saveAutor" class="btn-submit" value="Guardar" style="margin-bottom: 20px;">
         </form>
         <br/>
@@ -274,6 +276,7 @@
 </div>
 <!-- End modal-->
 
+<!-- Eventos para abrir los modals -->
 <script>
     var btnAbrirPopup = document.getElementById("btn-abrir-popup"),
             overlay = document.getElementById('overlay'),
@@ -309,4 +312,81 @@
         overlay2.classList.remove('active');
         popup2.classList.remove('active');
     });
+    
+</script>
+
+<!-- script para guardar datos de los coordinadores y autores-->
+
+<script>
+    $('#saveCoord').click(function (e) {
+        //e.prevenDefault();
+        var arrayData = 'user=' + $('#corduser').val() + 
+                '&password=' + $('#cordpassword').val() + 
+                '&nombre=' + $('#cordnombre').val() + 
+                '&apellido=' + $('#cordapellido').val() + 
+                '&identificacion=' + $('#cordidentificacion').val() + 
+                '&nacimiento=' + $('#cordfechaNacimiento').val().toString() + 
+                '&email=' + $('#cordemail').val() + 
+                '&direccion=' + $('#corddireccion').val() + 
+                '&nivelacademico=' + $('#cordlevelacademico').val() + 
+                '&ciudad=' + $("#cordciudad").data("data").idCiudad +
+                '&profesion=' + $('#cordprofesion').data("data").profesionID +
+                '&institucion=' + $('#cordinstitucion').data("data").institucionID +
+                '&transact=insert';
+        /*alert(arrayData);*/
+        $.ajax({
+            type: "POST",
+            url: "TransactCoordinador",
+            data: arrayData,
+            cache: false,
+            beforeSend: function (xhr) {
+            },
+            success: function (data, textStatus, jqXHR) {
+                alert(data);
+            },
+            error: function (jqXHR, textStatus, errorThrown) {
+
+            }
+        });
+    });
+    
+    $('#saveAutor').click(function (e) {
+        //e.prevenDefault();
+        var arrayData = 'carreraid=' + $('#autorcarrera').data("data").id_carrera + 
+                '&identificacion=' + $('#autoridentificacion').val() + 
+                '&nacimiento=' + $('#autorfechaNacimiento').val().toString() + 
+                '&nombre=' + $('#autornombre').val() + 
+                '&apellido=' + $('#autorapellido').val() + 
+                '&email=' + $('#autoremail').val().toString() +
+                '&transact=insert';
+        /*alert(arrayData);*/
+        $.ajax({
+            type: "POST",
+            url: "TransactAutor",
+            data: arrayData,
+            cache: false,
+            beforeSend: function (xhr) {
+            },
+            success: function (data, textStatus, jqXHR) {
+                alert(data);
+            },
+            error: function (jqXHR, textStatus, errorThrown) {
+
+            }
+        });
+    });
+    
+    /*$(document).ready(function () {
+        $("#saveCoord").prop("disabled", true);
+        $("#cordnombre, #cordapellido, #cordidentificacion, #cordemail, #corddireccion, #cordprovincia, #cordciudad, #cordprofesion, #cordinstitucion, #corduser, #cordpassword").keyup(function (){
+            if($("#cordnombre").val().length > 0 && $("#cordapellido").val().length > 0 && $("#cordidentificacion").val().length > 0 &&
+                    $("#cordemail").val().length > 0 && $("#corddireccion").val().length > 0 && $("#cordprovincia").val().length > 0 &&
+                    $("#cordciudad").val().length > 0 && $("#cordprofesion").val().length > 0 && $("#cordinstitucion").val().length > 0 &&
+                    $("#corduser").val().length > 0 && $("#cordpassword").val().length > 0) {
+                $("#saveCoord").prop("disabled", false);
+            } else {
+                $("#saveCoord").prop("disabled", true);
+            }
+        });
+    });*/
 </script>
