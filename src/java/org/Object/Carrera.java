@@ -7,36 +7,28 @@ package org.Object;
 
 /**
  *
- * @author crist
+ * @author F
  */
 public class Carrera {
+    
     Integer id_carrera;
-    Integer id_facultad;
+    Integer id;
     String nombre;
+
+    public Carrera(Integer id, String nombre) {
+        this.id = id;
+        this.nombre = nombre;
+    }
 
     public Carrera() {
     }
 
-    public Carrera(Integer id_carrera, Integer id_facultad, String nombre) {
-        this.id_carrera = id_carrera;
-        this.id_facultad = id_facultad;
-        this.nombre = nombre;
+    public Integer getId() {
+        return id;
     }
 
-    public Integer getId_carrera() {
-        return id_carrera;
-    }
-
-    public void setId_carrera(Integer id_carrera) {
-        this.id_carrera = id_carrera;
-    }
-
-    public Integer getId_facultad() {
-        return id_facultad;
-    }
-
-    public void setId_facultad(Integer id_facultad) {
-        this.id_facultad = id_facultad;
+    public void setId(Integer id) {
+        this.id = id;
     }
 
     public String getNombre() {
@@ -47,5 +39,12 @@ public class Carrera {
         this.nombre = nombre;
     }
 
-
+    public Integer getId_carrera() {
+        return id_carrera;
     }
+
+    public void setId_carrera(Integer id_carrera) {
+        this.id_carrera = id_carrera;
+    }
+    
+}
