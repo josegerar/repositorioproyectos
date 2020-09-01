@@ -20,6 +20,14 @@
         <servlet-name>Validate</servlet-name>
         <servlet-class>org.servlet.Validate</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>RepositorioProyectos</servlet-name>
+        <servlet-class>org.servlet.RepositorioProyectos</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>RepositorioProyectosFiltros</servlet-name>
+        <servlet-class>org.servlet.RepositorioProyectosFiltros</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>conex</servlet-name>
         <url-pattern>/conex</url-pattern>
@@ -39,6 +47,14 @@
     <servlet-mapping>
         <servlet-name>Validate</servlet-name>
         <url-pattern>/validate</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>RepositorioProyectos</servlet-name>
+        <url-pattern>/repositorio/proyectos</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>RepositorioProyectosFiltros</servlet-name>
+        <url-pattern>/repositorio/proyectos/filtros</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

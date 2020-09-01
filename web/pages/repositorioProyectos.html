@@ -6,32 +6,55 @@
         </ol>
     </nav>
 
-
     <div class="iniContBusc"style="width: 90%; margin-left: 5%; box-shadow: 0 2px 2px -2px gray;">
         <div class="iniContBuscIn">
             <div style="width: 40px;">
                 <img src="iconos/icons8_Search_50px.png" class="iniContBuscInImg" alt="">
             </div>
             <div style="width: 95%;">
-                <input type="text" class="iniContBuscInText" id="txtBuscar" onkeyup="buscar()" placeholder="Escribe para buscar..">
+                <input type="text" class="iniContBuscInText" id="txtBuscar" onkeyup="busquedaProyecto()" placeholder="Escribe para buscar..">
             </div>
         </div>
-        <button type="button" class="btn  iniContBuscInBtn"  onclick="buscar()">
+        <button type="button" class="btn  iniContBuscInBtn"  onclick="busquedaProyecto()">
             Buscar
         </button>
 
     </div>
 </div>            
 <div class="contenedor bcrumbSt" style="margin-top: 220px; margin-bottom: 100px;">
-    <form onload="sinFiltro()" >
+    <form>
         <div class="IniContPrim">
             <div class="IniContSecIz" style="background:  #fff;">
                 <p class="iniCabTitulo" style="text-transform: uppercase;">Filtrar por:</p>
-                <input type="button" class="page-link"  name="sinF" id="sFiltro" value="Mostrar todo" onclick="Aprobados()" style="width: 100%; text-align: left;">
-                <p class="iniCabTitulo2" style="font-size: 12px;margin-top: 5px; margin-bottom: 5px; font-weight: 600;">TAREA PREDETERMINADA</p>
-                <input type="button" class="page-link"  name="tarea" id="Clasification" value="Año" onclick="buscarC()" style="width: 100%; text-align: left;">
-                <input type="button" class="page-link"  name="tarea" id="Regresion" value="Facultad" onclick="buscarReg()" style="width: 100%; text-align: left;">
-                <input type="button" class="page-link"  name="tarea" id="Agrupacion" value="Carrera" onclick="buscarCla()" style="width: 100%; text-align: left;">
+                <input type="button" class="page-link"  name="sinF" id="sFiltro" value="Mostrar todo" style="width: 100%; text-align: left;">
+
+                <div>
+                    <a href="#fpcarreras" style="display: flex; margin-top: 5px; margin-bottom: 5px;" data-toggle="collapse">
+                        <i class="fa fa-chevron-up" aria-hidden="true" style="margin-top: auto; display: none"></i>
+                        <i class="fa fa-chevron-down" aria-hidden="true" style="margin-top: auto"></i>
+                        <p class="iniCabTitulo2" style="color: black; font-size: 12px; margin-bottom: auto">CARRERAS</p>
+                    </a>
+                    <div id="fpcarreras" class="collapse"> </div>
+                </div>
+
+                <div>
+                    <a href="#fpsemestre" style="display: flex; margin-top: 5px; margin-bottom: 5px;" data-toggle="collapse">
+                        <i class="fa fa-chevron-up" aria-hidden="false" style="margin-top: auto; display: none"></i>
+                        <i class="fa fa-chevron-down" aria-hidden="true" style="margin-top: auto"></i>
+                        <p class="iniCabTitulo2" style="color: black; font-size: 12px; margin-bottom: auto">SEMESTRES</p>
+                    </a>
+                    <div id="fpsemestre" class="collapse"> </div>
+                </div>
+
+                <div>
+                    <a href="#fpfacultades" style="display: flex; margin-top: 5px; margin-bottom: 5px;" data-toggle="collapse">
+                        <i class="fa fa-chevron-up" aria-hidden="false" style="margin-top: auto; display: none"></i>
+                        <i class="fa fa-chevron-down" aria-hidden="true" style="margin-top: auto"></i>
+                        <p class="iniCabTitulo2" style="color: black; font-size: 12px; margin-bottom: auto">FACULTADES</p>
+                    </a>
+                    <div id="fpfacultades" class="collapse"> </div>
+                </div>
+
 
             </div>
             <div class="IniContSecDe">
@@ -40,13 +63,8 @@
                     <hr style="margin-top: -10px;">
                 </div>
 
-
-
-
                 <div class="IniContCardsBusq" id="contenedores">
                     <div class="container">
-
-
 
                         <table id="myTable" class="table table-striped">
                             <thead class="thead-dark">
@@ -61,15 +79,13 @@
                             </thead>
                             <tbody id="resultado">
 
-
-
                             </tbody>
                         </table>
                         <div style="float: right;">    
                             <!--Paginacion de la tabla--> 
-                            <input type="button"  value="<"name="btnatras" onclick="dec()" style="background: #2079C5; border: none; color: #fff; width: 40px; height: 35px; border-radius: 5px;" class="btn-default waves-effect waves-light">
+                            <input type="button" id="btnatras" value="<" name="btnatras" onclick="paginacionProyectos(-1)" style="background: #2079C5; border: none; color: #fff; width: 40px; height: 35px; border-radius: 5px;" class="btn-default waves-effect waves-light">
                             <input type="button" id="btnAV" name="paginaN" value="1" style="background: #F5F5F5; border: none; color: #666666; width: 40px; height: 35px; border-radius: 5px;" class=" waves-effect waves-light">
-                            <input type="button"  value=">" name="btnsig" onclick="ad()" style="background: #2079C5; border: none; color: #fff; width: 40px; height: 35px; border-radius: 5px;" class="btn-default waves-effect waves-light">
+                            <input type="button" id="btnsig" value=">" name="btnsig" onclick="paginacionProyectos(1)" style="background: #2079C5; border: none; color: #fff; width: 40px; height: 35px; border-radius: 5px;" class="btn-default waves-effect waves-light">
                         </div>
                     </div>
 
@@ -77,6 +93,150 @@
             </div>
         </div>
 
-    </form>            
+    </form>
+    <script>
 
+        var filter = {};
+        filter.type = "todos";
+        filter.page = 1;
+        filter.av = false;
+        filter.reg = false;
+
+        function paginacionProyectos(value) {
+            filter.page = filter.page + value;
+            filtrar(filter);
+        }
+
+        function filtrar(newfilter) {
+
+            $.ajax({
+                url: "repositorio/proyectos",
+                data: newfilter,
+                type: "GET",
+                success: function (data) {
+
+                    if (data) {
+
+                        filter.av = data.av;
+                        filter.reg = data.reg;
+
+                        $("#resultado").empty();
+
+                        $("#btnsig").attr("disabled", !filter.av);
+                        $("#btnatras").attr("disabled", !filter.reg);
+                        $("#btnAV").attr("value", filter.page);
+
+                        $.each(data.proyectos, function (i, item) {
+
+                            let titulo = $("<td>").append($("<a>", {
+                                href: "javascript:paginacion('pages/detalleproyecto.jsp',{id: " + item.id + "})",
+                                text: item.titulo
+                            }));
+                            let semestre = $("<td>" + item.semestre + "</td>");
+                            let fecha = $("<td>" + item.fecha + "</td>");
+                            let objetivo = $("<td>" + item.objetivo + "</td>");
+                            let carrera = $("<td>" + item.carrera + "</td>");
+                            let periodo = $("<td>" + item.periodo + "</td>");
+
+                            let fila = $("<tr>").append(titulo).append(semestre).append(fecha)
+                                    .append(objetivo).append(carrera).append(periodo);
+
+                            $("#resultado").append(fila);
+
+                        });
+                    }
+                }
+            });
+
+        }
+
+    </script>
+
+    <script>
+
+        function createfilters(type, idparent) {
+
+            $.ajax({
+                url: "repositorio/proyectos/filtros",
+                data: {type: type},
+                type: "GET",
+                success: function (data) {
+                    if (data) {
+                        $.each(data, function (i, item) {
+
+                            let input = $("<input>", {
+                                type: "button",
+                                class: "page-link",
+                                value: item.nombre,
+                                style: "width: 100%; text-align: left;"
+                            });
+
+                            input.click(function (e) {
+
+                                let data = $(this).data("data");
+
+                                filter.id = data.id;
+                                filter.type = data.type;
+
+                                filtrar(filter);
+
+                            });
+
+                            item.type = type;
+                            item.page = 1;
+
+                            input.data("data", item);
+
+                            $(idparent).append(input);
+                        });
+                    }
+                }
+            });
+        }
+
+    </script>
+    <script>
+        function busquedaProyecto() {
+            var valor = $("#txtBuscar").val();
+            
+            filter.id = valor;
+            filter.type = "manual";
+            filter.page = 1;
+            
+            filtrar(filter);
+        }
+    </script>
+    <script>
+
+        $(function () {
+
+            createfilters("semestres", "#fpsemestre");
+            createfilters("carreras", "#fpcarreras");
+            createfilters("facultades", "#fpfacultades");
+
+            $('.collapse').on('hidden.bs.collapse', function () {
+                this.parentNode.children[0].children[0] && (this.parentNode.children[0].children[0].style.display = "none");
+                this.parentNode.children[0].children[1] && (this.parentNode.children[0].children[1].style.display = "");
+            });
+
+            $('.collapse').on('shown.bs.collapse', function () {
+                this.parentNode.children[0].children[1] && (this.parentNode.children[0].children[1].style.display = "none");
+                this.parentNode.children[0].children[0] && (this.parentNode.children[0].children[0].style.display = "");
+            });
+
+            $('.collapse').collapse('show');
+
+            $("#sFiltro").click(function (e) {
+
+                filter.type = "todos";
+                filter.page = 1;
+
+                filtrar(filter);
+            });
+
+            filtrar(filter);
+
+        });
+
+    </script>
 </div>
