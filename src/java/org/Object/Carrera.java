@@ -10,6 +10,8 @@ package org.Object;
  * @author crist
  */
 public class Carrera {
+    
+    Integer id;
     Integer id_carrera;
     Integer id_facultad;
     String nombre;
@@ -21,6 +23,14 @@ public class Carrera {
         this.id_carrera = id_carrera;
         this.id_facultad = id_facultad;
         this.nombre = nombre;
+    }
+
+    public Integer getId() {
+        return id;
+    }
+
+    public void setId(Integer id) {
+        this.id = id;
     }
 
     public Integer getId_carrera() {
