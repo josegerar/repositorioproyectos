@@ -183,4 +183,44 @@ public class ProyectoController extends ConexionMySQL {
         return this.getAll();
     }
 
+    public ArrayList<String> detalleProyecto(int id){
+        ArrayList<String> detalles = new ArrayList<>();
+        PreparedStatement ps = null;
+        ResultSet rs = null;
+        sql="select proyecto_integrador.titulo,autor.nombre,autor.apellido,autor.email,usuario.nombre,usuario.apellido,\n" +
+            "proyecto_integrador.modulo,proyecto_integrador.periodo_lectivo,proyecto_integrador.resumen,\n" +
+            "proyecto_integrador.objetivo,variable.variable,variable.tipo,proyecto_integrador.url_proyecto\n" +
+            "from proyecto_integrador,autor,proyecto_autor,usuario,variable\n" +
+            "where proyecto_integrador.id_proyecto = "+ id +" and proyecto_integrador.id_usuario = usuario.idUsuario\n" +
+            "and proyecto_autor.id_proyecto =  proyecto_integrador.id_proyecto\n" +
+            "and proyecto_autor.id_autor = autor.id_autor and variable.id_proyecto = proyecto_integrador.id_proyecto;";
+        try
+        {
+            ps=getConnection().prepareStatement(sql);
+            rs=ps.executeQuery();
+            while(rs.next())
+            {
+                detalles.add(rs.getString(0));
+                detalles.add(rs.getString(1));
+                detalles.add(rs.getString(2));
+                detalles.add(rs.getString(3));
+                detalles.add(rs.getString(4));
+                detalles.add(rs.getString(5));
+                detalles.add(rs.getString(6));
+                detalles.add(rs.getString(7));
+                detalles.add(rs.getString(8));
+                detalles.add(rs.getString(9));
+                detalles.add(rs.getString(10));
+                detalles.add(rs.getString(11));
+                detalles.add(rs.getString(12));
+                detalles.add(rs.getString(13));
+            }
+        }
+        catch (SQLException e)
+        {
+            System.err.println(e.getMessage());
+        }
+        
+        return detalles;
+    }
 }
