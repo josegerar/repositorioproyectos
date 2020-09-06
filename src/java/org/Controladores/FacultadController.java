@@ -54,6 +54,42 @@ public class FacultadController extends ConexionMySQL {
         return facultades;
     }
     
+    
+    public ArrayList<Facultad> getFacultades() {
+        ArrayList<Facultad> facultades = new ArrayList<>();
+        PreparedStatement pst = null;
+        ResultSet rs = null;
+        String sql;
+        try {
+            sql = "SELECT id_facultad, nombre_facultad FROM facultad;";
+            pst = getConnection().prepareStatement(sql);
+            rs = pst.executeQuery();
+            while (rs.next()) {
+                Facultad facultad = new Facultad();
+                facultad.setId(rs.getInt("id_facultad"));
+                facultad.setNombre(rs.getString("nombre_facultad"));
+                facultades.add(facultad);
+            }
+        } catch (SQLException ex) {
+            System.err.println(ex.getMessage());
+        } finally {
+            try {
+                if (isConected()) {
+                    getConnection().close();
+                }
+                if (pst != null) {
+                    pst.close();
+                }
+                if (rs != null) {
+                    rs.close();
+                }
+            } catch (SQLException e) {
+                System.err.println(e.getMessage());
+            }
+        }
+        return facultades;
+    }
+    
     private boolean existsFacultad (String facultad) {
         boolean salida = false;
         PreparedStatement pst = null;

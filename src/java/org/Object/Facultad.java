@@ -11,6 +11,7 @@ package org.Object;
  */
 public class Facultad {
     
+    Integer id;
     Integer id_facultad;
     String nombre;
 
@@ -20,6 +21,20 @@ public class Facultad {
     public Facultad(Integer id_facultad, String nombre) {
         this.id_facultad = id_facultad;
         this.nombre = nombre;
+    }
+
+    public Facultad(Integer id, Integer id_facultad, String nombre) {
+        this.id = id;
+        this.id_facultad = id_facultad;
+        this.nombre = nombre;
+    }
+
+    public Integer getId() {
+        return id;
+    }
+
+    public void setId(Integer id) {
+        this.id = id;
     }
 
     public Integer getId_facultad() {
@@ -37,6 +52,5 @@ public class Facultad {
     public void setNombre(String nombre) {
         this.nombre = nombre;
     }
-    
     
 }

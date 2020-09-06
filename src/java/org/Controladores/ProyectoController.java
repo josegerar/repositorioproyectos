@@ -149,7 +149,6 @@ public class ProyectoController extends ConexionMySQL {
     }
 
     public boolean isAv() {
-
         return av;
     }
 
