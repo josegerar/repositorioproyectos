@@ -5,8 +5,6 @@
     Pagina Principal del sistema
 --%>
 
-<%@page import="org.DAO.ConexionMySQL"%>
-<%@page import="model.Conexion"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 
@@ -61,7 +59,6 @@
         <div style="margin-bottom: 50px;">
             <!--Si esta logueado trae el nombre del usuario y el rol--> 
             <%
-                ConexionMySQL con = new ConexionMySQL();
                 HttpSession sesion = request.getSession(true);
                 String usuario = String.valueOf(sesion.getAttribute("usuario"));
                 String rol = String.valueOf(sesion.getAttribute("rol"));

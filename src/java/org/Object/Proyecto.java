@@ -5,6 +5,9 @@
  */
 package org.Object;
 
+import java.util.ArrayList;
+import java.util.List;
+
 /**
  *
  * @author F
@@ -19,16 +22,10 @@ public class Proyecto {
     String carrera;
     String periodo;
     String url;
-
-    public Proyecto(Integer id, String titulo, String semestre, String fecha, String objetivo, String carrera, String periodo) {
-        this.id = id;
-        this.titulo = titulo;
-        this.semestre = semestre;
-        this.fecha = fecha;
-        this.objetivo = objetivo;
-        this.carrera = carrera;
-        this.periodo = periodo;
-    }
+    String resumen;
+    Usuario coordinador;
+    ArrayList<Autor> autores;
+    ArrayList<Variable> variables;
 
     public Proyecto(Integer id, String titulo) {
         this.id = id;
@@ -100,6 +97,38 @@ public class Proyecto {
 
     public void setUrl(String url) {
         this.url = url;
+    }
+
+    public String getResumen() {
+        return resumen;
+    }
+
+    public void setResumen(String resumen) {
+        this.resumen = resumen;
+    }
+
+    public Usuario getCoordinador() {
+        return coordinador;
+    }
+
+    public void setCoordinador(Usuario coordinador) {
+        this.coordinador = coordinador;
+    }
+
+    public ArrayList<Autor> getAutores() {
+        return autores;
+    }
+
+    public void setAutores(ArrayList<Autor> autores) {
+        this.autores = autores;
+    }
+
+    public ArrayList<Variable> getVariables() {
+        return variables;
+    }
+
+    public void setVariables(ArrayList<Variable> variables) {
+        this.variables = variables;
     }
 
     @Override

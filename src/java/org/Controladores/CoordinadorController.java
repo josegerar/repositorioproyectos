@@ -19,7 +19,7 @@ import org.DAO.ConexionMySQL;
 public class CoordinadorController extends ConexionMySQL {
 
     public ArrayList<Usuario> getCoordinadores(String nombre) {
-        
+
         ArrayList<Usuario> coordinadores = new ArrayList<>();
         PreparedStatement pst = null;
         ResultSet rs = null;
@@ -27,8 +27,8 @@ public class CoordinadorController extends ConexionMySQL {
         try {
             sql = "SELECT * FROM(SELECT idUsuario, nombre, apellido FROM usuario WHERE Rol_idRol=2) AS p WHERE  p.nombre LIKE ? OR p.apellido LIKE ?;";
             pst = getConnection().prepareStatement(sql);
-            pst.setString(1, "%"+nombre+"%");
-            pst.setString(2, "%"+nombre+"%");
+            pst.setString(1, "%" + nombre + "%");
+            pst.setString(2, "%" + nombre + "%");
             rs = pst.executeQuery();
             while (rs.next()) {
                 Usuario user = new Usuario();
@@ -55,14 +55,14 @@ public class CoordinadorController extends ConexionMySQL {
         }
         return coordinadores;
     }
-    
-    public String insertCoordinadores (String user, String password, String nombre, String apellido, String cedula, String nacimiento, String email, 
-            String direccion, Integer nivelacademico, Integer idciudad, Integer idprofesion, Integer idinstitucion){
+
+    public String insertCoordinadores(String user, String password, String nombre, String apellido, String cedula, String nacimiento, String email,
+            String direccion, Integer nivelacademico, Integer idciudad, Integer idprofesion, Integer idinstitucion) {
         String sms = "";
-        if(existsCoordinador(cedula, email) != true ){
-            Integer estado = 0;
+        if (existsCoordinador(cedula, email) != true) {
+            Integer estado;
             PreparedStatement pst = null;
-            String sql = "";
+            String sql;
             try {
                 sql = "insert into usuario (nickName,password,nombre,apellido,cedula,fechaNacimiento,correo,direccion,nivelAcademico,Ciudad_idCiudad,Rol_idRol,Profesion_idProfesion,Institucion_idInstitucion) values (?,?,?,?,?,?,?,?,?,?,2,?,?);";
                 pst = getConnection().prepareStatement(sql);
@@ -79,33 +79,32 @@ public class CoordinadorController extends ConexionMySQL {
                 pst.setInt(11, idprofesion);
                 pst.setInt(12, idinstitucion);
                 estado = pst.executeUpdate();
-                if (estado > 0 ) {
+                if (estado > 0) {
                     sms = "Datos del coordinador ingresados exitosamente";
                 } else {
                     sms = "No se ingresaron los datos, intente nuevamente";
                 }
-            } catch (SQLException sqle){
-                sms = sms + "SQLState: " + sqle.getSQLState() + "SQLErrorCode: " + sqle.getErrorCode();
-                sqle.printStackTrace();
-             } catch (Exception e){
-                e.printStackTrace();
-             } finally {
-                if (getConnection() != null) {
-                   try{
-                      pst.close();
-                      close();
-                   } catch(Exception e){
-                      e.printStackTrace();
-                   }
+            } catch (SQLException e) {
+                sms = "A ocurrido un error al guardar la informacion";
+            } finally {
+                try {
+                    if (isConected()) {
+                        getConnection().close();
+                    }
+                    if (pst != null) {
+                        pst.close();
+                    }
+                } catch (SQLException e) {
+                    System.err.println(e.getMessage());
                 }
-             }
+            }
         } else {
             sms = "Ya existe un Coordinador registrado con ese No. de Identificacion y/o Email";
         }
         return sms;
     }
-    
-    private boolean existsCoordinador (String identificacion, String email){
+
+    private boolean existsCoordinador(String identificacion, String email) {
         boolean salida = false;
         PreparedStatement pst = null;
         ResultSet rs = null;
@@ -117,14 +116,10 @@ public class CoordinadorController extends ConexionMySQL {
             pst.setString(1, identificacion);
             pst.setString(2, email);
             rs = pst.executeQuery();
-            if(rs.next()) { 
+            if (rs.next()) {
                 cont = rs.getInt(1);
             }
-            if (cont > 0) {
-                salida = true;
-            } else {
-                salida = false;
-            }
+            salida = cont > 0;
         } catch (SQLException ex) {
             System.err.println(ex.getMessage());
         } finally {
@@ -143,6 +138,43 @@ public class CoordinadorController extends ConexionMySQL {
             }
         }
         return salida;
+    }
+    
+    public Usuario getCoordinadorProyecto(String idProyecto){
+        Usuario coordinador = new Usuario();
+        PreparedStatement pst = null;
+        ResultSet rs = null;
+        String sql = "";
+        try {
+            sql = sql.concat("SELECT u.idUsuario, u.nombre, u.apellido ");
+            sql = sql.concat("FROM proyecto_integrador p INNER JOIN usuario u ");
+            sql = sql.concat("ON u.idUsuario=p.id_usuario WHERE p.id_proyecto = ?");
+            pst = getConnection().prepareStatement(sql);
+            pst.setString(1, idProyecto);
+            rs = pst.executeQuery();
+            if (rs.next()) {
+                coordinador.setIdUsuario(rs.getInt("idUsuario"));
+                coordinador.setNombre(rs.getString("nombre"));
+                coordinador.setApellido(rs.getString("apellido"));
+            }
+        } catch (SQLException ex) {
+            System.err.println(ex.getMessage());
+        } finally {
+            try {
+                if (isConected()) {
+                    getConnection().close();
+                }
+                if (pst != null) {
+                    pst.close();
+                }
+                if (rs != null) {
+                    rs.close();
+                }
+            } catch (SQLException e) {
+                System.err.println(e.getMessage());
+            }
+        }
+        return coordinador;
     }
 
 }

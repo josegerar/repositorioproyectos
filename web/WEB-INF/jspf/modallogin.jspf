@@ -1,6 +1,6 @@
 <%-- any content can be specified here e.g.: --%>
 <%@ page pageEncoding="UTF-8" %>
-<div class="overlay" id="overlay" style="z-index: 100000000000">
+<div class="overlay" id="overlay" style="z-index: 100000000">
     <div class="popup" id="popup">
         <a id="btn-cerrar-popup" class="btn-cerrar-popup">X</a>
         <h3>INICIO DE SESIÓN</h3>
@@ -27,7 +27,6 @@
     btnCerrarPopup.addEventListener('click', function () {
         overlay.classList.remove('active');
         popup.classList.remove('active');
-        location.reload(true);
     });
 
 </script>
@@ -52,9 +51,7 @@
                         overlay.classList.remove('active');
                         popup.classList.remove('active');
                         location.reload(true);
-
                     }
-                    ;
                     $("#result1").html(result);
                 }
             });
@@ -75,7 +72,7 @@
                     usuario: usuarioVar
                 },
                 success: function (result) {
-                    location.reload(true);
+                    location.replace("Repo.jsp");
                 }
             });
         });

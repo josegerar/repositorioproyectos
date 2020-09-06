@@ -1,7 +1,7 @@
 <%-- any content can be specified here e.g.: --%>
 <%@ page pageEncoding="UTF-8" %>
 <nav class="navbar navbar-icon-top navbar-expand-lg navbar-dark " style="background:#225499; margin-top: 0px; position: fixed; top: 0; width: 100%; z-index: 10000000000;">
-    <a class="navbar-brand" href="#">REPOSITORIO</a>
+    <a class="navbar-brand" href="javascript:paginacion('pages/repositorioDocentes.html')">REPOSITORIO</a>
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-targ
             et="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
@@ -10,7 +10,7 @@
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
         <ul class="navbar-nav mr-auto">
             <li class="nav-item">
-                <a class="nav-link" href="DetalleProyecto.jsp">
+                <a class="nav-link" href="javascript:paginacion('pages/repositorioDocentes.html')">
                     <i class="fa fa-home"></i>
                     Inicio
                 </a>
@@ -20,13 +20,6 @@
                 <a class="nav-link" href="javascript:paginacion('pages/repositorioProyectos.html')">
                     <i class="fa fa-address-book" aria-hidden="true"></i>
                     Proyectos
-                </a>
-            </li>
-
-            <li class="nav-item">
-                <a class="nav-link" href="javascript:paginacion('pages/detalleproyecto.html')">
-                    <i class="fa fa-address-book" aria-hidden="true"></i>
-                    Ver Proyectos
                 </a>
             </li>
 
@@ -118,9 +111,9 @@
         return await (await fetch(url)).text();
     }
 
-    async function paginacion(pagina) {
+    async function paginacion(pagina, atributos) {
         const contentDiv = document.getElementById("contenidoPrincipal");
-        await $("#contenidoPrincipal").load(pagina);
+        await $("#contenidoPrincipal").load(pagina, atributos);
     }
 
 </script>

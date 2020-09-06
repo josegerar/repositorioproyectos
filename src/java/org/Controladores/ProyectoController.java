@@ -9,7 +9,9 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.Iterator;
 import org.DAO.ConexionMySQL;
+import org.Object.Autor;
 import org.Object.Proyecto;
 
 /**
@@ -39,9 +41,9 @@ public class ProyectoController extends ConexionMySQL {
 
     private void config(String page) {
         sql = "";
-        sql = sql.concat("SELECT * FROM (SELECT p.id_proyecto, p.titulo, p.modulo, \n");
-        sql = sql.concat("CAST( p.fecha_registro AS CHAR) AS fecha, p.objetivo, c.nombre_carrera,  \n");
-        sql = sql.concat("p.periodo_lectivo, p.url_proyecto , c.id_facultad, c.id_carrera  \n");
+        sql = sql.concat("SELECT * FROM (SELECT p.id_proyecto, p.titulo, p.modulo, p.objetivo, \n");
+        sql = sql.concat("CAST( p.fecha_registro AS CHAR) AS fecha, c.nombre_carrera, p.resumen, \n");
+        sql = sql.concat("p.periodo_lectivo, p.url_proyecto , c.id_facultad, c.id_carrera \n");
         sql = sql.concat("FROM proyecto_integrador AS p INNER JOIN proyecto_autor AS pa ON pa.id_proyecto=p.id_proyecto \n");
         sql = sql.concat("INNER JOIN autor AS a ON a.id_autor = pa.id_autor \n");
         sql = sql.concat("INNER JOIN carrera c ON c.id_carrera = a.id_carrera) AS p \n");
@@ -89,6 +91,7 @@ public class ProyectoController extends ConexionMySQL {
                 proyecto.setTitulo(rs.getString("titulo"));
                 proyecto.setSemestre(rs.getInt("modulo") + " semestre");
                 proyecto.setPeriodo(rs.getString("periodo_lectivo"));
+                proyecto.setResumen(rs.getString("resumen"));
                 proyectos.add(proyecto);
 
                 if (proyectos.size() >= size) {
@@ -154,15 +157,11 @@ public class ProyectoController extends ConexionMySQL {
     }
 
     public boolean isReg() {
-        if (this.page > 1) {
-            return true;
-        } else {
-            return false;
-        }
+        return this.page > 1;
     }
 
-    public ArrayList<Proyecto> getForManual(String id) {
-        String[] palabras = id.split(" ");
+    public ArrayList<Proyecto> getForManual(String condiciones) {
+        String[] palabras = condiciones.split(" ");
 
         sql = sql.concat("WHERE ");
 
@@ -183,44 +182,25 @@ public class ProyectoController extends ConexionMySQL {
         return this.getAll();
     }
 
-    public ArrayList<String> detalleProyecto(int id){
-        ArrayList<String> detalles = new ArrayList<>();
-        PreparedStatement ps = null;
-        ResultSet rs = null;
-        sql="select proyecto_integrador.titulo,autor.nombre,autor.apellido,autor.email,usuario.nombre,usuario.apellido,\n" +
-            "proyecto_integrador.modulo,proyecto_integrador.periodo_lectivo,proyecto_integrador.resumen,\n" +
-            "proyecto_integrador.objetivo,variable.variable,variable.tipo,proyecto_integrador.url_proyecto\n" +
-            "from proyecto_integrador,autor,proyecto_autor,usuario,variable\n" +
-            "where proyecto_integrador.id_proyecto = "+ id +" and proyecto_integrador.id_usuario = usuario.idUsuario\n" +
-            "and proyecto_autor.id_proyecto =  proyecto_integrador.id_proyecto\n" +
-            "and proyecto_autor.id_autor = autor.id_autor and variable.id_proyecto = proyecto_integrador.id_proyecto;";
-        try
-        {
-            ps=getConnection().prepareStatement(sql);
-            rs=ps.executeQuery();
-            while(rs.next())
-            {
-                detalles.add(rs.getString(0));
-                detalles.add(rs.getString(1));
-                detalles.add(rs.getString(2));
-                detalles.add(rs.getString(3));
-                detalles.add(rs.getString(4));
-                detalles.add(rs.getString(5));
-                detalles.add(rs.getString(6));
-                detalles.add(rs.getString(7));
-                detalles.add(rs.getString(8));
-                detalles.add(rs.getString(9));
-                detalles.add(rs.getString(10));
-                detalles.add(rs.getString(11));
-                detalles.add(rs.getString(12));
-                detalles.add(rs.getString(13));
-            }
-        }
-        catch (SQLException e)
-        {
-            System.err.println(e.getMessage());
+    public Proyecto getProyecto(String id) {
+        Proyecto p;
+
+        sql = sql.concat("WHERE p.id_proyecto = ? \n");
+
+        parameters.add(id);
+
+        ArrayList<Proyecto> ps = this.getAll();
+        
+        if (ps.size() > 0) {
+            p = ps.get(0);
+        } else {
+            p = new Proyecto();
         }
         
-        return detalles;
+        p.setCoordinador(new CoordinadorController().getCoordinadorProyecto(id));
+        p.setAutores(new AutorController().getAutoresProyecto(id));
+        p.setVariables(new VariableController().getVariablesProyecto(id));
+
+        return p;
     }
 }
