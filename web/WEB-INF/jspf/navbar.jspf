@@ -26,6 +26,14 @@
             <!--Validaciones de cada una de las paginas--> 
             <% if (sesion.getAttribute("usuario") != null) { %>
             <li class="nav-item">
+                <a class="nav-link" href="javascript:paginacion('pages/anadircarreras.html')">
+                    <i class="fa fa-newspaper-o" aria-hidden="true"></i>
+                    Añadir carreras
+
+                </a>
+            </li>
+            
+            <li class="nav-item">
                 <a class="nav-link" href="javascript:paginacion('pages/anadirproyectos.html')">
                     <i class="fa fa-newspaper-o" aria-hidden="true"></i>
                     Añadir proyecto
