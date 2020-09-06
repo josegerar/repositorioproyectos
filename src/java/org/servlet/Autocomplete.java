@@ -16,6 +16,7 @@ import org.Controladores.AutorController;
 import org.Controladores.CarreraController;
 import org.Controladores.CiudadController;
 import org.Controladores.CoordinadorController;
+import org.Controladores.FacultadController;
 import org.Controladores.InstitucionController;
 import org.Controladores.ProfesionController;
 import org.Controladores.ProvinciaController;
@@ -26,6 +27,7 @@ import org.Object.Ciudad;
 import org.Object.Profesion;
 import org.Object.Institucion;
 import org.Object.Carrera;
+import org.Object.Facultad;
 
 /**
  *
@@ -79,6 +81,10 @@ public class Autocomplete extends HttpServlet {
             ArrayList<Carrera> carrera = new CarreraController().getCarreras(nombre);
             json = new Gson().toJson(carrera);
         }
+        if(tipo.equals("facultad")){
+            ArrayList<Facultad> facultad = new FacultadController().getFacultades(nombre);
+            json = new Gson().toJson(facultad);
+        }       
         response.setContentType("application/json");
         response.setCharacterEncoding("UTF-8");
         response.getWriter().write(json);
