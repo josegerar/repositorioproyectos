@@ -1,3 +1,4 @@
+
 /*
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
@@ -91,6 +92,41 @@ public class CarreraController extends ConexionMySQL {
             }
         }
         return salida;
+    }
+    
+    public ArrayList<Carrera> getCarreras() {
+        ArrayList<Carrera> carreras = new ArrayList<>();
+        PreparedStatement pst = null;
+        ResultSet rs = null;
+        String sql;
+        try {
+            sql = "SELECT id_carrera, nombre_carrera FROM carrera;";
+            pst = getConnection().prepareStatement(sql);
+            rs = pst.executeQuery();
+            while (rs.next()) {
+                Carrera carrera = new Carrera();
+                carrera.setId(rs.getInt("id_carrera"));
+                carrera.setNombre(rs.getString("nombre_carrera"));
+                carreras.add(carrera);
+            }
+        } catch (SQLException ex) {
+            System.err.println(ex.getMessage());
+        } finally {
+            try {
+                if (isConected()) {
+                    getConnection().close();
+                }
+                if (pst != null) {
+                    pst.close();
+                }
+                if (rs != null) {
+                    rs.close();
+                }
+            } catch (SQLException e) {
+                System.err.println(e.getMessage());
+            }
+        }
+        return carreras;
     }
     
     public String insertCarrera (Integer facultad, String carrera){
