@@ -1,0 +1,127 @@
+<div class="regisContenedor" style="max-width: 800px; margin: auto;">
+    <br/>
+    <br/>
+    <br/>
+    <p class="regisTitulo"> Registrar de Carreras </p>
+    
+    <form>
+        <div>
+            <div class="input-group mb-3">
+                <div class="input-group-prepend">
+                    <span class="input-group-text" id="inputGroup-sizing-default2"  style="width: 200px;">Facultad</span>
+                </div>
+                <input type="text" placeholder="Facultad a la que pertenece..." id="facultad" style="height: 40px;" name="facultad" class="form-control autocomplete-sql ob-blur-sql" onkeypress="return ValTexto(event)" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default">    
+                <button id="btn-abrir-popupFacultad" class="btn btn-primary btn-lg" style="margin-bottom: 0px; margin-top: 0px; margin-right: 0px; width: 70px; height: 40px; padding: 0; font-size: 15px;">Añadir</button>
+            </div>
+            
+            <div class="input-group mb-3">
+                <div class="input-group-prepend">
+                    <span class="input-group-text" id="inputGroup-sizing-default" style="width: 200px; ">Carrera</span>
+                </div>
+                <input type="text" placeholder="Nombre de la carrera..." onpaste="return false" id="carrera" name="carrera" onkeypress="return ValTexto(event)" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default">
+
+            </div>
+        </div> 
+        
+        <div style="display: flex; justify-content: space-between;">
+            <button id="guardarCarrera" type="button" class="btn btn-primary btn-lg" style="width: 48%">Guardar</button>
+            <button id="cancela" type="button" onclick="" class="btn btn-secondary btn-lg" style="width: 48%">Cancelar</button>
+        </div>
+    </form>
+</div>
+
+<!--    Modal Autores --> 
+<div class="overlay" id="overlayFacultad" style="z-index: 100">
+    <div class="popup" id="popupFacultad" style="width: 400px; padding: 20px;">
+        <a id="btn-cerrar-popupFacultad" class="btn-cerrar-popup">X</a>
+        <h3>REGISTRAR FACULTAD</h3>
+        <br/>
+        <form id="form2">
+            <div class="contenedor-inputs">
+                <table id="tableFacultad" style="padding: 0px; margin: auto;">
+                    <tr>
+                        <td><input id="nombrefacultad" name="nombrefacultad" type="text" placeholder="Nombre de la facultad..." onkeypress="return ValTexto(event)"  style="width: 300px; height: 40px; margin-bottom: 5px;" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default" required minlength="1" maxlength="50" /></td>
+                        
+                    </tr> 
+                </table>
+            </div>
+            <br/>
+            <input type="button" id="saveFacultad" class="btn-submit" value="Guardar" style="margin-bottom: 20px;">
+        </form>
+        <br/>
+        <div id="resultA" style="color: red" ></div>
+        <br/>
+    </div>
+</div>
+<!-- End modal-->
+
+<!-- Abrir modal -->
+<script>
+    var btnabrirpopupFacultad = document.getElementById("btn-abrir-popupFacultad"),
+            overlayFacultad = document.getElementById('overlayFacultad'),
+            popupFacultad = document.getElementById('popupFacultad'),
+            btnCerrarPopupFacultad = document.getElementById('btn-cerrar-popupFacultad');
+
+    btnabrirpopupFacultad.addEventListener('click', function (e) {
+        e.preventDefault();
+        overlayFacultad.classList.add('active');
+        popupFacultad.classList.add('active');
+    });
+
+    btnCerrarPopupFacultad.addEventListener('click', function (e) {
+        e.preventDefault();
+        overlayFacultad.classList.remove('active');
+        popupFacultad.classList.remove('active');
+    });
+</script>
+
+<!-- Insert facultad y carrera -->
+<script>
+    $("#saveFacultad").click(function (){
+        var jSon = {};
+        jSon.facultad = $("#nombrefacultad").val();
+        jSon.transact = "insert";
+        jSon.objeto = "facultad";
+        $.ajax({
+            type: "POST",
+            url: "TransactFacultadAndCarrera",
+            data: jSon,
+            cache: false,
+            dataType: "json",
+            beforeSend: function (xhr) {
+            },
+            success: function (data, textStatus, jqXHR) {
+                alert(data);
+            },
+            error: function (jqXHR, textStatus, errorThrown) {
+                alert(jqXHR + "\n"+ textStatus +"\n"+ errorThrown);
+            }
+        });
+    });
+    
+    $("#guardarCarrera").click(function (){
+        var jSon = {};
+        jSon.carrera = $("#carrera").val();
+        jSon.facultad = $("#facultad").data("data").id_facultad;
+        jSon.transact = "insert";
+        jSon.objeto = "carrera";
+        $.ajax({
+            type: "POST",
+            url: "TransactFacultadAndCarrera",
+            data: jSon,
+            cache: false,
+            dataType: "json",
+            beforeSend: function (xhr) {
+                
+            },
+            success: function (data) {
+                alert(data);
+            },
+            error: function (jqXHR, textStatus, errorThrown) {
+                alert(jqXHR + "\n"+ textStatus +"\n"+ errorThrown);
+            }
+        });
+        $("#facultad").val("");
+        $("#carrera").val("");
+    });
+</script>

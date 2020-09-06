@@ -5,6 +5,7 @@
  */
 package org.servlet;
 
+import com.google.gson.Gson;
 import java.io.IOException;
 import java.io.PrintWriter;
 import javax.servlet.ServletException;
@@ -90,11 +91,11 @@ public class TransactCoordinador extends HttpServlet {
         Integer idprofesion = Integer.parseInt(request.getParameter("profesion"));
         Integer idinstitucion = Integer.parseInt(request.getParameter("institucion"));
         String transact = request.getParameter("transact");
-        String sms = "";
+        String json = "";
         if (transact.equals("insert")){
-            sms = controller.insertCoordinadores(nickName, password, nombre, apellido, cedula, fechanacimiento, correo, direccion, nivelacademico, idciudad, idprofesion, idinstitucion);
+            json = new Gson().toJson(controller.insertCoordinadores(nickName, password, nombre, apellido, cedula, fechanacimiento, correo, direccion, nivelacademico, idciudad, idprofesion, idinstitucion));
         }
-        response.getWriter().write(sms);
+        response.getWriter().write(json);
     }
 
     /**
