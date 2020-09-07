@@ -46,8 +46,8 @@ public class RepositorioProyectosFiltros extends HttpServlet {
             ArrayList<Carrera> carreras = new CarreraController().getCarreras();
             json = new Gson().toJson(carreras);
         } else if(tipo.equals("facultades")){
-            ArrayList<Facultad> facultades = new FacultadController().getFacultades();
-            json = new Gson().toJson(facultades);
+            //ArrayList<Facultad> facultades = new FacultadController().getFacultades();
+            //json = new Gson().toJson(facultades);
         }
         
         response.setContentType("application/json");

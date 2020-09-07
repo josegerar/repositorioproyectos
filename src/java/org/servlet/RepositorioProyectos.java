@@ -37,7 +37,7 @@ public class RepositorioProyectos extends HttpServlet {
         String page = request.getParameter("page");
         String id = request.getParameter("id");
 
-        String json;
+        String json = "[]";
 
         ArrayList<Proyecto> proyectos;
 
@@ -59,7 +59,7 @@ public class RepositorioProyectos extends HttpServlet {
 
         json = new Gson().toJson(proyectos);
 
-        json = "{ \"av\": " + proyectoC.isAv() + ", \"reg\": " + proyectoC.isReg() + ", \"proyectos\": " + json + "}";
+        //json = "{ \"av\": " + proyectoC.isAv() + ", \"reg\": " + proyectoC.isReg() + ", \"proyectos\": " + json + "}";
 
         response.setContentType("application/json");
         response.setCharacterEncoding("UTF-8");
