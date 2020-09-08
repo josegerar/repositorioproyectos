@@ -27,7 +27,13 @@ public class Usuario {
     Integer idProfesion;
     Rol idRol;
 
-   
+    public Usuario() {
+    }
+    
+    public Usuario(Integer idUsuario) {
+        this.idUsuario = idUsuario;
+    }
+
 
     public Integer getIdInstitucion() {
         return idInstitucion;
@@ -141,7 +147,4 @@ public class Usuario {
         this.idRol = idRol;
     }
 
-    public void getIdUsuario(int id) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
 }

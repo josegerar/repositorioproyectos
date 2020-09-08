@@ -31,6 +31,12 @@ public class Autor {
         this.email = email;
     }
 
+    public Autor(Integer id_autor) {
+        this.id_autor = id_autor;
+    }
+
+    
+    
     public Integer getId_autor() {
         return id_autor;
     }

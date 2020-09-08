@@ -58,6 +58,24 @@ public class VariableController extends ConexionMySQL{
         return variables;
     }
     
-    
+    public void insertVariableProyecto (ArrayList<Variable> variable, Integer idproyecto) throws Exception {
+        
+        PreparedStatement pst = null;
+        String sql = "";
+//        try {
+        sql = "insert into variable (id_proyecto,tipo,variable) values (?, ?, ?);";
+        for (Variable i : variable) {
+            pst = getConnection().prepareStatement(sql);
+            pst.setInt(1, idproyecto);
+            pst.setString(2, i.getTipo());
+            pst.setString(3, i.getVariable());
+            pst.executeUpdate();
+//                if (estado > 0) {
+//                    salida = true;
+//                } else {
+//                    salida = false;
+//                }
+        }
+    }
     
 }

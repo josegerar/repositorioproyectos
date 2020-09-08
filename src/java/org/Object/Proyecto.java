@@ -21,6 +21,7 @@ public class Proyecto {
     String objetivo;
     String carrera;
     String periodo;
+    String anio;
     String url;
     String resumen;
     Usuario coordinador;
@@ -91,6 +92,15 @@ public class Proyecto {
         this.periodo = periodo;
     }
 
+    public String getAnio() {
+        return anio;
+    }
+
+    public void setAnio(String anio) {
+        this.anio = anio;
+    }
+
+    
     public String getUrl() {
         return url;
     }

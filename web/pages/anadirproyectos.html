@@ -8,7 +8,6 @@
                 <div class="input-group-prepend">
                     <span class="input-group-text" id="inputGroup-sizing-default2"  style="width: 200px; ">Coordinador</span>
                 </div>
-                <!--<input type="text" name="coordinadorid" id="coordinadorid" class="custom-select" required="true" style="height: 40px; width: 500px;" />-->
                 <input type="text" placeholder="Escriba el coordinador..." id="coordinador" name="coordinador" class="form-control autocomplete-sql ob-blur-sql" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default">    
                 <button id="btn-abrir-popup" class="btn btn-primary btn-lg" style="margin-bottom: 0px; margin-top: 0px; margin-right: 0px; width: 70px; height: 40px; padding: 0; font-size: 15px;">Añadir</button>
             </div>
@@ -100,7 +99,7 @@
                     <option value="PPA">Primer Periodo Academico</option>
                     <option value="SPA">Segundo Periodo Academico</option>  
                 </select>
-                <input type="number" placeholder="Elija el año..." onpaste="return false" min="1970" max="2050" maxlength="2050" minlength="1970" onkeypress="return SoloNumeros(event)" id="anio" name="anio" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default">
+                <input type="number" placeholder="Elija el año..." onpaste="return false" min="1970" max="2050" maxlength="2050" minlength="1970" onkeyUp="return ValNumero(this);" id="anio" name="anio" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default">
                 <div class="input-group-append">
                     <label class="input-group-text" for="inputGroupSelect02" style="width: 170px;">Periodo Academico</label>
                 </div>             
@@ -110,7 +109,7 @@
                 <div class="input-group-prepend">
                     <span class="input-group-text" id="inputGroup-sizing-default2"  style="width: 200px; ">Objetivo General</span>
                 </div>
-                <input type="text"onpaste="return false" onkeypress="return SoloLetras(event)" id="objetivo" name="objetivo" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default2">
+                <input type="text"onpaste="return false" onkeypress="return ValTexto(event)" id="objetivo" name="objetivo" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default2">
             </div>    
 
             <div class="input-group mb-3">
@@ -185,7 +184,7 @@
         </div> 
 
         <div style="display: flex; justify-content: space-between;">
-            <button id="guardar" type="submit" class="btn btn-primary btn-lg" style="width: 48%">Guardar</button>
+            <button id="guardarPI" type="button" class="btn btn-primary btn-lg" style="width: 48%">Guardar</button>
             <button type="button" onclick="" class="btn btn-secondary btn-lg" style="width: 48%">Cancelar</button>
         </div>
     </form>
@@ -318,75 +317,125 @@
 <!-- script para guardar datos de los coordinadores y autores-->
 
 <script>
-    $('#saveCoord').click(function (e) {
-        //e.prevenDefault();
-        var arrayData = 'user=' + $('#corduser').val() + 
-                '&password=' + $('#cordpassword').val() + 
-                '&nombre=' + $('#cordnombre').val() + 
-                '&apellido=' + $('#cordapellido').val() + 
-                '&identificacion=' + $('#cordidentificacion').val() + 
-                '&nacimiento=' + $('#cordfechaNacimiento').val().toString() + 
-                '&email=' + $('#cordemail').val() + 
-                '&direccion=' + $('#corddireccion').val() + 
-                '&nivelacademico=' + $('#cordlevelacademico').val() + 
-                '&ciudad=' + $("#cordciudad").data("data").idCiudad +
-                '&profesion=' + $('#cordprofesion').data("data").profesionID +
-                '&institucion=' + $('#cordinstitucion').data("data").institucionID +
-                '&transact=insert';
-        /*alert(arrayData);*/
-        $.ajax({
-            type: "POST",
-            url: "TransactCoordinador",
-            data: arrayData,
-            cache: false,
-            beforeSend: function (xhr) {
-            },
-            success: function (data, textStatus, jqXHR) {
-                alert(data);
-            },
-            error: function (jqXHR, textStatus, errorThrown) {
-
-            }
-        });
-    });
-    
     $('#saveAutor').click(function (e) {
         //e.prevenDefault();
-        var arrayData = 'carreraid=' + $('#autorcarrera').data("data").id_carrera + 
-                '&identificacion=' + $('#autoridentificacion').val() + 
-                '&nacimiento=' + $('#autorfechaNacimiento').val().toString() + 
-                '&nombre=' + $('#autornombre').val() + 
-                '&apellido=' + $('#autorapellido').val() + 
-                '&email=' + $('#autoremail').val().toString() +
-                '&transact=insert';
-        /*alert(arrayData);*/
+        var jSon = {};
+        jSon.carreraid = $('#autorcarrera').data("data").id_carrera;
+        jSon.identificacion = $('#autoridentificacion').val();
+        jSon.nacimiento = $('#autorfechaNacimiento').val().toString();
+        jSon.nombre = $('#autornombre').val();
+        jSon.apellido = $('#autorapellido').val();
+        jSon.email = $('#autoremail').val().toString();
+        jSon.transact = "insert";
         $.ajax({
             type: "POST",
             url: "TransactAutor",
-            data: arrayData,
+            data: jSon,
             cache: false,
+            dataType: "json",
             beforeSend: function (xhr) {
             },
             success: function (data, textStatus, jqXHR) {
                 alert(data);
             },
             error: function (jqXHR, textStatus, errorThrown) {
-
+                alert(jqXHR + "\n"+ textStatus +"\n"+ errorThrown);
             }
         });
     });
     
-    /*$(document).ready(function () {
-        $("#saveCoord").prop("disabled", true);
-        $("#cordnombre, #cordapellido, #cordidentificacion, #cordemail, #corddireccion, #cordprovincia, #cordciudad, #cordprofesion, #cordinstitucion, #corduser, #cordpassword").keyup(function (){
-            if($("#cordnombre").val().length > 0 && $("#cordapellido").val().length > 0 && $("#cordidentificacion").val().length > 0 &&
-                    $("#cordemail").val().length > 0 && $("#corddireccion").val().length > 0 && $("#cordprovincia").val().length > 0 &&
-                    $("#cordciudad").val().length > 0 && $("#cordprofesion").val().length > 0 && $("#cordinstitucion").val().length > 0 &&
-                    $("#corduser").val().length > 0 && $("#cordpassword").val().length > 0) {
-                $("#saveCoord").prop("disabled", false);
-            } else {
-                $("#saveCoord").prop("disabled", true);
+    $('#saveCoord').click(function (e) {
+        //e.prevenDefault();
+        var jSon = {};
+        jSon.user = $('#corduser').val();
+        jSon.password = $('#cordpassword').val();
+        jSon.nombre = $('#cordnombre').val();
+        jSon.apellido = $('#cordapellido').val();
+        jSon.identificacion = $('#cordidentificacion').val();
+        jSon.nacimiento = $('#cordfechaNacimiento').val().toString();
+        jSon.email = $('#cordemail').val();
+        jSon.direccion = $('#corddireccion').val();
+        jSon.nivelacademico = $('#cordlevelacademico').val();
+        jSon.ciudad = $("#cordciudad").data("data").idCiudad;
+        jSon.profesion = $('#cordprofesion').data("data").profesionID;
+        jSon.institucion = $('#cordinstitucion').data("data").institucionID;
+        jSon.transact = "insert";
+        $.ajax({
+            type: "POST",
+            url: "TransactCoordinador",
+            data: jSon,
+            cache: false,
+            dataType: "json",
+            beforeSend: function (xhr) {
+            },
+            success: function (data, textStatus, jqXHR) {
+                alert(data);
+            },
+            error: function (jqXHR, textStatus, errorThrown) {
+                alert(jqXHR + "\n"+ textStatus +"\n"+ errorThrown);
             }
         });
+    });
+    
+    /*$("#guardarPI").click(function (){
+        var jSon = {};
+        jSon.coordinador = $("#coordinador").data("data").idUsuario;
+        jSon.autores = "";
+        jSon.titulo = $("#titulo").val();
     });*/
+    
+    
+    $("#guardarPI").click(function (e){
+       var jSon = {};
+       var vectorAutores = [];
+       var vectorVariables = [];
+       //var vectorTipos = [];
+       var tbda = $("#cuerpoAutores tr");
+       var tbdv = $("#cuerpoVariables tr");
+       $.each(tbda, function (i, item) {
+            var celdas = $(item).find("td");
+            var msj = $($(celdas[0]).children("input")[0]).data("data");
+            if(msj){
+               msj.id_autor && vectorAutores.push(msj.id_autor);
+            }
+       });
+       $.each(tbdv, function (i, item) {
+            var celdas = $(item).find("td");
+            var msj = $($(celdas[0]).children("input")[0]).val();
+            var msj2 = $($(celdas[1]).children("select")[0]).val();
+            var obj = {};
+            if(msj){
+                //vectorVariables.push(msj);
+               obj.valorvariable = msj;
+            }
+            if(msj2){
+                //vectorTipos.push(msj2)
+                obj.tipovariable = msj2;
+            }
+            vectorVariables.push(obj);
+       });
+        var sampleFile = document.getElementById("url").files[0];
+        var formdata = new FormData();
+        formdata.append("titulo", $('#titulo').val());
+        formdata.append("modulo", $("#modulo").val());
+        formdata.append("periodolectivo", $("#periodo").val());
+        formdata.append("anio", $("#anio").val());
+        formdata.append("objetivo", $("#objetivo").val());
+        formdata.append("resumen", $("#resumen").val());
+        formdata.append("coordinador", $("#coordinador").data("data").idUsuario);
+        formdata.append("autores", vectorAutores);
+        formdata.append("variables", JSON.stringify(vectorVariables));
+        //formdata.append("tipos", vectorTipos);
+        formdata.append("archivo", sampleFile);
+         
+        var xhr = new XMLHttpRequest();       
+        xhr.open("POST","/PII/TransactProyecto", true);
+        //xhr.setRequestHeader('Content-Type', 'multipart/form-data');
+        xhr.send(formdata);
+        xhr.onload = function(e) {
+        if (this.status == 200) {
+             alert(this.responseText);
+        }}; 
+    });
+    
 </script>
