@@ -28,7 +28,7 @@
             <li class="nav-item">
                 <a class="nav-link" href="javascript:paginacion('pages/anadircarreras.html')">
                     <i class="fa fa-newspaper-o" aria-hidden="true"></i>
-                    Añadir carreras
+                    Gestionar Carreras
 
                 </a>
             </li>
@@ -36,7 +36,7 @@
             <li class="nav-item">
                 <a class="nav-link" href="javascript:paginacion('pages/anadirproyectos.html')">
                     <i class="fa fa-newspaper-o" aria-hidden="true"></i>
-                    Añadir proyecto
+                    Gestionar Proyectos
 
                 </a>
             </li>
