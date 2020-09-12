@@ -9,7 +9,7 @@
     <div class="iniContBusc"style="width: 90%; margin-left: 5%; box-shadow: 0 2px 2px -2px gray;">
         <div class="iniContBuscIn">
             <div style="width: 40px;">
-                <img src="iconos/icons8_Search_50px.png" class="iniContBuscInImg" alt="">
+                <i class="fa fa-search fa-2 iniContBuscInImg" aria-hidden="true"></i>
             </div>
             <div style="width: 95%;">
                 <input type="text" class="iniContBuscInText" id="txtBuscar" onkeyup="busquedaProyecto()" placeholder="Escribe para buscar..">
@@ -110,7 +110,7 @@
         function filtrar(newfilter) {
 
             $.ajax({
-                url: "repositorio/proyectos",
+                url: serverURL + "repositorio/proyectos",
                 data: newfilter,
                 type: "GET",
                 success: function (data) {
@@ -157,7 +157,7 @@
         function createfilters(type, idparent) {
 
             $.ajax({
-                url: "repositorio/proyectos/filtros",
+                url: serverURL + "repositorio/proyectos/filtros",
                 data: {type: type},
                 type: "GET",
                 success: function (data) {

@@ -12,44 +12,54 @@
     <head>
         <meta name="viewport" content="width=device-width" />
         <title>Repositorio</title>
-
-        <link rel="apple-touch-icon" sizes="57x57" href="iconos/fav/apple-icon-57x57.png">
-        <link rel="apple-touch-icon" sizes="60x60" href="iconos/fav/apple-icon-60x60.png">
-        <link rel="apple-touch-icon" sizes="72x72" href="iconos/fav/apple-icon-72x72.png">
-        <link rel="apple-touch-icon" sizes="76x76" href="iconos/fav/apple-icon-76x76.png">
-        <link rel="apple-touch-icon" sizes="114x114" href="iconos/fav/apple-icon-114x114.png">
-        <link rel="apple-touch-icon" sizes="120x120" href="iconos/fav/apple-icon-120x120.png">
-        <link rel="apple-touch-icon" sizes="144x144" href="iconos/fav/apple-icon-144x144.png">
-        <link rel="apple-touch-icon" sizes="152x152" href="iconos/fav/apple-icon-152x152.png">
-        <link rel="apple-touch-icon" sizes="180x180" href="iconos/fav/apple-icon-180x180.png">
-        <link rel="icon" type="image/png" sizes="192x192"  href="iconos/fav/android-icon-192x192.png">
-        <link rel="icon" type="image/png" sizes="32x32" href="iconos/fav/favicon-32x32.png">
-        <link rel="icon" type="image/png" sizes="96x96" href="iconos/fav/favicon-96x96.png">
-        <link rel="icon" type="image/png" sizes="16x16" href="iconos/fav/favicon-16x16.png">
-        <link rel="manifest" href="iconos/fav/manifest.json">
+        <%
+            String scheme = request.getScheme();
+            String serverName = request.getServerName();
+            int serverPort = request.getServerPort();
+            String contextPath = request.getContextPath();
+            String serverURL = scheme + "://" + serverName + ":" + serverPort + contextPath + "/";
+        %>
+        <script>
+            const serverURL = "<%=serverURL%>";
+            console.log(serverURL);
+        </script>
+        <link rel="apple-touch-icon" sizes="57x57" href="<%=serverURL%>iconos/fav/apple-icon-57x57.png">
+        <link rel="apple-touch-icon" sizes="60x60" href="<%=serverURL%>iconos/fav/apple-icon-60x60.png">
+        <link rel="apple-touch-icon" sizes="72x72" href="<%=serverURL%>iconos/fav/apple-icon-72x72.png">
+        <link rel="apple-touch-icon" sizes="76x76" href="<%=serverURL%>iconos/fav/apple-icon-76x76.png">
+        <link rel="apple-touch-icon" sizes="114x114" href="<%=serverURL%>iconos/fav/apple-icon-114x114.png">
+        <link rel="apple-touch-icon" sizes="120x120" href="<%=serverURL%>iconos/fav/apple-icon-120x120.png">
+        <link rel="apple-touch-icon" sizes="144x144" href="<%=serverURL%>iconos/fav/apple-icon-144x144.png">
+        <link rel="apple-touch-icon" sizes="152x152" href="<%=serverURL%>iconos/fav/apple-icon-152x152.png">
+        <link rel="apple-touch-icon" sizes="180x180" href="<%=serverURL%>iconos/fav/apple-icon-180x180.png">
+        <link rel="icon" type="image/png" sizes="192x192"  href="<%=serverURL%>iconos/fav/android-icon-192x192.png">
+        <link rel="icon" type="image/png" sizes="32x32" href="<%=serverURL%>iconos/fav/favicon-32x32.png">
+        <link rel="icon" type="image/png" sizes="96x96" href="<%=serverURL%>iconos/fav/favicon-96x96.png">
+        <link rel="icon" type="image/png" sizes="16x16" href="<%=serverURL%>iconos/fav/favicon-16x16.png">
+        <link rel="manifest" href="<%=serverURL%>iconos/fav/manifest.json">
         <meta name="msapplication-TileColor" content="#ffffff">
-        <meta name="msapplication-TileImage" content="iconos/fav/ms-icon-144x144.png">
+        <meta name="msapplication-TileImage" content="<%=serverURL%>iconos/fav/ms-icon-144x144.png">
         <meta name="theme-color" content="#ffffff">
 
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 
-        <link href="css/bootstrap.min.css" rel="stylesheet" type="text/css"/>
-        <link href="css/bootstrap.css" rel="stylesheet" type="text/css"/>
-        <link href="css/bootstrap-reboot.min.css" rel="stylesheet" type="text/css"/>
-        <link href="css/bootstrap-reboot.css" rel="stylesheet" type="text/css"/>
-        <link href="css/bootstrap-grid.min.css" rel="stylesheet" type="text/css"/>
-        <link href="css/bootstrap-grid.css" rel="stylesheet" type="text/css"/>
-        <link href="css/estilos_rep.css" rel="stylesheet" type="text/css" />
-        <link href="css/estilos.css" rel="stylesheet" type="text/css"/>
+        <link href="<%=serverURL%>css/bootstrap.min.css" rel="stylesheet" type="text/css"/>
+        <link href="<%=serverURL%>css/bootstrap.css" rel="stylesheet" type="text/css"/>
+        <link href="<%=serverURL%>css/bootstrap-reboot.min.css" rel="stylesheet" type="text/css"/>
+        <link href="<%=serverURL%>css/bootstrap-reboot.css" rel="stylesheet" type="text/css"/>
+        <link href="<%=serverURL%>css/bootstrap-grid.min.css" rel="stylesheet" type="text/css"/>
+        <link href="<%=serverURL%>css/bootstrap-grid.css" rel="stylesheet" type="text/css"/>
+        <link href="<%=serverURL%>css/estilos_rep.css" rel="stylesheet" type="text/css" />
+        <link href="<%=serverURL%>css/estilos.css" rel="stylesheet" type="text/css"/>
         <link href="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
-        <link href="css/estylless.css" rel="stylesheet" type="text/css"/>
-        <link href="css/jquery-ui.css" rel="stylesheet" type="text/css"/>
-        <link href="css/widgetSelect.css" rel="stylesheet" type="text/css"/>
-        <script src="js/dinamico.js" type="text/javascript"></script>
+        <link href="<%=serverURL%>css/estylless.css" rel="stylesheet" type="text/css"/>
+        <link href="<%=serverURL%>css/jquery-ui.css" rel="stylesheet" type="text/css"/>
+        <link href="<%=serverURL%>css/widgetSelect.css" rel="stylesheet" type="text/css"/>
+        <script src="<%=serverURL%>js/dinamico.js" type="text/javascript"></script>
 
-        <script src="js/jquery.min_1.js" type="text/javascript"></script>
-        <script src="js/jquery-1.12.4.js" type="text/javascript"></script>
-        <script src="js/jquery-ui.js" type="text/javascript"></script>
+        <script src="<%=serverURL%>js/jquery.min_1.js" type="text/javascript"></script>
+        <script src="<%=serverURL%>js/jquery-1.12.4.js" type="text/javascript"></script>
+        <script src="<%=serverURL%>js/jquery-ui.js" type="text/javascript"></script>
 
         <script src="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>
 
@@ -96,12 +106,13 @@
                     var data = {};
                     data.nombre = $(input).val();
                     data.tipo = $(input).attr("name");
-                    if(data.tipo === "ciudad") {
+                    if (data.tipo === "ciudad") {
                         var prov = $("#cordprovincia").data("data");
                         data.idProvincia = prov.idProvincia;
                     }
+                    $(input).data("data", null);
                     $.ajax({
-                        url: "autocomplete",
+                        url: serverURL + "autocomplete",
                         data: data,
                         dataType: "json",
                         type: "GET",
@@ -124,7 +135,7 @@
                             $(this).val(ui.item.label);
                             $(this).data("data", ui.item.value);
                             /*var f = $(this).data("data");
-                            console.log(f);*/
+                             console.log(f);*/
                             return false;
                         },
                         create: function () {
@@ -137,7 +148,7 @@
 
                 function blurSql(input) {
                     $.ajax({
-                        url: "validate",
+                        url: serverURL + "validate",
                         data: {nombre: $(input).val(), type: "actor"},
                         type: "GET",
                         success: function (data) {
@@ -162,23 +173,23 @@
 
         <!-- script de validacion de campos de formularios -->
         <script>
-            function SoloNumerico(variable){
-                Numer=parseInt(variable);
-                if (isNaN(Numer)){
+            function SoloNumerico(variable) {
+                Numer = parseInt(variable);
+                if (isNaN(Numer)) {
                     return "";
                 }
                 return Numer;
             }
 
-            function ValNumero(Control){
-                Control.value=SoloNumerico(Control.value);
+            function ValNumero(Control) {
+                Control.value = SoloNumerico(Control.value);
             }
 
-            function ValTexto(e){
+            function ValTexto(e) {
                 key = e.keyCode || e.which;
                 tecla = String.fromCharCode(key).toLowerCase();
                 letras = " áéíóúabcdefghijklmnñopqrstuvwxyz";
-                if(letras.indexOf(tecla)==-1){
+                if (letras.indexOf(tecla) === -1) {
                     return false;
                 }
             }

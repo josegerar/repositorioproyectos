@@ -84,7 +84,7 @@
         jSon.objeto = "facultad";
         $.ajax({
             type: "POST",
-            url: "TransactFacultadAndCarrera",
+            url: serverURL + "TransactFacultadAndCarrera",
             data: jSon,
             cache: false,
             dataType: "json",
@@ -107,7 +107,7 @@
         jSon.objeto = "carrera";
         $.ajax({
             type: "POST",
-            url: "TransactFacultadAndCarrera",
+            url: serverURL + "TransactFacultadAndCarrera",
             data: jSon,
             cache: false,
             dataType: "json",

@@ -329,7 +329,7 @@
         jSon.transact = "insert";
         $.ajax({
             type: "POST",
-            url: "TransactAutor",
+            url: serverURL + "TransactAutor",
             data: jSon,
             cache: false,
             dataType: "json",
@@ -362,7 +362,7 @@
         jSon.transact = "insert";
         $.ajax({
             type: "POST",
-            url: "TransactCoordinador",
+            url: serverURL + "TransactCoordinador",
             data: jSon,
             cache: false,
             dataType: "json",
@@ -429,7 +429,7 @@
         formdata.append("archivo", sampleFile);
          
         var xhr = new XMLHttpRequest();       
-        xhr.open("POST","/PII/TransactProyecto", true);
+        xhr.open("POST",serverURL +"TransactProyecto", true);
         //xhr.setRequestHeader('Content-Type', 'multipart/form-data');
         xhr.send(formdata);
         xhr.onload = function(e) {

@@ -10,7 +10,7 @@
     <div class="iniContBusc"style="width: 90%; margin-left: 5%; box-shadow: 0 2px 2px -2px gray;">
         <div class="iniContBuscIn">
             <div style="width: 40px;">
-                <img src="iconos/icons8_Search_50px.png" class="iniContBuscInImg" alt="">
+                <i class="fa fa-search fa-2 iniContBuscInImg" aria-hidden="true"></i>
             </div>
             <div style="width: 95%;">
                 <input type="text" class="iniContBuscInText" id="txtBuscar" onkeyup="buscar()" placeholder="Escribe para buscar..">
@@ -131,7 +131,7 @@
             var pag = document.getElementById("btnAV").value;
             $.ajax({
                 type: "POST",
-                url: "BuscarServlet",
+                url: serverURL + "BuscarServlet",
                 data: {condicion: condicion, filtro: filtro, pagi: pag},
                 success: function (responseText) {
                     $("#resultado").html(responseText);
@@ -163,7 +163,7 @@
             var pag = document.getElementById("btnAV").value;
             $.ajax({
                 type: "POST",
-                url: "BuscarServlet",
+                url: serverURL + "BuscarServlet",
                 data: {condicion: condicion, filtro: filtro, pagi: pag},
                 success: function (responseText) {
                     console.log("ss");
@@ -184,7 +184,7 @@
         Gpag = pag;
         $.ajax({
             type: "POST",
-            url: "BuscarServlet",
+            url: serverURL + "BuscarServlet",
             data: {condicion: condicion, filtro: filtro, pagi: pag},
             success: function (responseText) {
                 $("#resultado").html(responseText);
@@ -201,7 +201,7 @@
         Gpag = pag;
         $.ajax({
             type: "POST",
-            url: "BuscarServlet",
+            url: serverURL + "BuscarServlet",
             data: {condicion: condicion, filtro: filtro, pagi: pag},
             success: function (responseText) {
                 $("#resultado").html(responseText);
@@ -218,7 +218,7 @@
         Gpag = pag;
         $.ajax({
             type: "POST",
-            url: "BuscarServlet",
+            url: serverURL + "BuscarServlet",
             data: {condicion: condicion, filtro: filtro, pagi: pag},
             success: function (responseText) {
                 $("#resultado").html(responseText);
@@ -235,7 +235,7 @@
         Gpag = pag;
         $.ajax({
             type: "POST",
-            url: "BuscarServlet",
+            url: serverURL + "BuscarServlet",
             data: {condicion: condicion, filtro: filtro, pagi: pag},
             success: function (responseText) {
                 $("#resultado").html(responseText);
@@ -252,7 +252,7 @@
         Gpag = pag;
         $.ajax({
             type: "POST",
-            url: "BuscarServlet",
+            url: serverURL + "BuscarServlet",
             data: {condicion: condicion, filtro: filtro, pagi: pag},
             success: function (responseText) {
                 $("#resultado").html(responseText);
@@ -269,7 +269,7 @@
         Gpag = pag;
         $.ajax({
             type: "POST",
-            url: "BuscarServlet",
+            url: serverURL + "BuscarServlet",
             data: {condicion: condicion, filtro: filtro, pagi: pag},
             success: function (responseText) {
                 $("#resultado").html(responseText);
@@ -288,7 +288,7 @@
         Gpag = pag;
         $.ajax({
             type: "POST",
-            url: "BuscarServlet",
+            url: serverURL + "BuscarServlet",
             data: {condicion: condicion, filtro: filtro, pagi: pag},
             success: function (responseText) {
                 $("#resultado").html(responseText);
@@ -305,7 +305,7 @@
         Gpag = pag;
         $.ajax({
             type: "POST",
-            url: "BuscarServlet",
+            url: serverURL + "BuscarServlet",
             data: {condicion: condicion, filtro: filtro, pagi: pag},
             success: function (responseText) {
                 $("#resultado").html(responseText);
@@ -322,7 +322,7 @@
         Gpag = pag;
         $.ajax({
             type: "POST",
-            url: "BuscarServlet",
+            url: serverURL + "BuscarServlet",
             data: {condicion: condicion, filtro: filtro, pagi: pag},
             success: function (responseText) {
                 $("#resultado").html(responseText);
@@ -339,7 +339,7 @@
         Gpag = pag;
         $.ajax({
             type: "POST",
-            url: "BuscarServlet",
+            url: serverURL + "BuscarServlet",
             data: {condicion: condicion, filtro: filtro, pagi: pag},
             success: function (responseText) {
                 $("#resultado").html(responseText);
@@ -356,7 +356,7 @@
         Gpag = pag;
         $.ajax({
             type: "POST",
-            url: "BuscarServlet",
+            url: serverURL + "BuscarServlet",
             data: {condicion: condicion, filtro: filtro, pagi: pag},
             success: function (responseText) {
                 $("#resultado").html(responseText);
@@ -373,7 +373,7 @@
         Gpag = pag;
         $.ajax({
             type: "POST",
-            url: "BuscarServlet",
+            url: serverURL + "BuscarServlet",
             data: {condicion: condicion, filtro: filtro, pagi: pag},
             success: function (responseText) {
                 $("#resultado").html(responseText);
@@ -388,7 +388,7 @@
         var pag = document.getElementById("btnAV").value;
         $.ajax({
             type: "POST",
-            url: "BuscarServlet",
+            url: serverURL + "BuscarServlet",
             data: {condicion: condicion, filtro: filtro, pagi: pag},
             success: function (responseText) {
                 $("#resultado").html(responseText);
@@ -407,7 +407,7 @@
         Gpag = pag;
         $.ajax({
             type: "POST",
-            url: "BuscarServlet",
+            url: serverURL + "BuscarServlet",
             data: {condicion: condicion, filtro: filtro, pagi: pag},
             success: function (responseText) {
                 $("#resultado").html(responseText);
@@ -425,7 +425,7 @@
         Gpag = pag;
         $.ajax({
             type: "POST",
-            url: "BuscarServlet",
+            url: serverURL + "BuscarServlet",
             data: {condicion: condicion, filtro: filtro, pagi: pag},
             success: function (responseText) {
                 $("#resultado").html(responseText);
@@ -442,7 +442,7 @@
         Gpag = pag;
         $.ajax({
             type: "POST",
-            url: "BuscarServlet",
+            url: serverURL + "BuscarServlet",
             data: {condicion: condicion, filtro: filtro, pagi: pag},
             success: function (responseText) {
                 $("#resultado").html(responseText);
@@ -459,7 +459,7 @@
         Gpag = pag;
         $.ajax({
             type: "POST",
-            url: "BuscarServlet",
+            url: serverURL + "BuscarServlet",
             data: {condicion: condicion, filtro: filtro, pagi: pag},
             success: function (responseText) {
                 $("#resultado").html(responseText);
@@ -476,7 +476,7 @@
         Gpag = pag;
         $.ajax({
             type: "POST",
-            url: "BuscarServlet",
+            url: serverURL + "BuscarServlet",
             data: {condicion: condicion, filtro: filtro, pagi: pag},
             success: function (responseText) {
                 $("#resultado").html(responseText);
@@ -493,7 +493,7 @@
         Gpag = pag;
         $.ajax({
             type: "POST",
-            url: "BuscarServlet",
+            url: serverURL + "BuscarServlet",
             data: {condicion: condicion, filtro: filtro, pagi: pag},
             success: function (responseText) {
                 $("#resultado").html(responseText);
@@ -508,7 +508,7 @@
         var pag = document.getElementById("btnAV").value;
         $.ajax({
             type: "POST",
-            url: "BuscarServlet",
+            url: serverURL + "BuscarServlet",
             data: {condicion: condicion, filtro: filtro, pagi: pag},
             success: function (responseText) {
                 $("#resultado").html(responseText);
@@ -523,7 +523,7 @@
         var pag = document.getElementById("btnAV").value;
         $.ajax({
             type: "POST",
-            url: "BuscarServlet",
+            url: serverURL + "BuscarServlet",
             data: {condicion: condicion, filtro: filtro, pagi: pag},
             success: function (responseText) {
                 $("#resultado").html(responseText);
@@ -538,7 +538,7 @@
         var pag = document.getElementById("btnAV").value;
         $.ajax({
             type: "POST",
-            url: "BuscarServlet",
+            url: serverURL + "BuscarServlet",
             data: {condicion: condicion, filtro: filtro, pagi: pag},
             success: function (responseText) {
                 $("#resultado").html(responseText);
@@ -553,7 +553,7 @@
         var pag = document.getElementById("btnAV").value;
         $.ajax({
             type: "POST",
-            url: "BuscarServlet",
+            url: serverURL + "BuscarServlet",
             data: {condicion: condicion, filtro: filtro, pagi: pag},
             success: function (responseText) {
                 $("#resultado").html(responseText);
@@ -570,7 +570,7 @@
         var pag = document.getElementById("btnAV").value;
         $.ajax({
             type: "POST",
-            url: "BuscarServlet",
+            url: serverURL + "BuscarServlet",
             data: {condicion: condicion, filtro: filtro, pagi: pag},
             success: function (responseText) {
                 $("#resultado").html(responseText);
@@ -585,7 +585,7 @@
         var pag = document.getElementById("btnAV").value;
         $.ajax({
             type: "POST",
-            url: "BuscarServlet",
+            url: serverURL + "BuscarServlet",
             data: {condicion: condicion, filtro: filtro, pagi: pag},
             success: function (responseText) {
                 $("#resultado").html(responseText);
@@ -601,7 +601,7 @@
         var pag = document.getElementById("btnAV").value;
         $.ajax({
             type: "POST",
-            url: "BuscarServlet",
+            url: serverURL + "BuscarServlet",
             data: {condicion: condicion, filtro: filtro, pagi: pag},
             success: function (responseText) {
                 $("#resultado").html(responseText);
@@ -616,7 +616,7 @@
         var pag = document.getElementById("btnAV").value;
         $.ajax({
             type: "POST",
-            url: "BuscarServlet",
+            url: serverURL + "BuscarServlet",
             data: {condicion: condicion, filtro: filtro, pagi: pag},
             success: function (responseText) {
                 $("#resultado").html(responseText);
@@ -632,7 +632,7 @@
         var ban = "nel";
         $.ajax({
             type: "POST",
-            url: "BuscarServlet",
+            url: serverURL + "BuscarServlet",
             data: {condicion: condicion, filtro: filtro, pagi: pag, ban: ban},
             success: function (responseText) {
                 $("#resultado").html(responseText);
@@ -648,7 +648,7 @@
         var ban = "ban";
         $.ajax({
             type: "POST",
-            url: "BuscarServlet",
+            url: serverURL + "BuscarServlet",
             data: {condicion: condicion, filtro: filtro, pagi: pag, ban: ban},
             success: function (responseText) {
                 $("#resultado").html(responseText);

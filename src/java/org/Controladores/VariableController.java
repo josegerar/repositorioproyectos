@@ -16,7 +16,7 @@ import org.Object.Variable;
  *
  * @author F
  */
-public class VariableController extends ConexionMySQL{
+public class VariableController extends ConexionMySQL {
 
     ArrayList<Variable> getVariablesProyecto(String idProyecto) {
         ArrayList<Variable> variables = new ArrayList<>();
@@ -32,9 +32,14 @@ public class VariableController extends ConexionMySQL{
             rs = pst.executeQuery();
             while (rs.next()) {
                 Variable variable = new Variable();
-                variable.setId(rs.getInt("id_autor"));
+                variable.setId(rs.getInt("id_variable"));
                 variable.setIdProyecto(rs.getInt("id_proyecto"));
-                variable.setTipo(rs.getString("tipo"));
+                String tipo = rs.getString("tipo");
+                if (tipo.equals("i")) {
+                    variable.setTipo("Independiente");
+                } else if (tipo.equals("d")) {
+                    variable.setTipo("Dependiente");
+                }
                 variable.setVariable(rs.getString("variable"));
                 variables.add(variable);
             }
@@ -57,25 +62,21 @@ public class VariableController extends ConexionMySQL{
         }
         return variables;
     }
-    
-    public void insertVariableProyecto (ArrayList<Variable> variable, Integer idproyecto) throws Exception {
+
+    public void insertVariableProyecto(ArrayList<Variable> variable, Integer idproyecto) throws SQLException {
+
+        PreparedStatement pst;
         
-        PreparedStatement pst = null;
-        String sql = "";
-//        try {
-        sql = "insert into variable (id_proyecto,tipo,variable) values (?, ?, ?);";
+        String sql = "insert into variable (id_proyecto,tipo,variable) values (?, ?, ?);";
+        
         for (Variable i : variable) {
             pst = getConnection().prepareStatement(sql);
             pst.setInt(1, idproyecto);
             pst.setString(2, i.getTipo());
             pst.setString(3, i.getVariable());
             pst.executeUpdate();
-//                if (estado > 0) {
-//                    salida = true;
-//                } else {
-//                    salida = false;
-//                }
         }
+        
     }
-    
+
 }

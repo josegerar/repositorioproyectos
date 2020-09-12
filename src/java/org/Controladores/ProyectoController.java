@@ -12,7 +12,6 @@ import java.util.ArrayList;
 import org.DAO.ConexionMySQL;
 import org.Object.Autor;
 import org.Object.Proyecto;
-import org.Object.Variable;
 
 /**
  *
@@ -204,14 +203,12 @@ public class ProyectoController extends ConexionMySQL {
     }
 
     private boolean existsProyecto(String titulo, String objetivo, String resumen) {
-        boolean salida = false;
         PreparedStatement pst = null;
         ResultSet rs = null;
-        String sql;
         int cont = 0;
         try {
-            sql = "select count(*) from proyecto_integrador where titulo = ? or objetivo = ? or resumen = ?;";
-            pst = getConnection().prepareStatement(sql);
+            String query = "select count(*) from proyecto_integrador where titulo = ? or objetivo = ? or resumen = ?;";
+            pst = getConnection().prepareStatement(query);
             pst.setString(1, titulo);
             pst.setString(2, objetivo);
             pst.setString(3, resumen);
@@ -219,11 +216,7 @@ public class ProyectoController extends ConexionMySQL {
             if (rs.next()) {
                 cont = rs.getInt(1);
             }
-            if (cont > 0) {
-                salida = true;
-            } else {
-                salida = false;
-            }
+            return cont > 0;
         } catch (SQLException ex) {
             System.err.println(ex.getMessage());
         } finally {
@@ -241,19 +234,19 @@ public class ProyectoController extends ConexionMySQL {
                 System.err.println(e.getMessage());
             }
         }
-        return salida;
+        return false;
     }
 
     public String insertProyectos(Proyecto proyecto) {
         String sms = "";
-        Integer lastId = 0;
+        Integer lastId;
         if (existsProyecto(proyecto.getTitulo(), proyecto.getObjetivo(), proyecto.getResumen()) != true) {
-            Integer estado = 0;
+            Integer estado;
             PreparedStatement pst = null;
-            String sql = "";
+            String query;
             try {
-                sql = "insert into proyecto_integrador (fecha_registro, titulo, modulo, periodo_lectivo, objetivo, resumen, url_proyecto, id_usuario) values (now(),?,?,?,?,?,?,?);";
-                pst = getConnection().prepareStatement(sql);
+                query = "insert into proyecto_integrador (fecha_registro, titulo, modulo, periodo_lectivo, objetivo, resumen, url_proyecto, id_usuario) values (now(),?,?,?,?,?,?,?);";
+                pst = getConnection().prepareStatement(query);
                 pst.setString(1, proyecto.getTitulo());
                 pst.setInt(2, Integer.parseInt(proyecto.getSemestre()));
                 pst.setString(3, proyecto.getPeriodo() + " " + proyecto.getAnio());
@@ -264,99 +257,60 @@ public class ProyectoController extends ConexionMySQL {
                 estado = pst.executeUpdate();
                 if (estado > 0) {
                     lastId = this.getLastIdProyecto();
-                    insertAutorProyecto(proyecto.getAutores(), lastId);
+                    this.insertAutorProyecto(proyecto.getAutores(), lastId);
                     new VariableController().insertVariableProyecto(proyecto.getVariables(), lastId);
                 } else {
                     sms = "No se ingresaron los datos, intente nuevamente";
                 }
             } catch (SQLException sqle) {
                 sms = sms + "SQLState: " + sqle.getSQLState() + "SQLErrorCode: " + sqle.getErrorCode() + sqle.getMessage();
-                sqle.printStackTrace();
-            } catch (Exception e) {
-                e.printStackTrace();
             } finally {
-                if (getConnection() != null) {
-                    try {
-                        pst.close();
-                        close();
-                    } catch (Exception e) {
-                        e.printStackTrace();
+                try {
+                    if (isConected()) {
+                        getConnection().close();
                     }
+                    if (pst != null) {
+                        pst.close();
+                    }
+                } catch (SQLException e) {
+                    System.err.println(e.getMessage());
                 }
             }
         } else {
-            sms = "Ya eciste un proyecto registrado con los datos de titulo y/o objetivo y/o resumen";
+            sms = "Ya existe un proyecto registrado con los datos de titulo y/o objetivo y/o resumen";
         }
         return sms;
     }
 
-    private Integer getLastIdProyecto() throws Exception {
+    private Integer getLastIdProyecto() throws SQLException {
         Integer id = 0;
-        PreparedStatement pst = null;
-        ResultSet rs = null;
-        String sql;
-//        int cont = 0;
-        //try {
-        sql = "select max(id_proyecto) as idlast from proyecto_integrador;";
-        pst = getConnection().prepareStatement(sql);
+        PreparedStatement pst;
+        ResultSet rs;
+        String query;
+        query = "select max(id_proyecto) as idlast from proyecto_integrador;";
+        pst = getConnection().prepareStatement(query);
         rs = pst.executeQuery();
         if (rs.next()) {
             id = rs.getInt("idlast");
         }
-//        } catch (SQLException ex) {
-//            System.err.println(ex.getMessage());
-//        } finally {
-//            try {
-//                if (isConected()) {
-//                    getConnection().close();
-//                }
-//                if (pst != null) {
-//                    pst.close();
-//                }
-//                if (rs != null) {
-//                    rs.close();
-//                }
-//            } catch (SQLException e) {
-//                System.err.println(e.getMessage());
-//            }
-//        }
+        pst.close();
+        rs.close();
         return id;
     }
 
-    private void insertAutorProyecto(ArrayList<Autor> autores, Integer idproyecto) throws Exception {
-//        boolean salida = false;
-//        Integer estado = 0;
+    private void insertAutorProyecto(ArrayList<Autor> autores, Integer idproyecto) throws SQLException {
         PreparedStatement pst = null;
-        String sql = "";
-//        try {
-        sql = "insert into proyecto_autor (id_proyecto, id_autor) values (?, ?);";
+        String query;
+        query = "insert into proyecto_autor (id_proyecto, id_autor) values (?, ?);";
         for (Autor i : autores) {
-            pst = getConnection().prepareStatement(sql);
+            pst = getConnection().prepareStatement(query);
             pst.setInt(1, idproyecto);
             pst.setInt(2, i.getId_autor());
             pst.executeUpdate();
-//                if (estado > 0) {
-//                    salida = true;
-//                } else {
-//                    salida = false;
-//                }
         }
-//        } catch (SQLException sqle) {
-//            System.out.println("SQLState: " + sqle.getSQLState() + "SQLErrorCode: " + sqle.getErrorCode());
-//            sqle.printStackTrace();
-//        } catch (Exception e) {
-//            e.printStackTrace();
-//        } finally {
-//            if (getConnection() != null) {
-//                try {
-//                    pst.close();
-//                    close();
-//                } catch (Exception e) {
-//                    e.printStackTrace();
-//                }
-//            }
-//        }
-//        return salida;
+        if (pst != null) {
+            pst.close();
+        }
     }
 
 }
