@@ -35,8 +35,8 @@
             
             <li class="nav-item">
                 <a class="nav-link" href="javascript:paginacion('pages/anadirproyectos.html')">
-                    <i class="fa fa-newspaper-o" aria-hidden="true"></i>
-                    Gestionar Proyectos
+                    <i class="fa fa-product-hunt" aria-hidden="true"></i>
+                    Añadir proyecto
 
                 </a>
             </li>
@@ -115,13 +115,14 @@
 
 <script>
 
-    async function fetchHtmlAsText(url) {
-        return await (await fetch(url)).text();
-    }
-
     async function paginacion(pagina, atributos) {
+        
         const contentDiv = document.getElementById("contenidoPrincipal");
+        
         await $("#contenidoPrincipal").load(pagina, atributos);
+        console.log(history);
+        //history.replaceState(null, "", pagina);
+        
     }
 
 </script>
