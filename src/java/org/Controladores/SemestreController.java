@@ -24,7 +24,7 @@ public class SemestreController extends ConexionMySQL{
         ResultSet rs = null;
         String sql;
         try {
-            sql = "SELECT DISTINCT modulo FROM proyecto_integrador;";
+            sql = "SELECT DISTINCT modulo FROM proyecto_integrador order by modulo asc;";
             pst = getConnection().prepareStatement(sql);
             rs = pst.executeQuery();
             while (rs.next()) {

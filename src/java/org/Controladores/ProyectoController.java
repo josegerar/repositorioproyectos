@@ -40,7 +40,7 @@ public class ProyectoController extends ConexionMySQL {
 
     private void config(String page) {
         sql = "";
-        sql = sql.concat("SELECT * FROM (SELECT p.id_proyecto, p.titulo, p.modulo, p.objetivo, \n");
+        sql = sql.concat("SELECT DISTINCT * FROM (SELECT p.id_proyecto, p.titulo, p.modulo, p.objetivo, \n");
         sql = sql.concat("CAST( p.fecha_registro AS CHAR) AS fecha, c.nombre_carrera, p.resumen, \n");
         sql = sql.concat("p.periodo_lectivo, p.url_proyecto , c.id_facultad, c.id_carrera \n");
         sql = sql.concat("FROM proyecto_integrador AS p INNER JOIN proyecto_autor AS pa ON pa.id_proyecto=p.id_proyecto \n");
@@ -172,7 +172,9 @@ public class ProyectoController extends ConexionMySQL {
 
                 parameters.add("%".concat(p).concat("%"));
                 parameters.add("%".concat(p).concat("%"));
-                sql = sql.concat("p.titulo LIKE ? OR p.objetivo LIKE ? \n");
+                parameters.add("%".concat(p).concat("%"));
+                parameters.add("%".concat(p).concat("%"));
+                sql = sql.concat("p.titulo LIKE ? OR p.objetivo LIKE ? OR p.modulo LIKE ? OR p.periodo_lectivo LIKE ? \n");
 
             }
         }

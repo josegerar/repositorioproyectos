@@ -14,6 +14,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import org.Controladores.CoordinadorController;
+import org.Object.hash;
 
 /**
  *
@@ -80,6 +81,7 @@ public class TransactCoordinador extends HttpServlet {
         //processRequest(request, response);
         String nickName = request.getParameter("user");
         String password = request.getParameter("password");
+        String contrasenia = hash.sha1(password);
         String nombre = request.getParameter("nombre");
         String apellido = request.getParameter("apellido");
         String cedula = request.getParameter("identificacion");
@@ -93,7 +95,7 @@ public class TransactCoordinador extends HttpServlet {
         String transact = request.getParameter("transact");
         String json = "";
         if (transact.equals("insert")){
-            json = new Gson().toJson(controller.insertCoordinadores(nickName, password, nombre, apellido, cedula, fechanacimiento, correo, direccion, nivelacademico, idciudad, idprofesion, idinstitucion));
+            json = new Gson().toJson(controller.insertCoordinadores(nickName, contrasenia, nombre, apellido, cedula, fechanacimiento, correo, direccion, nivelacademico, idciudad, idprofesion, idinstitucion));
         }
         response.getWriter().write(json);
     }
