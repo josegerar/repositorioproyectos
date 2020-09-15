@@ -261,6 +261,7 @@ public class ProyectoController extends ConexionMySQL {
                     lastId = this.getLastIdProyecto();
                     this.insertAutorProyecto(proyecto.getAutores(), lastId);
                     new VariableController().insertVariableProyecto(proyecto.getVariables(), lastId);
+                    sms = "Proyecto registrado exitosamente";
                 } else {
                     sms = "No se ingresaron los datos, intente nuevamente";
                 }
