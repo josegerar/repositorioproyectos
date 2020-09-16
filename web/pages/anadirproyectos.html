@@ -175,8 +175,20 @@
 
             <div class="input-group mb-3">
 
-                <input type="file" id="url" name="url" class="form-control upload-photo" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default2">
-
+                <input type="file" id="url" name="url" accept="application/pdf" class="form-control upload-photo" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default2">
+                <script>
+                    $('#url').on('change', function () {
+                        var ext = $(this).val().split('.').pop();
+                        console.log($(this)[0].files);
+                        if ($(this).val() !== '') {
+                            if (ext !== "pdf") {
+                                $(this).val('');
+                                console.log($(this)[0].files);
+                                alert("Tipo de archivo no permitido: " + ext);
+                            } 
+                        }
+                    });
+                </script>
                 <div class="input-group-prepend">
                     <span class="input-group-text" id="inputGroup-sizing-default2"  style="width: 170px;">Archivo de Proyecto</span>
                 </div>
@@ -311,7 +323,7 @@
         overlay2.classList.remove('active');
         popup2.classList.remove('active');
     });
-    
+
 </script>
 
 <!-- script para guardar datos de los coordinadores y autores-->
@@ -339,11 +351,11 @@
                 alert(data);
             },
             error: function (jqXHR, textStatus, errorThrown) {
-                alert(jqXHR + "\n"+ textStatus +"\n"+ errorThrown);
+                alert(jqXHR + "\n" + textStatus + "\n" + errorThrown);
             }
         });
     });
-    
+
     $('#saveCoord').click(function (e) {
         //e.prevenDefault();
         var jSon = {};
@@ -372,48 +384,48 @@
                 alert(data);
             },
             error: function (jqXHR, textStatus, errorThrown) {
-                alert(jqXHR + "\n"+ textStatus +"\n"+ errorThrown);
+                alert(jqXHR + "\n" + textStatus + "\n" + errorThrown);
             }
         });
     });
-    
+
     /*$("#guardarPI").click(function (){
+     var jSon = {};
+     jSon.coordinador = $("#coordinador").data("data").idUsuario;
+     jSon.autores = "";
+     jSon.titulo = $("#titulo").val();
+     });*/
+
+
+    $("#guardarPI").click(function (e) {
         var jSon = {};
-        jSon.coordinador = $("#coordinador").data("data").idUsuario;
-        jSon.autores = "";
-        jSon.titulo = $("#titulo").val();
-    });*/
-    
-    
-    $("#guardarPI").click(function (e){
-       var jSon = {};
-       var vectorAutores = [];
-       var vectorVariables = [];
-       //var vectorTipos = [];
-       var tbda = $("#cuerpoAutores tr");
-       var tbdv = $("#cuerpoVariables tr");
-       $.each(tbda, function (i, item) {
+        var vectorAutores = [];
+        var vectorVariables = [];
+        //var vectorTipos = [];
+        var tbda = $("#cuerpoAutores tr");
+        var tbdv = $("#cuerpoVariables tr");
+        $.each(tbda, function (i, item) {
             var celdas = $(item).find("td");
             var msj = $($(celdas[0]).children("input")[0]).data("data");
-            if(msj){
-               msj.id_autor && vectorAutores.push(msj.id_autor);
+            if (msj) {
+                msj.id_autor && vectorAutores.push(msj.id_autor);
             }
-       });
-       $.each(tbdv, function (i, item) {
+        });
+        $.each(tbdv, function (i, item) {
             var celdas = $(item).find("td");
             var msj = $($(celdas[0]).children("input")[0]).val();
             var msj2 = $($(celdas[1]).children("select")[0]).val();
             var obj = {};
-            if(msj){
+            if (msj) {
                 //vectorVariables.push(msj);
-               obj.valorvariable = msj;
+                obj.valorvariable = msj;
             }
-            if(msj2){
+            if (msj2) {
                 //vectorTipos.push(msj2)
                 obj.tipovariable = msj2;
             }
             vectorVariables.push(obj);
-       });
+        });
         var sampleFile = document.getElementById("url").files[0];
         var formdata = new FormData();
         formdata.append("titulo", $('#titulo').val());
@@ -427,15 +439,16 @@
         formdata.append("variables", JSON.stringify(vectorVariables));
         //formdata.append("tipos", vectorTipos);
         formdata.append("archivo", sampleFile);
-         
-        var xhr = new XMLHttpRequest();       
-        xhr.open("POST",serverURL +"TransactProyecto", true);
+
+        var xhr = new XMLHttpRequest();
+        xhr.open("POST", serverURL + "TransactProyecto", true);
         //xhr.setRequestHeader('Content-Type', 'multipart/form-data');
         xhr.send(formdata);
-        xhr.onload = function(e) {
-        if (this.status == 200) {
-             alert(this.responseText);
-        }}; 
+        xhr.onload = function (e) {
+            if (this.status == 200) {
+                alert(this.responseText);
+            }
+        };
     });
-    
+
 </script>

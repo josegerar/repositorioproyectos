@@ -21,7 +21,7 @@
         %>
         <script>
             const serverURL = "<%=serverURL%>";
-            console.log(serverURL);
+            //console.log(serverURL);
         </script>
         <link rel="apple-touch-icon" sizes="57x57" href="<%=serverURL%>iconos/fav/apple-icon-57x57.png">
         <link rel="apple-touch-icon" sizes="60x60" href="<%=serverURL%>iconos/fav/apple-icon-60x60.png">
@@ -79,7 +79,7 @@
             <!-- NavBar -->
             <!-- Content -->
 
-            <div id="contenidoPrincipal">
+            <div id="contenidoPrincipal" style="margin-top: 90px">
 
             </div>
             <!-- Content -->
