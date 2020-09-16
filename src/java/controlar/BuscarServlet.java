@@ -33,6 +33,8 @@ public class BuscarServlet extends HttpServlet {
      * @param response servlet response
      * @throws ServletException if a servlet-specific error occurs
      * @throws IOException if an I/O error occurs
+     * @throws java.sql.SQLException
+     * @throws java.lang.ClassNotFoundException
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException, SQLException, ClassNotFoundException {
@@ -55,7 +57,7 @@ public class BuscarServlet extends HttpServlet {
                 cont++;
                 if (cont <= npagina && cont > aux) {
                     out.println("<tr>");
-                    out.println("<td><a href=DetalleCD.jsp?id=" + R.getIdDonaciones() + ">" + R.getNombreConjuntoDatos() + "</a></td>");
+                    out.println("<td><a href=\"javascript:void(0)\" onclick=\"paginacion('pages/DetalleCD.jsp', {'id': "+ R.getIdDonaciones() +" })\">" + R.getNombreConjuntoDatos() + "</a></td>");
                     out.println("<td>" + R.getTipoDatos() + "</td>");
                     out.println("<td>" + R.getTarea() + "</td>");
                     out.println("<td>" + R.getTipoAtributo() + "</td>");

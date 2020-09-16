@@ -55,13 +55,13 @@
                     %>
                     <tr>
                         <td style="visibility: hidden"><%= leer.getString("idDonaciones")%></td>
-                        <th scope="row"> <a class="nav-link" href="javascript:paginacion('pages/DetalleCD.jsp?id=<%= leer.getString("idDonaciones")%>')"><%= leer.getString("nombreConjuntoDatos")%></a></th>
+                        <th scope="row"> <a class="nav-link" href="javascript:void(0)" onclick="paginacion('pages/DetalleCD.jsp?id=<%= leer.getString("idDonaciones")%>')"><%= leer.getString("nombreConjuntoDatos")%></a></th>
                         <td><%= leer.getString("abstracto")%></td>
                         <td><%= leer.getString("tarea")%></td>
                         <td><%= leer.getString("tipoDatos")%></td>
                         <td><%= leer.getString("numeroAtributos")%></td>
                         <td><a href="<%= leer.getString("archivoDatos")%>" >Descargar Archivo</a></td>
-                <form  action="AprobarDenegar" onsubmit="return alertaR()">
+                <form action="AprobarDenegar" onsubmit="return alertaR()">
                     <td><textarea id="ta" name="observacion" onkeypress="validaCaractaer(event);" rows="4" cols="25" maxlength="200"></textarea></td>
                     <input type="hidden" id="id" name="id" class="btn btn-success" value="<%= leer.getString("idDonaciones")%>"/>
                     <input type="hidden" id="opcion" name="opcion" class="btn btn-success" value="2">

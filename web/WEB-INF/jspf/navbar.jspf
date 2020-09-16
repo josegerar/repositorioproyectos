@@ -1,7 +1,7 @@
 <%-- any content can be specified here e.g.: --%>
 <%@ page pageEncoding="UTF-8" %>
 <nav class="navbar navbar-icon-top navbar-expand-lg navbar-dark " style="background:#225499; margin-top: 0px; position: fixed; top: 0; width: 100%; z-index: 10000000000;">
-    <a class="navbar-brand" href="javascript:paginacion('pages/repositorioDocentes.html')">REPOSITORIO</a>
+    <a class="navbar-brand" href="javascript:void(0)" onclick="paginacion('pages/repositorioDocentes.html')">REPOSITORIO</a>
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-targ
             et="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
@@ -10,14 +10,14 @@
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
         <ul class="navbar-nav mr-auto">
             <li class="nav-item">
-                <a class="nav-link" href="javascript:paginacion('pages/repositorioDocentes.html')">
+                <a class="nav-link" href="javascript:void(0)" onclick="paginacion('pages/repositorioDocentes.html')">
                     <i class="fa fa-home"></i>
                     Inicio
                 </a>
             </li>
 
             <li class="nav-item">
-                <a class="nav-link" href="javascript:paginacion('pages/repositorioProyectos.html')">
+                <a class="nav-link" href="javascript:void(0)" onclick="paginacion('pages/repositorioProyectos.html')" >
                     <i class="fa fa-address-book" aria-hidden="true"></i>
                     Proyectos
                 </a>
@@ -29,7 +29,7 @@
             
             <% if (rol.equals("1")) { %>
             <li class="nav-item">
-                <a class="nav-link" href="javascript:paginacion('pages/anadircarreras.html')">
+                <a class="nav-link" href="javascript:void(0)" onclick="paginacion('pages/anadircarreras.html')">
                     <i class="fa fa-newspaper-o" aria-hidden="true"></i>
                     Gestionar Carreras
 
@@ -38,7 +38,7 @@
             <%}%>
             
             <li class="nav-item">
-                <a class="nav-link" href="javascript:paginacion('pages/anadirproyectos.html')">
+                <a class="nav-link" href="javascript:void(0)" onclick="paginacion('pages/anadirproyectos.html')" >
                     <i class="fa fa-product-hunt" aria-hidden="true"></i>
                     Añadir proyecto
 
@@ -47,21 +47,21 @@
 
 
             <li class="nav-item">
-                <a class="nav-link" href="javascript:paginacion('pages/RegistroUsuario.jsp')">
+                <a class="nav-link" href="javascript:void(0)" onclick="paginacion('pages/RegistroUsuario.jsp')">
                     <i class="fa fa-user-o" id="userli"></i>
                     Mi Perfil
 
                 </a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="javascript:paginacion('pages/AcuerdoDonacion.html')">
+                <a class="nav-link" href="javascript:void(0)" onclick="paginacion('pages/AcuerdoDonacion.html')">
                     <i class="fa fa-gift">
                     </i>
                     Donar
                 </a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="javascript:paginacion('pages/MisDanaciones.jsp')">
+                <a class="nav-link" href="javascript:void(0)" onclick="paginacion('pages/MisDanaciones.jsp')">
                     <i class="fa fa-database">
 
                     </i>
@@ -69,7 +69,7 @@
                 </a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="javascript:paginacion('pages/GenerarDatos.html')">
+                <a class="nav-link" href="javascript:void(0)" onclick="paginacion('pages/GenerarDatos.html')">
                     <i class="fa fa-table">
 
                     </i>
@@ -80,7 +80,7 @@
 
             <% if (rol.equals("1")) { %>
             <li class="nav-item">
-                <a class="nav-link " href="javascript:paginacion('pages/Aprobacion.jsp')"><i class="fa fa-envelope-o"></i>Solicitudes</a>
+                <a class="nav-link " href="javascript:void(0)" onclick="paginacion('pages/Aprobacion.jsp')"><i class="fa fa-envelope-o"></i>Solicitudes</a>
             </li>
             
             <%}%>
@@ -92,7 +92,7 @@
                     <% if (sesion.getAttribute("usuario") != null) {%>
                     <a class="nav-link"  id="user" > <i class="fa fa-user"></i><%=sesion.getAttribute("usuario")%></a>
                         <%} else {%>
-                    <a class="nav-link" href="javascript:paginacion('pages/RegistroUsuario.jsp')"> <i class="fa fa-user"></i>Registrarse</a>
+                    <a class="nav-link" href="javascript:void(0)" onclick="paginacion('pages/RegistroUsuario.jsp')"> <i class="fa fa-user"></i>Registrarse</a>
                     <%}%>
                 </li>
                 <li class="nav-item">
@@ -121,7 +121,7 @@
 <script>
 
     async function paginacion(pagina, atributos) {
-        
+        console.log(this);
         const contentDiv = document.getElementById("contenidoPrincipal");
         
         await $("#contenidoPrincipal").load(pagina, atributos);

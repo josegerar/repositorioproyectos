@@ -129,7 +129,8 @@
                         $.each(data.proyectos, function (i, item) {
 
                             let titulo = $("<td>").append($("<a>", {
-                                href: "javascript:paginacion('pages/detalleproyecto.jsp',{id: " + item.id + "})",
+                                href: "javascript:void(0)",
+                                onclick: "paginacion('pages/detalleproyecto.jsp',{id: " + item.id + "})",
                                 text: item.titulo
                             }));
                             let semestre = $("<td>" + item.semestre + "</td>");

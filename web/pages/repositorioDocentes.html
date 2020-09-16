@@ -130,7 +130,7 @@
             var filtro = Gfiltro;
             var pag = document.getElementById("btnAV").value;
             $.ajax({
-                type: "POST",
+                'type': "POST",
                 url: serverURL + "BuscarServlet",
                 data: {condicion: condicion, filtro: filtro, pagi: pag},
                 success: function (responseText) {

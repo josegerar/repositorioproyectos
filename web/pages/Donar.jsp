@@ -62,7 +62,7 @@ Página para donar un conjunto de datos
     </nav>
 </div>
 <%-- Insertar donaciones formulario para mandar al servlet--%>
-<form action="InsertDonac" onload="activateevents()" method="post" enctype="multipart/form-data" style="margin-top: 100px;">
+<form action="InsertDonac" onload="activateevents()" method="post" enctype="multipart/form-data" >
 
     <div style="margin-left: 20%; margin-right: 20%;">
         <div class="regisContenedor">

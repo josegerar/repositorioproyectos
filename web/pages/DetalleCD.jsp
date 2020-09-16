@@ -54,10 +54,7 @@
         </ol>
     </nav>
 </div>
-<div class="contenedor bcrumbSt" style="margin-top: 100px;">
-
-
-
+<div class="contenedor bcrumbSt" >
 
     <form action="" method="post" style=" margin-bottom: 100px;" >
         <div style="display: flex; flex-wrap: wrap; font-size: 30px; font-weight: 700; text-transform: uppercase;">
