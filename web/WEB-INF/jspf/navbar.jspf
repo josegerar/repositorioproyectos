@@ -25,6 +25,9 @@
 
             <!--Validaciones de cada una de las paginas--> 
             <% if (sesion.getAttribute("usuario") != null) { %>
+            
+            
+            <% if (rol.equals("1")) { %>
             <li class="nav-item">
                 <a class="nav-link" href="javascript:paginacion('pages/anadircarreras.html')">
                     <i class="fa fa-newspaper-o" aria-hidden="true"></i>
@@ -32,6 +35,7 @@
 
                 </a>
             </li>
+            <%}%>
             
             <li class="nav-item">
                 <a class="nav-link" href="javascript:paginacion('pages/anadirproyectos.html')">
@@ -78,6 +82,8 @@
             <li class="nav-item">
                 <a class="nav-link " href="Aprobacion.jsp"><i class="fa fa-envelope-o"></i>Solicitudes</a>
             </li>
+            
+            
             <%}%>
 
         </ul>

@@ -35,9 +35,9 @@ public class VariableController extends ConexionMySQL {
                 variable.setId(rs.getInt("id_variable"));
                 variable.setIdProyecto(rs.getInt("id_proyecto"));
                 String tipo = rs.getString("tipo");
-                if (tipo.equals("i")) {
+                if (tipo.equals("I")) {
                     variable.setTipo("Independiente");
-                } else if (tipo.equals("d")) {
+                } else if (tipo.equals("D")) {
                     variable.setTipo("Dependiente");
                 }
                 variable.setVariable(rs.getString("variable"));

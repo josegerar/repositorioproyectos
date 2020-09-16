@@ -6,18 +6,18 @@
         </ol>
     </nav>
 
-    <div class="iniContBusc"style="width: 90%; margin-left: 5%; box-shadow: 0 2px 2px -2px gray;">
+    <div class="iniContBusc" style="width: 90%; margin-left: 5%; box-shadow: 0 2px 2px -2px gray;">
         <div class="iniContBuscIn">
             <div style="width: 40px;">
                 <i class="fa fa-search fa-2 iniContBuscInImg" aria-hidden="true"></i>
             </div>
-            <div style="width: 95%;">
+            <div style="width: 90%;">
                 <input type="text" class="iniContBuscInText" id="txtBuscar" onkeyup="busquedaProyecto()" placeholder="Escribe para buscar..">
             </div>
         </div>
-        <button type="button" class="btn  iniContBuscInBtn"  onclick="busquedaProyecto()">
+        <!--<button type="button" class="btn  iniContBuscInBtn"  onclick="busquedaProyecto()">
             Buscar
-        </button>
+        </button>-->
 
     </div>
 </div>            
@@ -202,6 +202,10 @@
             filter.id = valor;
             filter.type = "manual";
             filter.page = 1;
+            
+            if(valor.length === 0){
+                filter.type = "todos";
+            }
             
             filtrar(filter);
         }
