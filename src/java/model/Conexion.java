@@ -25,7 +25,7 @@ public class Conexion {
                 lineaUser + "&" +
                 lineaPass;
        
-        System.out.println(url);
+       // System.out.println(url);
        
         Class.forName("com.mysql.jdbc.Driver"); // jar, INCLUIR!!!!!
         con = DriverManager.getConnection(url);

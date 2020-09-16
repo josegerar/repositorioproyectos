@@ -33,7 +33,10 @@ public class CerrarSesion extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-        request.getSession().invalidate();
+        HttpSession s = request.getSession();
+        if (s != null) {
+            s.invalidate();
+        }
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
@@ -49,6 +52,7 @@ public class CerrarSesion extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         processRequest(request, response);
+        
     }
 
     /**
@@ -63,11 +67,7 @@ public class CerrarSesion extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         processRequest(request, response);
-        HttpSession sesion = request.getSession(true);
-        if(sesion.getAttribute("usuario")!=null)
-        {
-            sesion.setAttribute("usuario", null);
-        }
+
     }
 
     /**

@@ -51,8 +51,9 @@
                         overlay.classList.remove('active');
                         popup.classList.remove('active');
                         location.reload(true);
+                    } else {
+                        $("#result1").html(result);
                     }
-                    $("#result1").html(result);
                 }
             });
             document.getElementById("clave").value = "";
@@ -64,15 +65,10 @@
 <script>
     $(document).ready(function () {
         $('#btncerrarsesion').click(function (event) {
-            var usuarioVar = $('#usuario').val();
             $.ajax({
-                type: "POST",
                 url: "CerrarSesion",
-                data: {
-                    usuario: usuarioVar
-                },
                 success: function (result) {
-                    location.replace("Repo.jsp");
+                    location.reload();
                 }
             });
         });

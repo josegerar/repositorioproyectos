@@ -11,7 +11,7 @@
 <%@page import="org.Object.Provincia"%>
 <%@page import="org.DAO.ConexionMySQL"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
-
+<!DOCTYPE html>
 <%
     String ID = "0";
     String NombreUsuario = "";
@@ -48,11 +48,18 @@
         IDprovincia = Integer.parseInt(ConexionMySQL.seleccion("select Provincia_idProvincia as resultado from ciudad where idCiudad='" + IDciudad + "'"));
     }
 %>
-
+<div  style="width: 90%;margin-left: 5%; z-index: 10000000; background: #fff; ">
+    <nav aria-label="breadcrumb" style="margin-top: 10px; width: 90%; margin-left: 5%;">
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item active" aria-current="page">Inicio</li>
+        </ol>
+    </nav>
+</div>
 <!--Llama al servlet para insertar un usuario nuevo--> 
 <div class="regisContenedor" style="max-width: 800px; margin: auto;">
+
     <p class="regisTitulo"> Registro </p>
-    <form action="InsertUsuario" method="post">
+    <form action="InsertUsuario" method="post" >
         <div>
             <div class="input-group mb-3">
                 <div class="input-group-prepend">

@@ -1,6 +1,13 @@
 <!DOCTYPE html>
+<div  style="width: 90%;margin-left: 5%; z-index: 10000000; background: #fff; ">
+    <nav aria-label="breadcrumb" style="margin-top: 10px; width: 90%; margin-left: 5%;">
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item active" aria-current="page">Inicio</li>
+        </ol>
+    </nav>
+</div>
 <div class="regisContenedor" style="max-width: 800px; margin: auto;">
-    <p class="regisTitulo"> Registro de Proyectos </p>
+
     <p class="regisTitulo"> Registro de Proyectos </p>
     <form>
         <div>
@@ -185,7 +192,7 @@
                                 $(this).val('');
                                 console.log($(this)[0].files);
                                 alert("Tipo de archivo no permitido: " + ext);
-                            } 
+                            }
                         }
                     });
                 </script>

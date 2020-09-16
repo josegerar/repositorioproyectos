@@ -8,16 +8,17 @@
 <%
     Proyecto p = new ProyectoController().getProyecto(request.getParameter("id"));
 %>
+<div  style="width: 90%;margin-left: 5%; z-index: 10000000; background: #fff; ">
+    <nav aria-label="breadcrumb" style="margin-top: 10px; width: 90%; margin-left: 5%;">
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item active" aria-current="page">Inicio</li>
+        </ol>
+    </nav>
+</div>
 <div style="display: flex;">
     <div class="bcrumbSt" style="width: 50%; margin-left: 5%; margin-right: 5%">
 
-        <nav aria-label="breadcrumb">
-            <ol class="breadcrumb">
-                <li class="breadcrumb-item active" aria-current="page"><a href="javascript:paginacion('pages/repositorioDocentes.html')">Inicio</a></li>
-                <li class="breadcrumb-item active" aria-current="page"><a href="javascript:paginacion('pages/repositorioProyectos.html')">Proyectos</a></li>
-                <li class="breadcrumb-item active" aria-current="page">Detalle</li>
-            </ol>
-        </nav>
+
 
         <form action="" method="post" style=" margin-bottom: 100px;" >
             <div style="display: flex; flex-wrap: wrap; font-size: 30px; font-weight: 700; text-transform: uppercase;">

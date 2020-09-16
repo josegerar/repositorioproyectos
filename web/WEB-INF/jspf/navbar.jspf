@@ -54,14 +54,14 @@
                 </a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="AcuerdoDonacion.jsp">
+                <a class="nav-link" href="javascript:paginacion('pages/AcuerdoDonacion.html')">
                     <i class="fa fa-gift">
                     </i>
                     Donar
                 </a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="MisDanaciones.jsp">
+                <a class="nav-link" href="javascript:paginacion('pages/MisDanaciones.jsp')">
                     <i class="fa fa-database">
 
                     </i>
@@ -69,7 +69,7 @@
                 </a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="GenerarDatos.jsp">
+                <a class="nav-link" href="javascript:paginacion('pages/GenerarDatos.html')">
                     <i class="fa fa-table">
 
                     </i>
@@ -80,9 +80,8 @@
 
             <% if (rol.equals("1")) { %>
             <li class="nav-item">
-                <a class="nav-link " href="Aprobacion.jsp"><i class="fa fa-envelope-o"></i>Solicitudes</a>
+                <a class="nav-link " href="javascript:paginacion('pages/Aprobacion.jsp')"><i class="fa fa-envelope-o"></i>Solicitudes</a>
             </li>
-            
             
             <%}%>
 

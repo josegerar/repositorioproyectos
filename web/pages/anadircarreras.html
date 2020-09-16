@@ -1,9 +1,15 @@
+<!DOCTYPE html>
+<div  style="width: 90%;margin-left: 5%; z-index: 10000000; background: #fff; ">
+    <nav aria-label="breadcrumb" style="margin-top: 10px; width: 90%; margin-left: 5%;">
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item active" aria-current="page">Inicio</li>
+        </ol>
+    </nav>
+</div>
 <div class="regisContenedor" style="max-width: 800px; margin: auto;">
-    <br/>
-    <br/>
-    <br/>
+
     <p class="regisTitulo"> Registrar de Carreras </p>
-    
+
     <form>
         <div>
             <div class="input-group mb-3">
@@ -13,7 +19,7 @@
                 <input type="text" placeholder="Facultad a la que pertenece..." id="facultad" style="height: 40px;" name="facultad" class="form-control autocomplete-sql ob-blur-sql" onkeypress="return ValTexto(event)" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default">    
                 <button id="btn-abrir-popupFacultad" class="btn btn-primary btn-lg" style="margin-bottom: 0px; margin-top: 0px; margin-right: 0px; width: 70px; height: 40px; padding: 0; font-size: 15px;">Añadir</button>
             </div>
-            
+
             <div class="input-group mb-3">
                 <div class="input-group-prepend">
                     <span class="input-group-text" id="inputGroup-sizing-default" style="width: 200px; ">Carrera</span>
@@ -22,7 +28,7 @@
 
             </div>
         </div> 
-        
+
         <div style="display: flex; justify-content: space-between;">
             <button id="guardarCarrera" type="button" class="btn btn-primary btn-lg" style="width: 48%">Guardar</button>
             <button id="cancela" type="button" onclick="" class="btn btn-secondary btn-lg" style="width: 48%">Cancelar</button>
@@ -41,7 +47,7 @@
                 <table id="tableFacultad" style="padding: 0px; margin: auto;">
                     <tr>
                         <td><input id="nombrefacultad" name="nombrefacultad" type="text" placeholder="Nombre de la facultad..." onkeypress="return ValTexto(event)"  style="width: 300px; height: 40px; margin-bottom: 5px;" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default" required minlength="1" maxlength="50" /></td>
-                        
+
                     </tr> 
                 </table>
             </div>
@@ -77,7 +83,7 @@
 
 <!-- Insert facultad y carrera -->
 <script>
-    $("#saveFacultad").click(function (){
+    $("#saveFacultad").click(function () {
         var jSon = {};
         jSon.facultad = $("#nombrefacultad").val();
         jSon.transact = "insert";
@@ -94,12 +100,12 @@
                 alert(data);
             },
             error: function (jqXHR, textStatus, errorThrown) {
-                alert(jqXHR + "\n"+ textStatus +"\n"+ errorThrown);
+                alert(jqXHR + "\n" + textStatus + "\n" + errorThrown);
             }
         });
     });
-    
-    $("#guardarCarrera").click(function (){
+
+    $("#guardarCarrera").click(function () {
         var jSon = {};
         jSon.carrera = $("#carrera").val();
         jSon.facultad = $("#facultad").data("data").id_facultad;
@@ -112,13 +118,13 @@
             cache: false,
             dataType: "json",
             beforeSend: function (xhr) {
-                
+
             },
             success: function (data) {
                 alert(data);
             },
             error: function (jqXHR, textStatus, errorThrown) {
-                alert(jqXHR + "\n"+ textStatus +"\n"+ errorThrown);
+                alert(jqXHR + "\n" + textStatus + "\n" + errorThrown);
             }
         });
         $("#facultad").val("");
