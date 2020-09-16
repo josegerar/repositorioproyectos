@@ -43,28 +43,28 @@
 
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 
-        <link href="<%=serverURL%>css/bootstrap.min.css" rel="stylesheet" type="text/css"/>
-        <link href="<%=serverURL%>css/bootstrap.css" rel="stylesheet" type="text/css"/>
-        <link href="<%=serverURL%>css/bootstrap-reboot.min.css" rel="stylesheet" type="text/css"/>
-        <link href="<%=serverURL%>css/bootstrap-reboot.css" rel="stylesheet" type="text/css"/>
-        <link href="<%=serverURL%>css/bootstrap-grid.min.css" rel="stylesheet" type="text/css"/>
-        <link href="<%=serverURL%>css/bootstrap-grid.css" rel="stylesheet" type="text/css"/>
-        <link href="<%=serverURL%>css/estilos_rep.css" rel="stylesheet" type="text/css" />
-        <link href="<%=serverURL%>css/estilos.css" rel="stylesheet" type="text/css"/>
-        <link href="<%=serverURL%>css/estylless.css" rel="stylesheet" type="text/css"/>
-        <link href="<%=serverURL%>css/jquery-ui.css" rel="stylesheet" type="text/css"/>
-        <link href="<%=serverURL%>css/widgetSelect.css" rel="stylesheet" type="text/css"/>
+        <link async="" defer="" href="<%=serverURL%>css/bootstrap.min.css"  rel="stylesheet" type="text/css"/>
+        <link async="" defer="" async href="<%=serverURL%>css/bootstrap.css" rel="stylesheet" type="text/css"/>
+        <link async="" defer="" async href="<%=serverURL%>css/bootstrap-reboot.min.css" rel="stylesheet" type="text/css"/>
+        <link async="" defer="" async href="<%=serverURL%>css/bootstrap-reboot.css" rel="stylesheet" type="text/css"/>
+        <link async="" defer="" async href="<%=serverURL%>css/bootstrap-grid.min.css" rel="stylesheet" type="text/css"/>
+        <link async="" defer="" async href="<%=serverURL%>css/bootstrap-grid.css" rel="stylesheet" type="text/css"/>
+        <link async="" defer="" async href="<%=serverURL%>css/estilos_rep.css" rel="stylesheet" type="text/css" />
+        <link async="" defer="" async href="<%=serverURL%>css/estilos.css" rel="stylesheet" type="text/css"/>
+        <link async="" defer="" async href="<%=serverURL%>css/estylless.css" rel="stylesheet" type="text/css"/>
+        <link async="" defer="" async href="<%=serverURL%>css/jquery-ui.css" rel="stylesheet" type="text/css"/>
+        <link async="" defer="" async href="<%=serverURL%>css/widgetSelect.css" rel="stylesheet" type="text/css"/>
 
-        <script src="<%=serverURL%>js/dinamico.js" type="text/javascript"></script>
+        <script async="" defer="" src="<%=serverURL%>js/dinamico.js" type="text/javascript"></script>
         <script src="<%=serverURL%>js/jquery.min_1.js" type="text/javascript"></script>
         <script src="<%=serverURL%>js/jquery-1.12.4.js" type="text/javascript"></script>
         <script src="<%=serverURL%>js/jquery-ui.js" type="text/javascript"></script>
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
-        <script src="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>
+        <script async="" defer="" src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+        <script async="" defer="" src="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>
 
         <!--datatables-->
-        <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/v/bs4/dt-1.10.18/datatables.min.css" />
-        <script type="text/javascript" src="https://cdn.datatables.net/v/bs4/dt-1.10.18/datatables.min.js"></script>
+        <link async="" defer="" rel="stylesheet" type="text/css" href="https://cdn.datatables.net/v/bs4/dt-1.10.18/datatables.min.css" />
+        <script async="" defer="" type="text/javascript" src="https://cdn.datatables.net/v/bs4/dt-1.10.18/datatables.min.js"></script>
         
         <!--datatables--> 
         
@@ -99,7 +99,9 @@
         <!--fin-->
 
         <script>
-            paginacion("pages/repositorioDocentes.html");
+            
+                paginacion("pages/repositorioDocentes.html");
+            
         </script>
 
         <script type="text/javascript">

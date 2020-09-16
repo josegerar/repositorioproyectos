@@ -32,7 +32,7 @@
         <hr class="hrInic">
         <form action="InsertDonac" method="post">
 
-            <div class="IniContCardsBusq" id="contenedores"style="margin-bottom: 100px;">
+            <div class="IniContCardsBusq" id="contenedores"style="margin-bottom: 100px; width: 90%; margin-left: 5%">
                 <table id="example"  data-order='[[ 5, "asc" ]]' data-page-length='10' class="table table-sm table-striped table-hover table-bordered">
                     <thead class="thead-dark">
                         <tr>
@@ -100,10 +100,14 @@
 <script type="text/javascript" >
     $(document).ready(function () {
         $('#example').DataTable({
-            "columnDefs": [{
-                    "targets": 0
-                }],
-            language: {
+            "columnDefs": [
+                {
+                    "targets": [0],
+                    "visible": false,
+                    "searchable": false
+                }
+            ],
+            "language": {
                 "sProcessing": "Procesando...",
                 "sLengthMenu": "Mostrar _MENU_ resultados",
                 "sZeroRecords": "No se encontraron resultados",
@@ -119,6 +123,9 @@
                     "sNext": "Siguiente",
                     "sPrevious": "Anterior"
                 }
+            },
+            fixedColumns: {
+                heightMatch: 'auto'
             }
         });
     });

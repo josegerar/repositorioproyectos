@@ -32,7 +32,7 @@
         </div>
         <hr class="hrInic">
 
-        <div class="IniContCardsBusq" id="contenedores"style="margin-bottom: 100px;">
+        <div class="IniContCardsBusq" id="contenedores"style="margin-bottom: 100px; width: 90%; margin-left: 5%">
             <table id="example"  data-order='[[ 5, "asc" ]]' data-page-length='10' class="table table-sm table-striped table-hover table-bordered">
                 <thead class="thead-dark">
                     <tr>
@@ -62,7 +62,7 @@
                         <td><%= leer.getString("numeroAtributos")%></td>
                         <td><a href="<%= leer.getString("archivoDatos")%>" >Descargar Archivo</a></td>
                 <form action="AprobarDenegar" onsubmit="return alertaR()">
-                    <td><textarea id="ta" name="observacion" onkeypress="validaCaractaer(event);" rows="4" cols="25" maxlength="200"></textarea></td>
+                    <td><textarea id="ta" name="observacion" onkeypress="validaCaractaer(event);" rows="2" cols="25" maxlength="200"></textarea></td>
                     <input type="hidden" id="id" name="id" class="btn btn-success" value="<%= leer.getString("idDonaciones")%>"/>
                     <input type="hidden" id="opcion" name="opcion" class="btn btn-success" value="2">
                     <input type="hidden" name="archivo" class="btn btn-success" value="<%= leer.getString("archivoDatos")%>">
@@ -127,9 +127,13 @@
 <script type="text/javascript" >
     $(document).ready(function () {
         $('#example').DataTable({
-            "columnDefs": [{
-                    "targets": 0
-                }],
+            "columnDefs": [
+                {
+                    "targets": [0],
+                    "visible": false,
+                    "searchable": false
+                }
+            ],
             language: {
                 "sProcessing": "Procesando...",
                 "sLengthMenu": "Mostrar _MENU_ resultados",
@@ -146,6 +150,9 @@
                     "sNext": "Siguiente",
                     "sPrevious": "Anterior"
                 }
+            },
+            fixedColumns: {
+                heightMatch: 'auto'
             }
         });
     });

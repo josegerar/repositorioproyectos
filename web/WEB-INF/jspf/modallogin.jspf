@@ -33,7 +33,7 @@
 
 <!-- ajax -->
 <script>
-    $(document).ready(function () {
+    $(function () {
         $('#envia').click(function (event) {
             var usuarioVar = $('#usuario').val();
             var claveVar = $('#clave').val();
@@ -63,7 +63,7 @@
 </script>
 <!--Cerrar Sesion-->
 <script>
-    $(document).ready(function () {
+    $(function () {
         $('#btncerrarsesion').click(function (event) {
             $.ajax({
                 url: "CerrarSesion",

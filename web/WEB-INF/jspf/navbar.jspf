@@ -120,11 +120,11 @@
 
 <script>
 
-    async function paginacion(pagina, atributos) {
-        console.log(this);
+    function paginacion(pagina, atributos) {
+        //console.log(this);
         const contentDiv = document.getElementById("contenidoPrincipal");
         
-        await $("#contenidoPrincipal").load(pagina, atributos);
+        $("#contenidoPrincipal").load(pagina, atributos);
         //console.log(history);
         //history.replaceState(null, "", pagina);
         
