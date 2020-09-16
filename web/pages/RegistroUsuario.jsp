@@ -248,7 +248,7 @@
             var ciudad_id = <%= IDciudad%>;
             //location.href = "http://" + window.location.host + "/PII/RegistroUsuario.jsp?provincia="+provincia_id+"";
             $.ajax({
-                url: "ciudad.jsp", //your jsp page name
+                url: "ciudadserlet", //your jsp page name
                 data: {provincia_id: provincia_id, ciudad_id: ciudad_id}, //sending request to state.jsp page.
                 method: "POST", //HTTP method.
                 success: function (data)

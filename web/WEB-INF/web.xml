@@ -28,6 +28,10 @@
         <servlet-name>RepositorioProyectosFiltros</servlet-name>
         <servlet-class>org.servlet.RepositorioProyectosFiltros</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>CiudadSerlet</servlet-name>
+        <servlet-class>org.servlet.CiudadSerlet</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>conex</servlet-name>
         <url-pattern>/conex</url-pattern>
@@ -55,6 +59,10 @@
     <servlet-mapping>
         <servlet-name>RepositorioProyectosFiltros</servlet-name>
         <url-pattern>/repositorio/proyectos/filtros</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>CiudadSerlet</servlet-name>
+        <url-pattern>/ciudadserlet</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>
