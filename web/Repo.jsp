@@ -78,7 +78,7 @@
                 String usuario = String.valueOf(sesion.getAttribute("usuario"));
                 String rol = String.valueOf(sesion.getAttribute("rol"));
                 String newPage = request.getParameter("newPage");
-                if(newPage == null ){
+                if (newPage == null) {
                     newPage = "repositorioDocentes.html";
                 }
             %>
@@ -102,7 +102,7 @@
         <!--fin-->
 
         <script>
-
+            console.log("<%=request.getParameter("newPage")%>");
             paginacion("<%=newPage%>");
 
         </script>
@@ -150,8 +150,15 @@
                         },
                         create: function () {
                             $(this).data('ui-autocomplete')._renderItem = function (ul, item) {
-                                return $('<li>').append('<label>' + item.label + '</label>').appendTo(ul);
+                                return $('<li>')
+                                        .attr("data-value", item.value)
+                                        .append('<label>' + item.label + '</label>')
+                                        .appendTo(ul);
                             };
+                        },
+                        focus: function( event, ui ) {
+                            $(this).val(ui.item.label);
+                            return false;
                         }
                     });
                 });

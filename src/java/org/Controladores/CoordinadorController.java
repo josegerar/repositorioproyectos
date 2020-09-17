@@ -24,11 +24,15 @@ public class CoordinadorController extends ConexionMySQL {
         PreparedStatement pst = null;
         ResultSet rs = null;
         String sql;
+        nombre = nombre.trim();
         try {
-            sql = "SELECT * FROM(SELECT idUsuario, nombre, apellido FROM usuario WHERE Rol_idRol=2) AS p WHERE  p.nombre LIKE ? OR p.apellido LIKE ?;";
+            sql = "SELECT * FROM(SELECT idUsuario, nombre, apellido FROM usuario WHERE Rol_idRol=2) AS p \n";
+            sql = sql.concat("WHERE  p.nombre LIKE ? OR p.apellido LIKE ? \n");
+            sql = sql.concat("OR CONCAT_WS(' ', p.nombre, p.apellido) LIKE ? ;");
             pst = getConnection().prepareStatement(sql);
             pst.setString(1, "%" + nombre + "%");
             pst.setString(2, "%" + nombre + "%");
+            pst.setString(3, "%" + nombre + "%");
             rs = pst.executeQuery();
             while (rs.next()) {
                 Usuario user = new Usuario();
@@ -59,11 +63,13 @@ public class CoordinadorController extends ConexionMySQL {
     public String insertCoordinadores(String user, String password, String nombre, String apellido, String cedula, String nacimiento, String email,
             String direccion, Integer nivelacademico, Integer idciudad, Integer idprofesion, Integer idinstitucion) {
         String sms = "";
-        if (existsCoordinador(cedula, email) != true) {
-            Integer estado;
-            PreparedStatement pst = null;
-            String sql;
-            try {
+        PreparedStatement pst = null;
+        try {
+            if (existsCoordinador(cedula, email) != true) {
+                Integer estado;
+                
+                String sql;
+
                 sql = "insert into usuario (nickName,password,nombre,apellido,cedula,fechaNacimiento,correo,direccion,nivelAcademico,Ciudad_idCiudad,Rol_idRol,Profesion_idProfesion,Institucion_idInstitucion) values (?,?,?,?,?,?,?,?,?,?,2,?,?);";
                 pst = getConnection().prepareStatement(sql);
                 pst.setString(1, user);
@@ -84,44 +90,11 @@ public class CoordinadorController extends ConexionMySQL {
                 } else {
                     sms = "No se ingresaron los datos, intente nuevamente";
                 }
-            } catch (SQLException e) {
-                sms = "A ocurrido un error al guardar la informacion";
-            } finally {
-                try {
-                    if (isConected()) {
-                        getConnection().close();
-                    }
-                    if (pst != null) {
-                        pst.close();
-                    }
-                } catch (SQLException e) {
-                    System.err.println(e.getMessage());
-                }
+            } else {
+                sms = "Ya existe un Coordinador registrado con ese No. de Identificacion y/o Email";
             }
-        } else {
-            sms = "Ya existe un Coordinador registrado con ese No. de Identificacion y/o Email";
-        }
-        return sms;
-    }
-
-    private boolean existsCoordinador(String identificacion, String email) {
-        boolean salida = false;
-        PreparedStatement pst = null;
-        ResultSet rs = null;
-        String sql;
-        int cont = 0;
-        try {
-            sql = "select count(*) from usuario where cedula = ? or correo = ?;";
-            pst = getConnection().prepareStatement(sql);
-            pst.setString(1, identificacion);
-            pst.setString(2, email);
-            rs = pst.executeQuery();
-            if (rs.next()) {
-                cont = rs.getInt(1);
-            }
-            salida = cont > 0;
-        } catch (SQLException ex) {
-            System.err.println(ex.getMessage());
+        } catch (SQLException e) {
+            sms = "A ocurrido un error al guardar la informacion";
         } finally {
             try {
                 if (isConected()) {
@@ -130,17 +103,35 @@ public class CoordinadorController extends ConexionMySQL {
                 if (pst != null) {
                     pst.close();
                 }
-                if (rs != null) {
-                    rs.close();
-                }
             } catch (SQLException e) {
                 System.err.println(e.getMessage());
             }
         }
-        return salida;
+
+        return sms;
     }
-    
-    public Usuario getCoordinadorProyecto(String idProyecto){
+
+    private boolean existsCoordinador(String identificacion, String email) throws SQLException {
+
+        PreparedStatement pst = null;
+        ResultSet rs = null;
+        String sql;
+        int cont = 0;
+
+        sql = "select count(*) from usuario where cedula = ? or correo = ?;";
+        pst = getConnection().prepareStatement(sql);
+        pst.setString(1, identificacion);
+        pst.setString(2, email);
+        rs = pst.executeQuery();
+        if (rs.next()) {
+            cont = rs.getInt(1);
+        }
+        pst.close();
+        rs.close();
+        return cont > 0;
+    }
+
+    public Usuario getCoordinadorProyecto(String idProyecto) {
         Usuario coordinador = new Usuario();
         PreparedStatement pst = null;
         ResultSet rs = null;

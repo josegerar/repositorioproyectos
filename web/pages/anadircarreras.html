@@ -15,15 +15,20 @@
             <div class="input-group mb-3">
                 <div class="input-group-prepend">
                     <span class="input-group-text" id="inputGroup-sizing-default2"  style="width: 200px;">Facultad</span>
+
                 </div>
+                <i class="fa fa-exclamation-triangle fa-2" style="color: red; margin: auto; display: none" aria-hidden="true"></i>
                 <input type="text" placeholder="Facultad a la que pertenece..." id="facultad" style="height: 40px;" name="facultad" class="form-control autocomplete-sql ob-blur-sql" onkeypress="return ValTexto(event)" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default">    
+
                 <button id="btn-abrir-popupFacultad" class="btn btn-primary btn-lg" style="margin-bottom: 0px; margin-top: 0px; margin-right: 0px; width: 70px; height: 40px; padding: 0; font-size: 15px;">Añadir</button>
+
             </div>
 
             <div class="input-group mb-3">
                 <div class="input-group-prepend">
                     <span class="input-group-text" id="inputGroup-sizing-default" style="width: 200px; ">Carrera</span>
                 </div>
+                <i class="fa fa-exclamation-triangle fa-2" style="color: red; margin: auto; display: none" aria-hidden="true"></i>
                 <input type="text" placeholder="Nombre de la carrera..." onpaste="return false" id="carrera" name="carrera" onkeypress="return ValTexto(event)" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default">
 
             </div>
@@ -46,7 +51,10 @@
             <div class="contenedor-inputs">
                 <table id="tableFacultad" style="padding: 0px; margin: auto;">
                     <tr>
-                        <td><input id="nombrefacultad" name="nombrefacultad" type="text" placeholder="Nombre de la facultad..." onkeypress="return ValTexto(event)"  style="width: 300px; height: 40px; margin-bottom: 5px;" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default" required minlength="1" maxlength="50" /></td>
+                        <td style="display: flex;">
+                            <i class="fa fa-exclamation-triangle fa-2" style="color: red; margin: auto; display: none" aria-hidden="true"></i>
+                            <input id="nombrefacultad" name="nombrefacultad" type="text" placeholder="Nombre de la facultad..." onkeypress="return ValTexto(event)"  style="width: 300px; height: 40px; margin-bottom: 5px;" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default" required minlength="1" maxlength="50" />
+                        </td>
 
                     </tr> 
                 </table>
@@ -85,49 +93,92 @@
 <script>
     $("#saveFacultad").click(function () {
         var jSon = {};
+        
         jSon.facultad = $("#nombrefacultad").val();
-        jSon.transact = "insert";
-        jSon.objeto = "facultad";
-        $.ajax({
-            type: "POST",
-            url: serverURL + "TransactFacultadAndCarrera",
-            data: jSon,
-            cache: false,
-            dataType: "json",
-            beforeSend: function (xhr) {
-            },
-            success: function (data, textStatus, jqXHR) {
-                alert(data);
-            },
-            error: function (jqXHR, textStatus, errorThrown) {
-                alert(jqXHR + "\n" + textStatus + "\n" + errorThrown);
-            }
-        });
+
+        if (jSon.facultad.length === 0) {
+            $("#nombrefacultad").prev().show();
+        } else {
+            
+            var button = this;
+            $(button).prop("disabled", true);
+            
+            $("#nombrefacultad").prev().hide();
+            
+            jSon.transact = "insert";
+            jSon.objeto = "facultad";
+            
+            $.ajax({
+                type: "POST",
+                url: serverURL + "TransactFacultadAndCarrera",
+                data: jSon,
+                cache: false,
+                dataType: "json",
+                beforeSend: function (xhr) {
+                    
+                },
+                success: function (data, textStatus, jqXHR) {
+                    $(button).prop("disabled", false);
+                    $("#nombrefacultad").val("");
+                    alert(data);
+                },
+                error: function (jqXHR, textStatus, errorThrown) {
+                    $(button).prop("disabled", false);
+                    alert(jqXHR + "\n" + textStatus + "\n" + errorThrown);
+                }
+            });
+        }
     });
 
     $("#guardarCarrera").click(function () {
+
         var jSon = {};
         jSon.carrera = $("#carrera").val();
-        jSon.facultad = $("#facultad").data("data").id_facultad;
-        jSon.transact = "insert";
-        jSon.objeto = "carrera";
-        $.ajax({
-            type: "POST",
-            url: serverURL + "TransactFacultadAndCarrera",
-            data: jSon,
-            cache: false,
-            dataType: "json",
-            beforeSend: function (xhr) {
+        var facultad = $("#facultad").data("data");
+        if (jSon.carrera.length === 0) {
+            $("#carrera").prev().show();
+        } else {
+            $("#carrera").prev().hide();
+        }
+        if (!facultad) {
+            $("#facultad").prev().show();
+        } else {
+            $("#facultad").prev().hide();
+        }
+        if (jSon.carrera.length > 0 && facultad) {
+            var button = this;
+            $(button).prop("disabled", true);
 
-            },
-            success: function (data) {
-                alert(data);
-            },
-            error: function (jqXHR, textStatus, errorThrown) {
-                alert(jqXHR + "\n" + textStatus + "\n" + errorThrown);
-            }
-        });
-        $("#facultad").val("");
-        $("#carrera").val("");
+            jSon.facultad = facultad.id_facultad;
+            jSon.transact = "insert";
+            jSon.objeto = "carrera";
+            $.ajax({
+                type: "POST",
+                url: serverURL + "TransactFacultadAndCarrera",
+                data: jSon,
+                cache: false,
+                dataType: "json",
+                beforeSend: function (xhr) {
+
+                },
+                success: function (data) {
+
+                    $("#facultad").val("");
+                    $("#carrera").val("");
+
+                    $("#facultad").data("data", null);
+                    $(button).prop("disabled", false);
+                    alert(data);
+
+
+                },
+                error: function (jqXHR, textStatus, errorThrown) {
+                    $(button).prop("disabled", false);
+                    alert(jqXHR + "\n" + textStatus + "\n" + errorThrown);
+
+                }
+            });
+
+        }
     });
 </script>
