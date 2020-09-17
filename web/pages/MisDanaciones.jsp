@@ -55,7 +55,7 @@
                         %>
                         <tr>
                             <td style="visibility: hidden" ><%= leer.getString("idDonaciones")%></td>
-                            <th scope="row"> <a class="nav-link" href="javascript:void(0)" onclick="paginacion('pages/Donar.jsp?id=<%= leer.getString("idDonaciones")%>&us=<%=sesion.getAttribute("usuario")%>')"><%= leer.getString("nombreConjuntoDatos")%></a></th>
+                            <th scope="row"> <a class="nav-link" href="javascript:void(0)" onclick="paginacion('donar.html?id=<%= leer.getString("idDonaciones")%>&us=<%=sesion.getAttribute("usuario")%>')"><%= leer.getString("nombreConjuntoDatos")%></a></th>
                             <td><%= leer.getString("abstracto")%></td>
                             <td><%= leer.getString("tarea")%></td>
                             <td><%= leer.getString("tipoDatos")%></td>

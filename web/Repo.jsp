@@ -65,9 +65,9 @@
         <!--datatables-->
         <link async="" defer="" rel="stylesheet" type="text/css" href="https://cdn.datatables.net/v/bs4/dt-1.10.18/datatables.min.css" />
         <script async="" defer="" type="text/javascript" src="https://cdn.datatables.net/v/bs4/dt-1.10.18/datatables.min.js"></script>
-        
+
         <!--datatables--> 
-        
+
     </head>
     <!--Cuando el usuario no ha seleccionado ningun filtro se muestra todas los dataset--> 
     <body >
@@ -77,7 +77,10 @@
                 HttpSession sesion = request.getSession(true);
                 String usuario = String.valueOf(sesion.getAttribute("usuario"));
                 String rol = String.valueOf(sesion.getAttribute("rol"));
-
+                String newPage = request.getParameter("newPage");
+                if(newPage == null ){
+                    newPage = "repositorioDocentes.html";
+                }
             %>
             <!-- NavBar -->
             <%@include file="WEB-INF/jspf/navbar.jspf" %>
@@ -99,9 +102,9 @@
         <!--fin-->
 
         <script>
-            
-                paginacion("pages/repositorioDocentes.html");
-            
+
+            paginacion("<%=newPage%>");
+
         </script>
 
         <script type="text/javascript">
