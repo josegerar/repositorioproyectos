@@ -8,7 +8,6 @@ package org.servlet;
 
 import java.io.IOException;
 import java.io.PrintWriter;
-import static java.lang.System.out;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -16,7 +15,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import org.DAO.ConexionMySQL;
-import org.Object.hash;;
+import org.Object.Encript;;
 
 /**
  *
@@ -70,7 +69,7 @@ public class LogUsuario extends HttpServlet {
         HttpSession sesion = request.getSession(true);
         String usuario = request.getParameter("usuario");
         String clave = request.getParameter("clave");
-        String contraseña=hash.sha1(clave);
+        String contraseña=Encript.sha1(clave);
         ConexionMySQL conex = new ConexionMySQL();
         String query="select idUsuario from Usuario where nickName='"+usuario+"'";
         int bandera= conex.validacion(query);

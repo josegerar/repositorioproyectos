@@ -8,11 +8,9 @@ package org.servlet;
 import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
-import java.io.PrintWriter;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.nio.file.StandardCopyOption;
-import java.sql.DriverManager;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.MultipartConfig;
 import javax.servlet.annotation.WebServlet;
@@ -41,7 +39,7 @@ public class SubirArchGener extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-       
+
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
@@ -68,34 +66,34 @@ public class SubirArchGener extends HttpServlet {
      * @throws IOException if an I/O error occurs
      */
     @Override
-    
+
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        
-          String variblesClase=request.getParameter("txtVariables");
-           String numRequer=request.getParameter("txtestimar");
-         try {
-                   
-        //file1 es el nombre de subir archivos
+
+        String variblesClase = request.getParameter("txtVariables");
+        String numRequer = request.getParameter("txtestimar");
+        try {
+
+            //file1 es el nombre de subir archivos
             Part filePart = request.getPart("file1"); // Retrieves <input type="file" name="file">
             String fileName = Paths.get(filePart.getSubmittedFileName()).getFileName().toString(); // MSIE fix.
             InputStream fileContent = filePart.getInputStream();
-           
-     File fichero = new File("C:\\Users\\cris_\\Desktop\\pivi\\Nueva carpeta\\PII\\web\\GenerarDatos",fileName );
-     String rut="C:/Users/cris_/Desktop/pivi/Nueva carpeta/PII/web/GenerarDatos/"+fileName;
-    //Llama a la conexion a R recordar que se necesita tener iniciado RServer en R investigar sobre R server
-     ConexionR con = new ConexionR();
-     con.conectar(rut, variblesClase, numRequer);
 
-    try (InputStream input = filePart.getInputStream()){
-        Files.copy(input, fichero.toPath(), StandardCopyOption.REPLACE_EXISTING);
-    }
+            File fichero = new File("C:\\Users\\cris_\\Desktop\\pivi\\Nueva carpeta\\PII\\web\\GenerarDatos", fileName);
+            String rut = "C:/Users/cris_/Desktop/pivi/Nueva carpeta/PII/web/GenerarDatos/" + fileName;
+            //Llama a la conexion a R recordar que se necesita tener iniciado RServer en R investigar sobre R server
+            ConexionR con = new ConexionR();
+            con.conectar(rut, variblesClase, numRequer);
 
-             //out.print("data in inserted");
-        } catch (Exception e) {
-           // out.print(e.getMessage());
+            try (InputStream input = filePart.getInputStream()) {
+                Files.copy(input, fichero.toPath(), StandardCopyOption.REPLACE_EXISTING);
+            }
+
+            //out.print("data in inserted");
+        } catch (IOException | ServletException e) {
+            // out.print(e.getMessage());
         }
-           request.getRequestDispatcher("DescargarDG.jsp").forward(request, response);
+        request.getRequestDispatcher("descargarDG.html").forward(request, response);
     }
 
     /**

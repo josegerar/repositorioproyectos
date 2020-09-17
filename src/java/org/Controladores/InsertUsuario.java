@@ -19,7 +19,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import org.Object.Usuario;
 import org.DAO.ConexionMySQL;
-import org.Object.hash;
+import org.Object.Encript;
 
 /**
  *
@@ -59,7 +59,7 @@ public class InsertUsuario extends HttpServlet {
             ConexionMySQL conex = new ConexionMySQL();
             String date = usuario.getFechaNacimiento() + " 00:00:00";
             boolean band = false;
-            String contraseña = hash.sha1(usuario.getPassword());
+            String contraseña = Encript.sha1(usuario.getPassword());
             String clave1 = request.getParameter("clave");
             String clave2 = request.getParameter("clave2");
 

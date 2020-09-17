@@ -14,7 +14,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import org.Controladores.CoordinadorController;
-import org.Object.hash;
+import org.Object.Encript;
 
 /**
  *
@@ -81,7 +81,7 @@ public class TransactCoordinador extends HttpServlet {
         //processRequest(request, response);
         String nickName = request.getParameter("user");
         String password = request.getParameter("password");
-        String contrasenia = hash.sha1(password);
+        String contrasenia = Encript.sha1(password);
         String nombre = request.getParameter("nombre");
         String apellido = request.getParameter("apellido");
         String cedula = request.getParameter("identificacion");
