@@ -1,5 +1,19 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <web-app version="3.1" xmlns="http://xmlns.jcp.org/xml/ns/javaee" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-app_3_1.xsd">
+    <filter>
+        <filter-name>LogFilter</filter-name>
+        <filter-class>org.servlet.filter.SessionFilter</filter-class>
+   
+        <init-param>
+            <param-name>test-param</param-name>
+            <param-value>Initialization Paramter</param-value>
+        </init-param>
+    </filter>
+
+    <filter-mapping>
+        <filter-name>LogFilter</filter-name>
+        <url-pattern>/*</url-pattern>
+    </filter-mapping>
     <servlet>
         <servlet-name>conex</servlet-name>
         <servlet-class>org.servlet.conex</servlet-class>
@@ -63,6 +77,70 @@
     <servlet-mapping>
         <servlet-name>CiudadSerlet</servlet-name>
         <url-pattern>/ciudadserlet</url-pattern>
+    </servlet-mapping>
+    <servlet>
+        <servlet-name>inicio</servlet-name>
+        <jsp-file>Repo.jsp</jsp-file>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>inicio</servlet-name>
+        <url-pattern>/index.html</url-pattern>
+    </servlet-mapping>
+    <servlet>
+        <servlet-name>aprobacion</servlet-name>
+        <jsp-file>/pages/Aprobacion.jsp</jsp-file>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>aprobacion</servlet-name>
+        <url-pattern>/pages/aprobacion.html</url-pattern>
+    </servlet-mapping>
+    <servlet>
+        <servlet-name>detallecd</servlet-name>
+        <jsp-file>/pages/DetalleCD.jsp</jsp-file>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>detallecd</servlet-name>
+        <url-pattern>/pages/detalleCD.html</url-pattern>
+    </servlet-mapping>
+    <servlet>
+        <servlet-name>donar</servlet-name>
+        <jsp-file>/pages/Donar.jsp</jsp-file>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>donar</servlet-name>
+        <url-pattern>/pages/donar.html</url-pattern>
+    </servlet-mapping>
+    <servlet>
+        <servlet-name>misdonaciones</servlet-name>
+        <jsp-file>/pages/MisDanaciones.jsp</jsp-file>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>misdonaciones</servlet-name>
+        <url-pattern>/pages/misDonaciones.html</url-pattern>
+    </servlet-mapping>
+    <servlet>
+        <servlet-name>registrousuario</servlet-name>
+        <jsp-file>/pages/RegistroUsuario.jsp</jsp-file>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>registrousuario</servlet-name>
+        <url-pattern>/pages/registroUsuario.html</url-pattern>
+    </servlet-mapping>
+    <servlet>
+        <servlet-name>detalleproyecto</servlet-name>
+        <jsp-file>/pages/detalleProyecto.jsp</jsp-file>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>registrousuario</servlet-name>
+        <url-pattern>/pages/detalleProyecto.html</url-pattern>
+    </servlet-mapping>
+    <servlet>
+        <servlet-name>descargardg</servlet-name>
+        <jsp-file>/pages/DescargarDG.jsp</jsp-file>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>descargardg</servlet-name>
+        <url-pattern>/pages/descargarDG.html</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>
