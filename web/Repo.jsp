@@ -74,10 +74,10 @@
         <div style="margin-bottom: 50px;">
             <!--Si esta logueado trae el nombre del usuario y el rol--> 
             <%
-                HttpSession sesion = request.getSession(true);
-                String usuario = String.valueOf(sesion.getAttribute("usuario"));
-                String rol = String.valueOf(sesion.getAttribute("rol"));
-                String newPage = request.getParameter("newPage");
+                HttpSession sesion = request.getSession();
+                Object usuario = sesion.getAttribute("usuario");
+                Object rol = sesion.getAttribute("rol");
+                Object newPage = sesion.getAttribute("newPage");
                 if (newPage == null) {
                     newPage = "repositorioDocentes.html";
                 }
@@ -102,9 +102,10 @@
         <!--fin-->
 
         <script>
-            console.log("<%=request.getParameter("newPage")%>");
-            paginacion("<%=newPage%>");
-
+            console.log("<%=newPage%>");
+            onload = function(){
+                paginacion("<%=newPage%>");
+            };
         </script>
 
         <script type="text/javascript">

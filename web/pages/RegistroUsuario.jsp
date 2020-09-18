@@ -13,6 +13,7 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <%
+    Object type = request.getParameter("type");
     String ID = "0";
     String NombreUsuario = "";
     String Apellido = "";
@@ -57,8 +58,11 @@
 </div>
 <!--Llama al servlet para insertar un usuario nuevo--> 
 <div class="regisContenedor" style="max-width: 800px; margin: auto;">
-
+    <% if (type.equals("perfil")) { %>
+    <p class="regisTitulo"> Mi perfil </p>
+    <%} else if (type.equals("registro")) {%>                        
     <p class="regisTitulo"> Registro </p>
+    <%}%>
     <form action="InsertUsuario" method="post" >
         <div>
             <div class="input-group mb-3">
@@ -209,6 +213,7 @@
     </form>
 </div>     
 <script>
+    console.log("<%=type%>");
     function Actualizar() {
         document.getElementById("nivelAcademico").selectedIndex = "<%= NivelAcademico%>";
         document.getElementById("idInstitucion").selectedIndex = "<%= IDinstitucion%>";

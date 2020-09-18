@@ -96,6 +96,8 @@ public class LogUsuario extends HttpServlet {
                 sesion.setAttribute("id",bandera);
                 sesion.setAttribute("usuario",usuario.trim());
                 sesion.setAttribute("rol",rol);
+                //sesion.setMaxInactiveInterval(60 * 60 * 60 * 1000);
+                sesion.setMaxInactiveInterval(60);
                  out.println("1");
             }
         }

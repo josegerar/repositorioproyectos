@@ -15,6 +15,7 @@ import javax.servlet.ServletRequest;
 import javax.servlet.ServletResponse;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 /**
  *
@@ -41,6 +42,7 @@ public class SessionFilter implements Filter {
         this.pages.add("donar.html");
         this.pages.add("detalleProyecto.html");
         this.pages.add("descargarDG.html");
+        this.pages.add("miPerfil.html");
     }
 
     @Override
@@ -56,9 +58,12 @@ public class SessionFilter implements Filter {
     public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain) throws IOException, ServletException {
         HttpServletRequest req = (HttpServletRequest) request;
         HttpServletResponse resp = (HttpServletResponse) response;
-        String usuario = (String) req.getSession().getAttribute("usuario");
+        HttpSession session = req.getSession(true);
+        String usuario = (String) session.getAttribute("usuario");
         String uri = req.getRequestURI();
         boolean isvalid = true;
+        boolean islogged = true;
+        //boolean isValidSession = this.isValidSession(session);
         String newPage = "";
         for (int i = 0; i < pages.size(); i++) {
             String page = pages.get(i);
@@ -71,8 +76,18 @@ public class SessionFilter implements Filter {
                 break;
             }
             if ((contextPathDef + page).equals(uri)) {
+                if (usuario == null) {
+                    if (i >= 3) {
+                        islogged = false;
+                    } else {
+                        newPage = page;
+                    }
+                } else {
+                    if(i != 2){
+                        newPage = page;
+                    }
+                }
                 isvalid = false;
-                newPage = page;
                 break;
             }
         }
@@ -80,15 +95,32 @@ public class SessionFilter implements Filter {
             chain.doFilter(request, response);
         } else {
             if (newPage.length() > 0) {
-                req.setAttribute("newPage", newPage);
+                req.getSession().setAttribute("newPage", newPage);
+            } else {
+                req.getSession().setAttribute("newPage", null);
             }
-            resp.sendRedirect("index.html");
+            if (islogged == true) {
+                //if (isValidSession == true || usuario == null) {
+                    request.getServletContext().getRequestDispatcher("/index.html").forward(req, resp);
+               // } else {
+                    //resp.sendRedirect("CerrarSesion");
+                    //request.getServletContext().getRequestDispatcher("/CerrarSesion").forward(req, resp);
+                //}
+            } else {
+                resp.sendRedirect("index.html");
+            }
         }
     }
 
     @Override
     public void destroy() {
 
+    }
+
+    public boolean isValidSession(HttpSession session) {
+        System.out.println(session.getCreationTime() + (session.getMaxInactiveInterval() * 1000));
+        System.out.println(session.getLastAccessedTime());
+        return (session.getCreationTime() + (session.getMaxInactiveInterval() * 1000)) > session.getLastAccessedTime();
     }
 
 }

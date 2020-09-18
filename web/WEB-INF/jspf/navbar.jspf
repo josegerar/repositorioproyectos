@@ -27,7 +27,7 @@
             <% if (sesion.getAttribute("usuario") != null) { %>
 
 
-            <% if (rol.equals("1")) { %>
+            <% if (rol != null && rol.equals("1")) { %>
             <li class="nav-item">
                 <a class="nav-link" href="javascript:void(0)" onclick="paginacion('anadircarreras.html')">
                     <i class="fa fa-newspaper-o" aria-hidden="true"></i>
@@ -47,7 +47,7 @@
 
 
             <li class="nav-item">
-                <a class="nav-link" href="javascript:void(0)" onclick="paginacion('registroUsuario.html')">
+                <a class="nav-link" href="javascript:void(0)" onclick="paginacion('miPerfil.html', {type: 'perfil'})">
                     <i class="fa fa-user-o" id="userli"></i>
                     Mi Perfil
 
@@ -78,7 +78,7 @@
             </li>
             <%}%>
 
-            <% if (rol.equals("1")) { %>
+            <% if (rol != null && rol.equals("1")) { %>
             <li class="nav-item">
                 <a class="nav-link " href="javascript:void(0)" onclick="paginacion('aprobacion.html')"><i class="fa fa-envelope-o"></i>Solicitudes</a>
             </li>
@@ -92,7 +92,7 @@
                     <% if (sesion.getAttribute("usuario") != null) {%>
                     <a class="nav-link"  id="user" > <i class="fa fa-user"></i><%=sesion.getAttribute("usuario")%></a>
                         <%} else {%>
-                    <a class="nav-link" href="javascript:void(0)" onclick="paginacion('registroUsuario.html')"> <i class="fa fa-user"></i>Registrarse</a>
+                    <a class="nav-link" href="javascript:void(0)" onclick="paginacion('registroUsuario.html', {type: 'registro'})"> <i class="fa fa-user"></i>Registrarse</a>
                     <%}%>
                 </li>
                 <li class="nav-item">
