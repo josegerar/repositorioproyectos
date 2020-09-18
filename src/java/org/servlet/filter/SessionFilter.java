@@ -63,7 +63,6 @@ public class SessionFilter implements Filter {
         String uri = req.getRequestURI();
         boolean isvalid = true;
         boolean islogged = true;
-        //boolean isValidSession = this.isValidSession(session);
         String newPage = "";
         for (int i = 0; i < pages.size(); i++) {
             String page = pages.get(i);
@@ -100,12 +99,7 @@ public class SessionFilter implements Filter {
                 req.getSession().setAttribute("newPage", null);
             }
             if (islogged == true) {
-                //if (isValidSession == true || usuario == null) {
                     request.getServletContext().getRequestDispatcher("/index.html").forward(req, resp);
-               // } else {
-                    //resp.sendRedirect("CerrarSesion");
-                    //request.getServletContext().getRequestDispatcher("/CerrarSesion").forward(req, resp);
-                //}
             } else {
                 resp.sendRedirect("index.html");
             }
@@ -116,11 +110,4 @@ public class SessionFilter implements Filter {
     public void destroy() {
 
     }
-
-    public boolean isValidSession(HttpSession session) {
-        System.out.println(session.getCreationTime() + (session.getMaxInactiveInterval() * 1000));
-        System.out.println(session.getLastAccessedTime());
-        return (session.getCreationTime() + (session.getMaxInactiveInterval() * 1000)) > session.getLastAccessedTime();
-    }
-
 }
