@@ -32,6 +32,7 @@ public class SessionFilter implements Filter {
         this.pages.add("repositorioDocentes.html");
         this.pages.add("repositorioProyectos.html");
         this.pages.add("registroUsuario.html");
+        this.pages.add("detalleProyecto.html");
         this.pages.add("anadircarreras.html");
         this.pages.add("anadirproyectos.html");
         this.pages.add("acuerdoDonacion.html");
@@ -40,7 +41,6 @@ public class SessionFilter implements Filter {
         this.pages.add("aprobacion.html");
         this.pages.add("detalleCD.html");
         this.pages.add("donar.html");
-        this.pages.add("detalleProyecto.html");
         this.pages.add("descargarDG.html");
         this.pages.add("miPerfil.html");
     }
@@ -68,7 +68,7 @@ public class SessionFilter implements Filter {
             String page = pages.get(i);
             if ((contextPathDef + containerPages + page).equals(uri)) {
                 if (usuario == null) {
-                    if (i >= 3) {
+                    if (i >= 4) {
                         isvalid = false;
                     }
                 }
@@ -76,7 +76,7 @@ public class SessionFilter implements Filter {
             }
             if ((contextPathDef + page).equals(uri)) {
                 if (usuario == null) {
-                    if (i >= 3) {
+                    if (i >= 4) {
                         islogged = false;
                     } else {
                         newPage = page;
