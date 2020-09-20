@@ -80,7 +80,7 @@
     </servlet-mapping>
     <servlet>
         <servlet-name>inicio</servlet-name>
-        <jsp-file>Repo.jsp</jsp-file>
+        <jsp-file>/Repo.jsp</jsp-file>
     </servlet>
     <servlet-mapping>
         <servlet-name>inicio</servlet-name>
