@@ -132,10 +132,10 @@
     </servlet-mapping>
     <servlet>
         <servlet-name>detalleproyecto</servlet-name>
-        <jsp-file>/pages/detalleProyecto.jsp</jsp-file>
+        <jsp-file>/pages/detalleproyecto.jsp</jsp-file>
     </servlet>
     <servlet-mapping>
-        <servlet-name>registrousuario</servlet-name>
+        <servlet-name>detalleproyecto</servlet-name>
         <url-pattern>/pages/detalleProyecto.html</url-pattern>
     </servlet-mapping>
     <servlet>
