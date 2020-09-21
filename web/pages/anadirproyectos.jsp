@@ -1,4 +1,17 @@
+<%@page import="org.Controladores.ProyectoController"%>
+<%@page import="org.Object.Proyecto"%>
+<%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
+
+<%
+    Proyecto p = null;
+    String type = request.getParameter("type");
+    if(type.equals("editar")){
+        p = new ProyectoController().getProyecto(request.getParameter("id"));
+    }
+    
+%>
+
 <div  style="width: 90%;margin-left: 5%; z-index: 10000000; background: #fff; ">
     <nav aria-label="breadcrumb" style="margin-top: 10px; width: 90%; margin-left: 5%;">
         <ol class="breadcrumb">
@@ -8,7 +21,12 @@
 </div>
 <div class="regisContenedor" style="max-width: 800px; margin: auto;">
 
-    <p class="regisTitulo"> Registro de Proyectos </p>
+    <% if (type.equals("anadir")) { %>
+    <p class="regisTitulo"> Registro de Proyecto </p>
+    <%} else if (type.equals("editar")) {%>                        
+    <p class="regisTitulo"> Editar de Proyecto </p>
+    <%}%>
+    
     <form>
         <div>
             <div class="input-group mb-3">
@@ -16,8 +34,15 @@
                     <span class="input-group-text" id="inputGroup-sizing-default2"  style="width: 200px; ">Coordinador</span>
                 </div>
                 <i class="fa fa-exclamation-triangle fa-2" style="color: red; margin: auto; display: none" aria-hidden="true"></i>
+                <% if (type.equals("editar")) { %>
+                <input type="text" placeholder="Escriba el coordinador..." value="<%=p.getCoordinador().getNombre()%>" id="coordinador" name="coordinador" class="form-control autocomplete-sql ob-blur-sql" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default">    
+                <script>
+                    $('#coordinador').data("data",{idUsuario:p.getCoordinador().getIdUsuario()});
+                </script>
+                <%}else {%>  
                 <input type="text" placeholder="Escriba el coordinador..." id="coordinador" name="coordinador" class="form-control autocomplete-sql ob-blur-sql" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default">    
-                <button id="btn-abrir-popup" class="btn btn-primary btn-lg" style="margin-bottom: 0px; margin-top: 0px; margin-right: 0px; width: 70px; height: 40px; padding: 0; font-size: 15px;">Añadir</button>
+                <%}%>
+                <button id="btn-abrir-popup" class="btn btn-primary btn-lg" style="margin-bottom: 0px; margin-top: 0px; margin-right: 0px; width: 70px; height: 40px; padding: 0; font-size: 15px;">A&ntilde;adir</button>
             </div>
 
             <table id="general" style="width: 15px; height: 15px; margin-bottom: 10px;">
@@ -33,7 +58,7 @@
                                 </table>
                             </div>
                         </td>
-                        <td><button id="btn-abrir-popup2" class="btn btn-primary btn-lg" style="margin-bottom: 0px; margin-top: 0px; width: 70px; height: 40px; padding: 0; font-size: 15px;">Añadir</button></td>
+                        <td><button id="btn-abrir-popup2" class="btn btn-primary btn-lg" style="margin-bottom: 0px; margin-top: 0px; width: 70px; height: 40px; padding: 0; font-size: 15px;">A&ntilde;adir</button></td>
                 <script>
                     //Script para generar Autores
                     var cont1 = 0;
@@ -78,26 +103,39 @@
                     <span class="input-group-text" id="inputGroup-sizing-default" style="width: 200px; ">Titulo</span>
                 </div>
                 <i class="fa fa-exclamation-triangle fa-2" style="color: red; margin: auto; display: none" aria-hidden="true"></i>
+                 <% if (type.equals("editar")) { %>
+                <input type="text" placeholder="Escriba el titulo..." value="<%=p.getTitulo()%>"  onpaste="return false" id="titulo" name="titulo" class="form-control autocomplete-sql ob-blur-sql" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default">
+                
+                <%}else {%> 
                 <input type="text" placeholder="Escriba el titulo..." onpaste="return false" id="titulo" name="titulo" class="form-control autocomplete-sql ob-blur-sql" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default">
-
+                <%}%>
             </div>
 
-
+            
             <div class="input-group mb-3">
                 <i class="fa fa-exclamation-triangle fa-2" style="color: red; margin: auto; display: none" aria-hidden="true"></i>
                 <select id="modulo" name="modulo" class="custom-select">
                     <option value="0" selected>Elija el Modulo...</option>
-                    <option value="1">1er Semestre</option>
-                    <option value="2">2do Semestre</option>
-                    <option value="3">3er Semestre</option>
-                    <option value="4">4to Semestre</option>   
-                    <option value="5">5to Semestre</option>   
-                    <option value="6">6to Semestre</option>   
-                    <option value="7">7mo Semestre</option>   
-                    <option value="8">8vo Semestre</option>   
-                    <option value="9">9no Semestre</option>   
+                    <option value="1">1 Semestre</option>
+                    <option value="2">2 Semestre</option>
+                    <option value="3">3 Semestre</option>
+                    <option value="4">4 Semestre</option>   
+                    <option value="5">5 Semestre</option>   
+                    <option value="6">6 Semestre</option>   
+                    <option value="7">7 Semestre</option>   
+                    <option value="8">8 Semestre</option>   
+                    <option value="9">9 Semestre</option>   
                 </select>
-
+                <%if (type.equals("editar")) {%>
+                <script>
+                    $("#modulo option").each(function(){
+                        if ($(this).text() === <%=p.getSemestre()%> ){        
+                         $("#modulo option[value="+ $(this).val() +"]").attr("selected",true);
+                        }
+                     });
+                </script>
+                 <%}%> 
+                 
                 <div class="input-group-append">
                     <label class="input-group-text" for="inputGroupSelect02" style="width: 170px;">Modulo</label>
                 </div>             
@@ -111,7 +149,7 @@
                     <option value="SPA">Segundo Periodo Academico</option>  
                 </select>
                 <i class="fa fa-exclamation-triangle fa-2" style="color: red; margin: auto; display: none" aria-hidden="true"></i>
-                <input type="number" placeholder="Elija el año..." onpaste="return false" min="1970" max="2050" maxlength="2050" minlength="1970" onkeyUp="return ValNumero(this);" id="anio" name="anio" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default">
+                <input type="number" placeholder="Elija el a&ntilde;o..." onpaste="return false" min="1970" max="2050" maxlength="2050" minlength="1970" onkeyUp="return ValNumero(this);" id="anio" name="anio" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default">
                 <div class="input-group-append">
                     <label class="input-group-text" for="inputGroupSelect02" style="width: 170px;">Periodo Academico</label>
                 </div>             
@@ -246,11 +284,11 @@
                     <tr>
                         <td>
                             <i class="fa fa-exclamation-triangle fa-2" style="color: red; margin: auto; display: none; float: left;" aria-hidden="true"></i>
-                            <input id="cordemail" name="cordemail" type="text" style="width: 300px; height: 40px; margin-bottom: 5px;" required minlength="8" maxlength="100" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default" placeholder="Correo electrónico..."/>
+                            <input id="cordemail" name="cordemail" type="text" style="width: 300px; height: 40px; margin-bottom: 5px;" required minlength="8" maxlength="100" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default" placeholder="Correo elect&oacute;nico..."/>
                         </td>
                         <td>
                             <i class="fa fa-exclamation-triangle fa-2" style="color: red; margin: auto; display: none; float: left;" aria-hidden="true"></i>
-                            <input id="corddireccion" name="corddireccion" type="text" style="width: 300px; height: 40px; margin-bottom: 5px;" required minlength="10" maxlength="100" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default" placeholder="Dirección..."/>
+                            <input id="corddireccion" name="corddireccion" type="text" style="width: 300px; height: 40px; margin-bottom: 5px;" required minlength="10" maxlength="100" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default" placeholder="Direcci&oacute;n..."/>
                         </td>
                     </tr>
                     <tr>
@@ -266,18 +304,18 @@
                     <tr>
                         <td>
                             <i class="fa fa-exclamation-triangle fa-2" style="color: red; margin: auto; display: none; float: left;" aria-hidden="true"></i>
-                            <input id="cordprofesion" name="profesion" onkeypress="return ValTexto(event)"  type="text" style="width: 300px; height: 40px; margin-bottom: 5px;"  class="form-control autocomplete-sql ob-blur-sql" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default" placeholder="Escriba la profesión..."/>
+                            <input id="cordprofesion" name="profesion" onkeypress="return ValTexto(event)"  type="text" style="width: 300px; height: 40px; margin-bottom: 5px;"  class="form-control autocomplete-sql ob-blur-sql" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default" placeholder="Escriba la profesi&oacute;n..."/>
                         </td>
                         <td>
                             <i class="fa fa-exclamation-triangle fa-2" style="color: red; margin: auto; display: none; float: left;" aria-hidden="true"></i>
-                            <input id="cordinstitucion" name="institucion" onkeypress="return ValTexto(event)"  type="text" style="width: 300px; height: 40px; margin-bottom: 5px;" class="form-control autocomplete-sql ob-blur-sql" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default" placeholder="Institución a que pertenece..."/>
+                            <input id="cordinstitucion" name="institucion" onkeypress="return ValTexto(event)"  type="text" style="width: 300px; height: 40px; margin-bottom: 5px;" class="form-control autocomplete-sql ob-blur-sql" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default" placeholder="Instituci&oacute;n a que pertenece..."/>
                         </td>
                     </tr>
                 </table>
                 <br/>
                 <i class="fa fa-exclamation-triangle fa-2" style="color: red; margin: auto; display: none; float: left;" aria-hidden="true"></i>
                 <select id="cordlevelacademico" name="cordlevelacademico" class="custom-select" style="font-size: 14px;; width: 250px; margin-bottom: 20px;">
-                    <option value="" selected>Elija el Nivel académico...</option>
+                    <option value="" selected>Elija el Nivel acad&eacute;mico...</option>
                     <option value="3">Tercer nivel</option>
                     <option value="4">Cuarto nivel</option>
                 </select>
@@ -336,7 +374,7 @@
                     <tr>
                         <td>
                             <i class="fa fa-exclamation-triangle fa-2" style="color: red; margin: auto; display: none; float: left;" aria-hidden="true"></i>
-                            <input id="autoremail" name="autoremail" type="text" style="width: 300px; height: 40px; margin-bottom: 5px;" required minlength="8" maxlength="100" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default" placeholder="Correo electrónico..."/>
+                            <input id="autoremail" name="autoremail" type="text" style="width: 300px; height: 40px; margin-bottom: 5px;" required minlength="8" maxlength="100" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default" placeholder="Correo electr&oacute;nico..."/>
                         </td>
                         <td>
                             <i class="fa fa-exclamation-triangle fa-2" style="color: red; margin: auto; display: none; float: left;" aria-hidden="true"></i>

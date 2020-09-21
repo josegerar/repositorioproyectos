@@ -24,8 +24,17 @@
             <div style="display: flex; flex-wrap: wrap; font-size: 30px; font-weight: 700; text-transform: uppercase;">
                 <p style="margin-right: 7px;">Descargar proyecto</p>
             </div>
-            <div >
-                <a class="page-link" download="" style="margin-bottom: 5px;" href="<%=p.getUrl()%>">Descargar</a>
+            <div style="display: flex;">
+                <!--<a class="btn btn-primary btn-lg" download="" style="margin-bottom: 5px;" href="<%=p.getUrl()%>">Descargar</a>
+                <a class="btn btn-primary btn-lg" style="margin-bottom: 5px;" href="<%=p.getUrl()%>">Editar</a>-->
+                <a class="nav-link form-control" style="color: black; text-align: center;" download="" href="<%=p.getUrl()%>">
+                    <i class="fa fa-home"></i>
+                    Descargar
+                </a>
+                <a class="nav-link form-control" style="color: black; text-align: center;" href="javascript:void(0)" onclick="paginacion('editarProyecto.html', {id:<%=p.getId()%>, type:'editar'})">
+                    <i class="fa fa-home"></i>
+                    Editar
+                </a>
             </div>
             <div>
                 <p class="iniCabTitulo" style="text-align: justify;">Titulo:</p>

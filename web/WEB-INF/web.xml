@@ -146,6 +146,18 @@
         <servlet-name>descargardg</servlet-name>
         <url-pattern>/pages/descargarDG.html</url-pattern>
     </servlet-mapping>
+    <servlet>
+        <servlet-name>anadirproyectos</servlet-name>
+        <jsp-file>/pages/anadirproyectos.jsp</jsp-file>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>anadirproyectos</servlet-name>
+        <url-pattern>/pages/anadirproyectos.html</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>anadirproyectos</servlet-name>
+        <url-pattern>/pages/editarProyecto.html</url-pattern>
+    </servlet-mapping>
     <session-config>
         <session-timeout>
             30

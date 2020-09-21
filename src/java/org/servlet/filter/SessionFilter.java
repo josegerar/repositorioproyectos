@@ -43,6 +43,7 @@ public class SessionFilter implements Filter {
         this.pages.add("donar.html");
         this.pages.add("descargarDG.html");
         this.pages.add("miPerfil.html");
+        this.pages.add("editarProyecto.html");
     }
 
     @Override

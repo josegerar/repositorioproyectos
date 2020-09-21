@@ -38,10 +38,10 @@
             <%}%>
             
             <li class="nav-item">
-                <a class="nav-link" href="javascript:void(0)" onclick="paginacion('anadirproyectos.html')" >
+                <a class="nav-link" href="javascript:void(0)" onclick="paginacion('anadirproyectos.html', {type: 'anadir'})" >
                     <i class="fa fa-product-hunt" aria-hidden="true"></i>
                     Añadir proyecto
-
+                    
                 </a>
             </li>
 
