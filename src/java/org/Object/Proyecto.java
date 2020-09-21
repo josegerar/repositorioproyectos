@@ -28,6 +28,10 @@ public class Proyecto {
     ArrayList<Autor> autores;
     ArrayList<Variable> variables;
 
+    public Proyecto(Integer id) {
+        this.id = id;
+    }
+
     public Proyecto(Integer id, String titulo) {
         this.id = id;
         this.titulo = titulo;

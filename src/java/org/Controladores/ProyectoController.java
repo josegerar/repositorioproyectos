@@ -242,46 +242,51 @@ public class ProyectoController extends ConexionMySQL {
     public String insertProyectos(Proyecto proyecto) {
         String sms = "";
         Integer lastId;
-        if (existsProyecto(proyecto.getTitulo(), proyecto.getObjetivo(), proyecto.getResumen()) != true) {
-            Integer estado;
-            PreparedStatement pst = null;
-            String query;
-            try {
-                query = "insert into proyecto_integrador (fecha_registro, titulo, modulo, periodo_lectivo, objetivo, resumen, url_proyecto, id_usuario) values (now(),?,?,?,?,?,?,?);";
-                pst = getConnection().prepareStatement(query);
-                pst.setString(1, proyecto.getTitulo());
-                pst.setInt(2, Integer.parseInt(proyecto.getSemestre()));
-                pst.setString(3, proyecto.getPeriodo() + " " + proyecto.getAnio());
-                pst.setString(4, proyecto.getObjetivo());
-                pst.setString(5, proyecto.getResumen());
-                pst.setString(6, proyecto.getUrl());
-                pst.setInt(7, proyecto.getCoordinador().getIdUsuario());
-                estado = pst.executeUpdate();
-                if (estado > 0) {
-                    lastId = this.getLastIdProyecto();
-                    this.insertAutorProyecto(proyecto.getAutores(), lastId);
-                    new VariableController().insertVariableProyecto(proyecto.getVariables(), lastId);
-                    sms = "Proyecto registrado exitosamente";
-                } else {
-                    sms = "No se ingresaron los datos, intente nuevamente";
-                }
-            } catch (SQLException sqle) {
-                sms = sms + "SQLState: " + sqle.getSQLState() + "SQLErrorCode: " + sqle.getErrorCode() + sqle.getMessage();
-            } finally {
+        if (proyecto != null) {
+            if (existsProyecto(proyecto.getTitulo(), proyecto.getObjetivo(), proyecto.getResumen()) != true) {
+                Integer estado;
+                PreparedStatement pst = null;
+                String query;
                 try {
-                    if (isConected()) {
-                        getConnection().close();
+                    query = "insert into proyecto_integrador (fecha_registro, titulo, modulo, periodo_lectivo, objetivo, resumen, url_proyecto, id_usuario) values (now(),?,?,?,?,?,?,?);";
+                    pst = getConnection().prepareStatement(query);
+                    pst.setString(1, proyecto.getTitulo());
+                    pst.setInt(2, Integer.parseInt(proyecto.getSemestre()));
+                    pst.setString(3, proyecto.getPeriodo() + " " + proyecto.getAnio());
+                    pst.setString(4, proyecto.getObjetivo());
+                    pst.setString(5, proyecto.getResumen());
+                    pst.setString(6, proyecto.getUrl());
+                    pst.setInt(7, proyecto.getCoordinador().getIdUsuario());
+                    estado = pst.executeUpdate();
+                    if (estado > 0) {
+                        lastId = this.getLastIdProyecto();
+                        this.insertAutorProyecto(proyecto.getAutores(), lastId);
+                        new VariableController().insertVariableProyecto(proyecto.getVariables(), lastId);
+                        sms = "Proyecto registrado exitosamente";
+                    } else {
+                        sms = "No se ingresaron los datos, intente nuevamente";
                     }
-                    if (pst != null) {
-                        pst.close();
+                } catch (SQLException sqle) {
+                    sms = sms + "SQLState: " + sqle.getSQLState() + "SQLErrorCode: " + sqle.getErrorCode() + sqle.getMessage();
+                } finally {
+                    try {
+                        if (isConected()) {
+                            getConnection().close();
+                        }
+                        if (pst != null) {
+                            pst.close();
+                        }
+                    } catch (SQLException e) {
+                        System.err.println(e.getMessage());
                     }
-                } catch (SQLException e) {
-                    System.err.println(e.getMessage());
                 }
+            } else {
+                sms = "Ya existe un proyecto registrado con los datos de titulo y/o objetivo y/o resumen";
             }
         } else {
-            sms = "Ya existe un proyecto registrado con los datos de titulo y/o objetivo y/o resumen";
+            sms = "Proyecto a guardar esta vacio o nulo";
         }
+
         return sms;
     }
 

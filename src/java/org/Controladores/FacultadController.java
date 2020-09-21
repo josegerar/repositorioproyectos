@@ -4,6 +4,7 @@
  * and open the template in the editor.
  */
 package org.Controladores;
+
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -15,10 +16,9 @@ import org.Object.Facultad;
  *
  * @author crist
  */
-
 public class FacultadController extends ConexionMySQL {
-    
-    public ArrayList<Facultad> getFacultades (String nombre) {
+
+    public ArrayList<Facultad> getFacultades(String nombre) {
         ArrayList<Facultad> facultades = new ArrayList<>();
         PreparedStatement pst = null;
         ResultSet rs = null;
@@ -26,7 +26,7 @@ public class FacultadController extends ConexionMySQL {
         try {
             sql = "select * from facultad where nombre_facultad like ?;";
             pst = getConnection().prepareStatement(sql);
-            pst.setString(1, "%"+nombre+"%");
+            pst.setString(1, "%" + nombre + "%");
             rs = pst.executeQuery();
             while (rs.next()) {
                 Facultad facultad = new Facultad();
@@ -53,8 +53,7 @@ public class FacultadController extends ConexionMySQL {
         }
         return facultades;
     }
-    
-    
+
     public ArrayList<Facultad> getFacultades() {
         ArrayList<Facultad> facultades = new ArrayList<>();
         PreparedStatement pst = null;
@@ -89,8 +88,8 @@ public class FacultadController extends ConexionMySQL {
         }
         return facultades;
     }
-    
-    private boolean existsFacultad (String facultad) {
+
+    private boolean existsFacultad(String facultad) {
         boolean salida = false;
         PreparedStatement pst = null;
         ResultSet rs = null;
@@ -101,7 +100,7 @@ public class FacultadController extends ConexionMySQL {
             pst = getConnection().prepareStatement(sql);
             pst.setString(1, facultad);
             rs = pst.executeQuery();
-            if(rs.next()) { 
+            if (rs.next()) {
                 cont = rs.getInt(1);
             }
             if (cont > 0) {
@@ -128,40 +127,44 @@ public class FacultadController extends ConexionMySQL {
         }
         return salida;
     }
-    
-    public String insertFacultad (String facultad){
+
+    public String insertFacultad(String facultad) {
         String sms = "";
-        if(existsFacultad(facultad) != true){
-            Integer estado = 0;
-            PreparedStatement pst = null;
-            String sql = "";
-            try {
-                sql = "insert into facultad (nombre_facultad) values (?);";
-                pst = getConnection().prepareStatement(sql);
-                pst.setString(1, facultad);
-                estado = pst.executeUpdate();
-                if (estado > 0 ) {
-                    sms = "Facultad registrada exitosamente";
-                } else {
-                    sms = "No se ingresaron los datos, intente nuevamente";
+        if (facultad != null && facultad.length() > 0) {
+            if (existsFacultad(facultad) != true) {
+                Integer estado = 0;
+                PreparedStatement pst = null;
+                String sql = "";
+                try {
+                    sql = "insert into facultad (nombre_facultad) values (?);";
+                    pst = getConnection().prepareStatement(sql);
+                    pst.setString(1, facultad);
+                    estado = pst.executeUpdate();
+                    if (estado > 0) {
+                        sms = "Facultad registrada exitosamente";
+                    } else {
+                        sms = "No se ingresaron los datos, intente nuevamente";
+                    }
+                } catch (SQLException sqle) {
+                    sms = sms + "SQLState: " + sqle.getSQLState() + "SQLErrorCode: " + sqle.getErrorCode();
+                    sqle.printStackTrace();
+                } catch (Exception e) {
+                    e.printStackTrace();
+                } finally {
+                    if (getConnection() != null) {
+                        try {
+                            pst.close();
+                            close();
+                        } catch (Exception e) {
+                            e.printStackTrace();
+                        }
+                    }
                 }
-            } catch (SQLException sqle){
-                sms = sms + "SQLState: " + sqle.getSQLState() + "SQLErrorCode: " + sqle.getErrorCode();
-                sqle.printStackTrace();
-             } catch (Exception e){
-                e.printStackTrace();
-             } finally {
-                if (getConnection() != null) {
-                   try{
-                      pst.close();
-                      close();
-                   } catch(Exception e){
-                      e.printStackTrace();
-                   }
-                }
-             } 
+            } else {
+                sms = "Ya existe una Facultad registrado con ese nombre";
+            }
         } else {
-            sms = "Ya existe una Facultad registrado con ese nombre";
+            sms = "Valor de ingreso vacio o nulo";
         }
         return sms;
     }
