@@ -88,7 +88,7 @@ public class ProyectoController extends ConexionMySQL {
                 proyecto.setObjetivo(rs.getString("objetivo"));
                 proyecto.setUrl(rs.getString("url_proyecto"));
                 proyecto.setTitulo(rs.getString("titulo"));
-                proyecto.setSemestre(rs.getInt("modulo") + " semestre");
+                proyecto.setSemestre(String.valueOf(rs.getInt("modulo")));
                 proyecto.setPeriodo(rs.getString("periodo_lectivo"));
                 proyecto.setResumen(rs.getString("resumen"));
                 proyectos.add(proyecto);
@@ -319,6 +319,66 @@ public class ProyectoController extends ConexionMySQL {
         if (pst != null) {
             pst.close();
         }
+    }
+
+    public String updateProyecto(Proyecto proyecto) {
+        String sms = "";
+        PreparedStatement pst = null;
+        String query = "";
+        query = query.concat("UPDATE proyecto_integrador \n");
+        query = query.concat("	SET \n");
+        query = query.concat("	titulo = ?, \n");
+        query = query.concat("	modulo = ?,  \n");
+        query = query.concat("	periodo_lectivo = ?, \n");
+        query = query.concat("	objetivo = ?,  \n");
+        query = query.concat("	resumen = ?,  \n");
+        query = query.concat("	url_proyecto = ?, \n");
+        query = query.concat("	id_usuario = ? \n");
+        query = query.concat("	WHERE \n");
+        query = query.concat("	id_proyecto = ? ;");
+        try {
+            pst = getConnection().prepareStatement(query);
+            pst.setString(1, proyecto.getTitulo());
+            pst.setInt(2, Integer.parseInt(proyecto.getSemestre()));
+            pst.setString(3, proyecto.getPeriodo() + " " + proyecto.getAnio());
+            pst.setString(4, proyecto.getObjetivo());
+            pst.setString(5, proyecto.getResumen());
+            pst.setString(6, proyecto.getUrl());
+            pst.setInt(7, proyecto.getCoordinador().getIdUsuario());
+            pst.setInt(8, proyecto.getId());
+            Integer estado = pst.executeUpdate();
+            if (estado > 0) {
+                this.updateAutorProyecto(proyecto.getAutores(), proyecto.getId());
+                new VariableController().updateVariableProyecto(proyecto.getVariables(), proyecto.getId());
+                sms = "Proyecto actualizado exitosamente";
+            } else {
+                sms = "No se actualizaron los datos, intente nuevamente";
+            }
+        } catch (SQLException sqle) {
+            sms = sms + "SQLState: " + sqle.getSQLState() + "SQLErrorCode: " + sqle.getErrorCode() + sqle.getMessage();
+        } finally {
+            try {
+                if (isConected()) {
+                    getConnection().close();
+                }
+                if (pst != null) {
+                    pst.close();
+                }
+            } catch (SQLException e) {
+                System.err.println(e.getMessage());
+            }
+        }
+        return sms;
+    }
+
+    private void updateAutorProyecto(ArrayList<Autor> autores, Integer id) throws SQLException {
+        String query = "DELETE FROM proyecto_autor WHERE id_proyecto = ?;";
+        PreparedStatement pst;
+        pst = getConnection().prepareStatement(query);
+        pst.setInt(1, id);
+        pst.executeUpdate();
+        this.insertAutorProyecto(autores, id);
+        pst.close();
     }
 
 }

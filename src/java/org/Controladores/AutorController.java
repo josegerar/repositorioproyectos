@@ -25,10 +25,13 @@ public class AutorController extends ConexionMySQL {
         String sql;
 
         try {
-            sql = "SELECT * FROM(SELECT id_autor, nombre, apellido FROM autor) AS p WHERE p.nombre LIKE ? OR p.apellido LIKE ?;";
+            sql = "SELECT * FROM(SELECT id_autor, nombre, apellido FROM autor) AS p \n";
+            sql = sql.concat("WHERE p.nombre LIKE ? OR p.apellido LIKE ? \n");
+            sql = sql.concat("OR CONCAT_WS(' ', p.nombre, p.apellido) LIKE ? ;");
             pst = getConnection().prepareStatement(sql);
             pst.setString(1, "%" + nombre + "%");
             pst.setString(2, "%" + nombre + "%");
+            pst.setString(3, "%" + nombre + "%");
             rs = pst.executeQuery();
             while (rs.next()) {
                 Autor autor = new Autor();

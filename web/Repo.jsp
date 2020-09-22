@@ -103,9 +103,9 @@
 
         <script>
             console.log("<%=newPage%>");
-            onload = function(){
+            document.addEventListener("DOMContentLoaded", function (event) {
                 paginacion("<%=newPage%>");
-            };
+            });
         </script>
 
         <script type="text/javascript">

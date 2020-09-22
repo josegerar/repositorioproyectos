@@ -9,11 +9,13 @@ import com.google.gson.JsonArray;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
+import com.google.gson.JsonSyntaxException;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.PrintWriter;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import javax.servlet.ServletException;
@@ -96,6 +98,7 @@ public class TransactProyecto extends HttpServlet {
         Proyecto proyecto = new Proyecto();
         String sms = "";
         PrintWriter out = response.getWriter();
+        JsonParser parser = new JsonParser();
         boolean isMultipart = ServletFileUpload.isMultipartContent(request);
         if (isMultipart) {
             ServletFileUpload upload = new ServletFileUpload();
@@ -103,10 +106,13 @@ public class TransactProyecto extends HttpServlet {
                 FileItemIterator iter = upload.getItemIterator(request);
                 while (iter.hasNext()) {
                     FileItemStream item = iter.next();
-                     String name = item.getFieldName();
+                    String name = item.getFieldName();
                     InputStream stream = item.openStream();
                     if (item.isFormField()) {
                         switch (name) {
+                            case "id":
+                                proyecto.setId(Integer.parseInt(Streams.asString(stream)));
+                                break;
                             case "titulo":
                                 proyecto.setTitulo(Streams.asString(stream));
                                 break;
@@ -129,49 +135,62 @@ public class TransactProyecto extends HttpServlet {
                                 proyecto.setCoordinador(new Usuario(Integer.parseInt(Streams.asString(stream))));
                                 break;
                             case "autores":
-                                String[] v = Streams.asString(stream).split(",");
-                                ArrayList<Autor> autor = new ArrayList<>();
-                                for (String i : v) {
-                                    autor.add(new Autor(Integer.parseInt(i)));
-                                }   proyecto.setAutores(autor);
+                                ArrayList<Autor> autores = new ArrayList<>();
+                                JsonArray gsonArrAutores = parser.parse(Streams.asString(stream)).getAsJsonArray();
+                                for (JsonElement gsonArrAutor : gsonArrAutores) {
+                                    Integer idAutor = gsonArrAutor.getAsInt();
+                                    autores.add(new Autor(idAutor));
+                                }
+                                proyecto.setAutores(autores);
                                 break;
                             case "variables":
                                 ArrayList<Variable> variableArray = new ArrayList<>();
-                                JsonParser parser = new JsonParser();
                                 JsonArray gsonArrClases = parser.parse(Streams.asString(stream)).getAsJsonArray();
                                 for (JsonElement gsonArrClase : gsonArrClases) {
                                     Variable variable = new Variable();
                                     JsonObject gsonObj = gsonArrClase.getAsJsonObject();
+                                    if (gsonObj.get("id") != null) {
+                                        variable.setId(gsonObj.get("id").getAsInt());
+                                    }
                                     String vv = gsonObj.get("valorvariable").getAsString();
                                     String tv = gsonObj.get("tipovariable").getAsString();
                                     variable.setVariable(vv);
                                     variable.setTipo(tv);
                                     variableArray.add(variable);
-                                }   proyecto.setVariables(variableArray);
+                                }
+                                proyecto.setVariables(variableArray);
                                 break;
                             default:
                                 break;
                         }
                     } else {
-                        name = item.getName();
-                        if (name != null && !"".equals(name)) {
-                            String fileName = new File(item.getName()).getName();
-                            String[] extencion = fileName.split("\\.");
-                            String ext = extencion[extencion.length - 1];
-                            Date date = new Date();
-                            String ruta = "/archivos/" + proyecto.getTitulo() + "." + ext;
-                            ruta = ruta.replace(" ", "_");
-                            File file = new File(getServletContext().getRealPath(ruta));
-                            FileOutputStream fos = new FileOutputStream(file);
-                            long fileSize = Streams.copy(stream, fos, true);
-                            proyecto.setUrl("/PII" + ruta);
+                        String fileName = new File(item.getName()).getName();
+                        String[] fileNamearr = fileName.split("\\.");
+                        String ext = fileNamearr[fileNamearr.length - 1];
+                        String archivo = fileName.substring(0, fileName.length() - ext.length() - 1);
+                        archivo = archivo.replace(" ", "_");
+                        String directory = "/archivos/";
+                        File file = new File(getServletContext().getRealPath(directory) + "\\" + archivo + "." + ext);
+                        int a = 1;
+                        while (file.exists()) {
+                            archivo = archivo + a;
+                            file = new File(getServletContext().getRealPath(directory) + "\\" + archivo + "." + ext);
+                            a++;
                         }
+                        FileOutputStream fos = new FileOutputStream(file);
+                        Streams.copy(stream, fos, true);
+                        proyecto.setUrl("/PII" + directory + archivo + "." + ext);
                     }
-                    
+
                 }
-                sms = new ProyectoController().insertProyectos(proyecto);
-            } catch (FileUploadException fue) {
+                if(proyecto.getId() != null){
+                    sms = new ProyectoController().updateProyecto(proyecto);
+                } else{
+                    sms = new ProyectoController().insertProyectos(proyecto);
+                }
+            } catch (JsonSyntaxException | IOException | NumberFormatException | FileUploadException ex) {
                 out.write("Error!");
+                System.out.println(ex);
             }
             out.write(sms);
         }

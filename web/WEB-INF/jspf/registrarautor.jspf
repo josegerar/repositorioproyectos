@@ -1,0 +1,118 @@
+<%-- any content can be specified here e.g.: --%>
+<%@ page pageEncoding="UTF-8" %>
+<div class="overlay" id="overlay2" style="z-index: 100">
+    <div class="popup" id="popup2" style="width: 700px; padding: 10px;">
+        <a id="btn-cerrar-popup2" class="btn-cerrar-popup">X</a>
+        <h3>REGISTRAR AUTOR</h3>
+        <form id="form2">
+            <div class="contenedor-inputs">
+                <table id="tableAutor" style="padding: 0px; margin: auto;">
+                    <tr>
+                        <td>
+                            <i class="fa fa-exclamation-triangle fa-2" style="color: red; margin: auto; display: none; float: left;" aria-hidden="true"></i>
+                            <input id="autornombre" name="autornombre" type="text" placeholder="Nombres..." onkeypress="return ValTexto(event)"  style="width: 300px; height: 40px; margin-bottom: 5px;" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default" required minlength="1" maxlength="50" />
+                        </td>
+                        <td>
+                            <i class="fa fa-exclamation-triangle fa-2" style="color: red; margin: auto; display: none; float: left;" aria-hidden="true"></i>
+                            <input id="autorapellido" name="autorapellido" type="text" placeholder="Apellidos..." onkeypress="return ValTexto(event)"  style="width: 300px; height: 40px; margin-bottom: 5px;" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default" required minlength="1" maxlength="50" />
+                        </td>
+                    </tr>   
+                    <tr>
+                        <td>
+                            <i class="fa fa-exclamation-triangle fa-2" style="color: red; margin: auto; display: none; float: left;" aria-hidden="true"></i>
+                            <input id="autoridentificacion" name="autoridentificacion" type="text" placeholder="CI, Pasaporte, etc..." onkeyUp="return ValNumero(this);" style="width: 300px; height: 40px; margin-bottom: 5px;" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default" required minlength="1" maxlength="15" />
+                        </td>
+                        <td>
+                            <i class="fa fa-exclamation-triangle fa-2" style="color: red; margin: auto; display: none; float: left;" aria-hidden="true"></i>
+                            <input type="date" id="autorfechaNacimiento" min="1930-01-01" max="2010-12-31"name="autorfechaNacimiento" style="width: 300px; height: 40px; margin-bottom: 5px;"  class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default2">
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <i class="fa fa-exclamation-triangle fa-2" style="color: red; margin: auto; display: none; float: left;" aria-hidden="true"></i>
+                            <input id="autoremail" name="autoremail" type="text" style="width: 300px; height: 40px; margin-bottom: 5px;" required minlength="8" maxlength="100" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default" placeholder="Correo electr&oacute;nico..."/>
+                        </td>
+                        <td>
+                            <i class="fa fa-exclamation-triangle fa-2" style="color: red; margin: auto; display: none; float: left;" aria-hidden="true"></i>
+                            <input id="autorcarrera" name="carrera" type="text" onkeypress="return ValTexto(event)"  style="width: 300px; height: 40px; margin-bottom: 5px;" required minlength="10" maxlength="100" class="form-control autocomplete-sql ob-blur-sql" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default" placeholder="Carrera que cursa..."/>
+                        </td>
+                    </tr>
+                </table>
+            </div>
+            <br/>
+            <input type="button" id="saveAutor" class="btn-submit" value="Guardar" style="margin-bottom: 20px;">
+        </form>
+        <br/>
+        <div id="resultA" style="color: red" ></div>
+        <br/>
+    </div>
+</div>
+<script>
+    $('#saveAutor').click(function (e) {
+        var jSon = {};
+        var carrera = $('#autorcarrera').data("data");
+        jSon.identificacion = $('#autoridentificacion').val();
+        jSon.nacimiento = $('#autorfechaNacimiento').val().toString();
+        jSon.nombre = $('#autornombre').val();
+        jSon.apellido = $('#autorapellido').val();
+        jSon.email = $('#autoremail').val().toString();
+        if (jSon.identificacion.length === 0) {
+            $("#autoridentificacion").prev().show();
+        } else {
+            $("#autoridentificacion").prev().hide();
+        }
+        if (jSon.nacimiento.length === 0) {
+            $("#autorfechaNacimiento").prev().show();
+        } else {
+            $("#autorfechaNacimiento").prev().hide();
+        }
+        if (jSon.nombre.length === 0) {
+            $("#autornombre").prev().show();
+        } else {
+            $("#autornombre").prev().hide();
+        }
+        if (jSon.apellido.length === 0) {
+            $("#autorapellido").prev().show();
+        } else {
+            $("#autorapellido").prev().hide();
+        }
+        if (jSon.email.length === 0) {
+            $("#autoremail").prev().show();
+        } else {
+            $("#autoremail").prev().hide();
+        }
+        if (!carrera) {
+            $("#autorcarrera").prev().show();
+        } else {
+            $("#autorcarrera").prev().hide();
+        }
+        if (jSon.identificacion.length > 0 && jSon.nacimiento.length > 0 && jSon.nombre.length > 0 && jSon.apellido.length > 0 && jSon.email.length > 0 && carrera) {
+            var button = this;
+            $(button).prop("disabled", true);
+            jSon.carreraid = carrera.id_carrera;
+            jSon.transact = "insert";
+            $.ajax({
+                type: "POST",
+                url: serverURL + "TransactAutor",
+                data: jSon,
+                cache: false,
+                dataType: "json",
+                beforeSend: function (xhr) {
+                },
+                success: function (data, textStatus, jqXHR) {
+                    $("#autoridentificacion").val("");
+                    $("#autorfechaNacimiento").val("");
+                    $("#autornombre").val("");
+                    $("#autorapellido").val("");
+                    $("#autoremail").val("");
+                    $("#autorcarrera").data("data", null);
+                    alert(data);
+                },
+                error: function (jqXHR, textStatus, errorThrown) {
+                    $(button).prop("disabled", false);
+                    alert(jqXHR + "\n" + textStatus + "\n" + errorThrown);
+                }
+            });
+        }
+    });
+</script>

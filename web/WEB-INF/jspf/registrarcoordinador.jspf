@@ -1,0 +1,205 @@
+<%-- any content can be specified here e.g.: --%>
+<%@ page pageEncoding="UTF-8" %>
+<div class="overlay" id="overlay" style="z-index: 100">
+    <div class="popup" id="popup" style="width: 700px; padding: 10px;">
+        <a id="btn-cerrar-popup" class="btn-cerrar-popup">X</a>
+        <h3>REGISTRAR COORDINADOR</h3>
+        <form id="form1">
+            <div id="conttabla" class="contenedor-inputs">
+                <table id="tableCoord1" style="padding: 0px; margin: auto;">
+                    <tr>
+                        <td>
+                            <i class="fa fa-exclamation-triangle fa-2" style="color: red; margin: auto; display: none; float: left;" aria-hidden="true"></i>
+                            <input id="cordnombre" name="cordnombre" type="text" placeholder="Nombres..." onkeypress="return ValTexto(event)" style="width: 300px; height: 40px; margin-bottom: 5px;" required minlength="1" maxlength="50" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default" />
+                        </td>
+                        <td>
+                            <i class="fa fa-exclamation-triangle fa-2" style="color: red; margin: auto; display: none; float: left;" aria-hidden="true"></i>
+                            <input id="cordapellido" name="cordapellido" type="text" placeholder="Apellidos..." onkeypress="return ValTexto(event)"  style="width: 300px; height: 40px; margin-bottom: 5px;" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default" required minlength="1" maxlength="50" />
+                        </td>
+                    </tr>   
+                    <tr>
+                        <td>
+                            <i class="fa fa-exclamation-triangle fa-2" style="color: red; margin: auto; display: none; float: left;" aria-hidden="true"></i>
+                            <input id="cordidentificacion" name="cordidentificacion" type="text" placeholder="CI, Pasaporte, etc..." onkeyUp="return ValNumero(this);" style="width: 300px; height: 40px; margin-bottom: 5px;" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default" required minlength="1" maxlength="15" />
+                        </td>
+                        <td>
+                            <i class="fa fa-exclamation-triangle fa-2" style="color: red; margin: auto; display: none; float: left;" aria-hidden="true"></i>
+                            <input type="date" id="cordfechaNacimiento" min="1930-01-01" max="2010-12-31"name="cordfechaNacimiento" style="width: 300px; height: 40px; margin-bottom: 5px;"  class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default2">
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <i class="fa fa-exclamation-triangle fa-2" style="color: red; margin: auto; display: none; float: left;" aria-hidden="true"></i>
+                            <input id="cordemail" name="cordemail" type="text" style="width: 300px; height: 40px; margin-bottom: 5px;" required minlength="8" maxlength="100" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default" placeholder="Correo elect&oacute;nico..."/>
+                        </td>
+                        <td>
+                            <i class="fa fa-exclamation-triangle fa-2" style="color: red; margin: auto; display: none; float: left;" aria-hidden="true"></i>
+                            <input id="corddireccion" name="corddireccion" type="text" style="width: 300px; height: 40px; margin-bottom: 5px;" required minlength="10" maxlength="100" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default" placeholder="Direcci&oacute;n..."/>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <i class="fa fa-exclamation-triangle fa-2" style="color: red; margin: auto; display: none; float: left;" aria-hidden="true"></i>
+                            <input id="cordprovincia" name="provincia" type="text" onkeypress="return ValTexto(event)"  style="width: 300px; height: 40px; margin-bottom: 5px;" class="form-control autocomplete-sql ob-blur-sql" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default" placeholder="Provincia..."/>
+                        </td>
+                        <td>
+                            <i class="fa fa-exclamation-triangle fa-2" style="color: red; margin: auto; display: none; float: left;" aria-hidden="true"></i>
+                            <input id="cordciudad" name="ciudad" type="text" onkeypress="return ValTexto(event)"  style="width: 300px; height: 40px; margin-bottom: 5px;" class="form-control autocomplete-sql ob-blur-sql" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default" placeholder="Ciudad..."/>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <i class="fa fa-exclamation-triangle fa-2" style="color: red; margin: auto; display: none; float: left;" aria-hidden="true"></i>
+                            <input id="cordprofesion" name="profesion" onkeypress="return ValTexto(event)"  type="text" style="width: 300px; height: 40px; margin-bottom: 5px;"  class="form-control autocomplete-sql ob-blur-sql" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default" placeholder="Escriba la profesi&oacute;n..."/>
+                        </td>
+                        <td>
+                            <i class="fa fa-exclamation-triangle fa-2" style="color: red; margin: auto; display: none; float: left;" aria-hidden="true"></i>
+                            <input id="cordinstitucion" name="institucion" onkeypress="return ValTexto(event)"  type="text" style="width: 300px; height: 40px; margin-bottom: 5px;" class="form-control autocomplete-sql ob-blur-sql" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default" placeholder="Instituci&oacute;n a que pertenece..."/>
+                        </td>
+                    </tr>
+                </table>
+                <br/>
+                <i class="fa fa-exclamation-triangle fa-2" style="color: red; margin: auto; display: none; float: left;" aria-hidden="true"></i>
+                <select id="cordlevelacademico" name="cordlevelacademico" class="custom-select" style="font-size: 14px;; width: 250px; margin-bottom: 20px;">
+                    <option value="" selected>Elija el Nivel acad&eacute;mico...</option>
+                    <option value="3">Tercer nivel</option>
+                    <option value="4">Cuarto nivel</option>
+                </select>
+
+                <table id="tableCoord2" style="padding: 0px; margin: auto;">
+                    <tr>
+                        <td>
+                            <i class="fa fa-exclamation-triangle fa-2" style="color: red; margin: auto; display: none; float: left;" aria-hidden="true"></i>
+                            <input id="corduser" name="corduser" type="text" placeholder="Usuario..." style="width: 300px; height: 40px; margin-bottom: 5px;" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default" />
+                        </td>
+                        <td>
+                            <i class="fa fa-exclamation-triangle fa-2" style="color: red; margin: auto; display: none; float: left;" aria-hidden="true"></i>
+                            <input id="cordpassword" name="cordpassword" type="password" placeholder="Clave..." style="width: 300px; height: 40px; margin-bottom: 5px;" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default" />
+                        </td>
+                    </tr>
+                </table>
+            </div>
+            <br/>
+            <input type="button" id="saveCoord" class="btn-submit" value="Guardar" style="margin-bottom: 20px;">
+        </form>
+        <br/>
+        <div id="resultC" style="color: red" ></div>
+        <br/>
+    </div>
+</div>
+
+<script>
+    $('#saveCoord').click(function (e) {
+        var jSon = {};
+        jSon.user = $('#corduser').val();
+        jSon.password = $('#cordpassword').val();
+        jSon.nombre = $('#cordnombre').val();
+        jSon.apellido = $('#cordapellido').val();
+        jSon.identificacion = $('#cordidentificacion').val();
+        jSon.nacimiento = $('#cordfechaNacimiento').val().toString();
+        jSon.email = $('#cordemail').val();
+        jSon.direccion = $('#corddireccion').val();
+        jSon.nivelacademico = $('#cordlevelacademico').val();
+        var ciudad = $("#cordciudad").data("data");
+        var profesion = $('#cordprofesion').data("data");
+        var institucion = $('#cordinstitucion').data("data");
+        if (jSon.user.length === 0) {
+            $("#corduser").prev().show();
+        } else {
+            $("#corduser").prev().hide();
+        }
+        if (jSon.password.length === 0) {
+            $("#cordpassword").prev().show();
+        } else {
+            $("#cordpassword").prev().hide();
+        }
+        if (jSon.nombre.length === 0) {
+            $("#cordnombre").prev().show();
+        } else {
+            $("#cordnombre").prev().hide();
+        }
+        if (jSon.apellido.length === 0) {
+            $("#cordapellido").prev().show();
+        } else {
+            $("#cordapellido").prev().hide();
+        }
+        if (jSon.identificacion.length === 0) {
+            $("#cordidentificacion").prev().show();
+        } else {
+            $("#cordidentificacion").prev().hide();
+        }
+        if (jSon.nacimiento.length === 0) {
+            $("#cordfechaNacimiento").prev().show();
+        } else {
+            $("#cordfechaNacimiento").prev().hide();
+        }
+        if (jSon.email.length === 0) {
+            $("#cordemail").prev().show();
+        } else {
+            $("#cordemail").prev().hide();
+        }
+        if (jSon.direccion.length === 0) {
+            $("#corddireccion").prev().show();
+        } else {
+            $("#corddireccion").prev().hide();
+        }
+        if (jSon.nivelacademico.length === 0) {
+            $("#cordlevelacademico").prev().show();
+        } else {
+            $("#cordlevelacademico").prev().hide();
+        }
+        if (!ciudad) {
+            $("#cordciudad").prev().show();
+        } else {
+            $("#cordciudad").prev().hide();
+        }
+        if (!profesion) {
+            $("#cordprofesion").prev().show();
+        } else {
+            $("#cordprofesion").prev().hide();
+        }
+        if (!institucion) {
+            $("#cordinstitucion").prev().show();
+        } else {
+            $("#cordinstitucion").prev().hide();
+        }
+        if (jSon.user.length > 0 && jSon.password.length > 0 && jSon.nombre.length > 0 && jSon.apellido.length > 0 && jSon.identificacion.length > 0
+                && jSon.nacimiento.length > 0 && jSon.email.length > 0 && jSon.direccion.length > 0 && jSon.nivelacademico.length > 0 && ciudad
+                && profesion && institucion) {
+            var button = this;
+            $(button).prop("disabled", true);
+            jSon.ciudad = ciudad.idCiudad;
+            jSon.profesion = profesion.profesionID;
+            jSon.institucion = institucion.institucionID;
+            jSon.transact = "insert";
+            $.ajax({
+                type: "POST",
+                url: serverURL + "TransactCoordinador",
+                data: jSon,
+                cache: false,
+                dataType: "json",
+                beforeSend: function (xhr) {
+                },
+                success: function (data, textStatus, jqXHR) {
+                    $("#corduser").val("");
+                    $("#cordpassword").val("");
+                    $("#cordnombre").val("");
+                    $("#cordapellido").val("");
+                    $("#cordidentificacion").val("");
+                    $("#cordfechaNacimiento").val("");
+                    $("#corddireccion").val("");
+                    $("#cordlevelacademico").val("");
+                    $("#cordciudad").data("data", null);
+                    $("#cordprofesion").data("data", null);
+                    $("#cordinstitucion").data("data", null);
+                    $(button).prop("disabled", false);
+                    alert(data);
+                },
+                error: function (jqXHR, textStatus, errorThrown) {
+                    $(button).prop("disabled", false);
+                    alert(jqXHR + "\n" + textStatus + "\n" + errorThrown);
+                }
+            });
+        }
+    });
+</script>

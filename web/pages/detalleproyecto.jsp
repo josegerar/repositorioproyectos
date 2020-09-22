@@ -31,7 +31,7 @@
                     <i class="fa fa-home"></i>
                     Descargar
                 </a>
-                <a class="nav-link form-control" style="color: black; text-align: center;" href="javascript:void(0)" onclick="paginacion('editarProyecto.html', {id:<%=p.getId()%>, type:'editar'})">
+                <a class="nav-link form-control" style="color: black; text-align: center;" href="javascript:void(0)" onclick="paginacion('editarProyecto.html', {id:<%=p.getId()%>, type: 'editar'})">
                     <i class="fa fa-home"></i>
                     Editar
                 </a>
@@ -76,7 +76,7 @@
                     <tbody>
                         <tr>
                             <td style="border-style: solid; border-width: 2px; border-color: #E9ECEF ;background:#E9ECEF; font-weight: 600; ">Modulo:</td>
-                            <td style="border-style: solid; border-width: 2px; border-color: #E9ECEF ;"><%= p.getSemestre()%></td>
+                            <td style="border-style: solid; border-width: 2px; border-color: #E9ECEF ;"><%= p.getSemestre()%> Semestre</td>
                             <td style="border-style: solid; border-width: 2px; border-color: #E9ECEF ;background:#E9ECEF; font-weight: 600; ">Periodo Lectivo:</td>
                             <td style="border-style: solid; border-width: 2px; border-color: #E9ECEF ;"> <%= p.getPeriodo()%></td>
                         </tr>
@@ -104,10 +104,16 @@
                     <tbody >
                         <%
                             for (Variable v : p.getVariables()) {
+                                String tipo = "";
+                                if (v.getTipo().equals("I")) {
+                                    tipo = "Independiente";
+                                } else if (v.getTipo().equals("D")) {
+                                    tipo = "Dependiente";
+                                }
                         %>
                         <tr>
                             <td><%=v.getVariable()%></td>
-                            <td><%=v.getTipo()%></td>
+                            <td><%=tipo%></td>
                         </tr>
                         <%
                             }

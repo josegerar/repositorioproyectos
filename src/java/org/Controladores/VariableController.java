@@ -34,12 +34,7 @@ public class VariableController extends ConexionMySQL {
                 Variable variable = new Variable();
                 variable.setId(rs.getInt("id_variable"));
                 variable.setIdProyecto(rs.getInt("id_proyecto"));
-                String tipo = rs.getString("tipo");
-                if (tipo.equals("I")) {
-                    variable.setTipo("Independiente");
-                } else if (tipo.equals("D")) {
-                    variable.setTipo("Dependiente");
-                }
+                variable.setTipo(rs.getString("tipo"));
                 variable.setVariable(rs.getString("variable"));
                 variables.add(variable);
             }
@@ -65,10 +60,10 @@ public class VariableController extends ConexionMySQL {
 
     public void insertVariableProyecto(ArrayList<Variable> variable, Integer idproyecto) throws SQLException {
 
-        PreparedStatement pst;
-        
+        PreparedStatement pst = null;
+
         String sql = "insert into variable (id_proyecto,tipo,variable) values (?, ?, ?);";
-        
+
         for (Variable i : variable) {
             pst = getConnection().prepareStatement(sql);
             pst.setInt(1, idproyecto);
@@ -76,6 +71,25 @@ public class VariableController extends ConexionMySQL {
             pst.setString(3, i.getVariable());
             pst.executeUpdate();
         }
+
+        if (pst != null) {
+            pst.close();
+        }
+    }
+
+    public void updateVariableProyecto(ArrayList<Variable> variables, Integer idproyecto) throws SQLException {
+
+        PreparedStatement pst;
+
+        String sql = "DELETE FROM variable WHERE id_proyecto = ?;";
+
+        pst = getConnection().prepareStatement(sql);
+        pst.setInt(1, idproyecto);
+        pst.executeUpdate();
+        
+        this.insertVariableProyecto(variables, idproyecto);
+        
+        pst.close();
         
     }
 

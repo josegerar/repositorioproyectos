@@ -11,8 +11,8 @@ import java.io.Serializable;
  *
  * @author F
  */
-public class Variable implements Serializable{
-    
+public class Variable implements Serializable {
+
     Integer id;
     Integer idProyecto;
     String tipo;
@@ -49,17 +49,7 @@ public class Variable implements Serializable{
     }
 
     public void setTipo(String tipo) {
-        switch (tipo) {
-            case "i":
-                this.tipo = "independiente";
-                break;
-            case "d":
-                this.tipo = "dependiente";
-                break;
-            default:
-                this.tipo = tipo;
-                break;
-        }
+        this.tipo = tipo;
     }
 
     public String getVariable() {
@@ -74,5 +64,5 @@ public class Variable implements Serializable{
     public String toString() {
         return "Variable{" + "id=" + id + ", idProyecto=" + idProyecto + ", tipo=" + tipo + ", variable=" + variable + '}';
     }
-        
+
 }
